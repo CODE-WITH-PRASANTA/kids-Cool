@@ -1,17 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import { Routes, Route } from "react-router-dom";
-import Homehero from "./Components/Homehero/Homehero";
-import Home from "./Pages/Home/Home";
-
-const App = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Home/>}/>
-    </Routes>
-  );
-};
-=======
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import Navbar from "./Components/Navbar/Navbar";
@@ -39,6 +26,5 @@ function App() {
     </BrowserRouter>
   );
 }
->>>>>>> 6b71545aae3711683b78aad5119e4b57858ade90
 
 export default App;
