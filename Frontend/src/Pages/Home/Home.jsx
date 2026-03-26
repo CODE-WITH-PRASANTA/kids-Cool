@@ -7,6 +7,7 @@ import Education from '../../Components/Education/Education'
 import Teacher from '../../Components/Teacher/Teacher'
 import Activites from '../../Components/Activites/Activites'
 import Blog from '../../Components/Blog/Blog'
+import TeachingMethodology from '../../Components/TeachingMethodology/TeachingMethodology'
 
 const Home = () => {
   return (
@@ -19,6 +20,7 @@ const Home = () => {
         <Teacher/>
         <Activites/>
         <Blog/>
+        <TeachingMethodology/>
     </div>
   )
 }

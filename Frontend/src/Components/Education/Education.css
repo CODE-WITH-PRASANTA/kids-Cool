@@ -248,10 +248,10 @@
 
 .educationSection__field {
   position: relative;
-  z-index: 1;
-  margin-top: -40px;
-  height: 260px;
-  background-repeat: no-repeat;
+  z-index: 110;
+  margin-top: 4px;
+  height: 380px;
+  /* background-repeat: no-repeat; */
   background-position: center bottom;
   background-size: cover;
 }
@@ -259,7 +259,7 @@
 .educationSection__kid {
   position: absolute;
   bottom: 24px;
-  width: 120px;
+  width: 100px;
   pointer-events: none;
   z-index: 3;
   animation: educationSectionBounce 3.8s ease-in-out infinite;
@@ -267,11 +267,13 @@
 
 .educationSection__kid--left {
   left: max(2%, 22px);
+  top: -35px;
 }
 
 .educationSection__kid--right {
   right: max(2%, 22px);
   animation-delay: 0.6s;
+  top: -33px;
 }
 
 .educationSection__modal {

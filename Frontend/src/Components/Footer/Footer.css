@@ -323,7 +323,7 @@
   position: relative;
   z-index: 5;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 1px 40px;
   font-size: 14px;
   align-items:center;
@@ -491,6 +491,7 @@ flex-direction:column;
 gap:10px;
 text-align:center;
 padding:3px;
+margin-bottom: 3px;
 }
 
 }
@@ -525,6 +526,7 @@ flex-direction:column;
 gap:10px;
 text-align:center;
 padding:3px;
+margin-bottom: 3px;
 }
 
 }

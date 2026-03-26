@@ -25,43 +25,99 @@ const EssentialSkill = () => {
     return () => observer.disconnect();
   }, []);
 
+
+  /* ================= slider ================= */
+
+  const [page, setPage] = useState(0);
+  const [perPage, setPerPage] = useState(2);
+
   const programs = [
     {
       id: 1,
       title: "Online Class",
-      desc: "Eu turpis egestas pretium aenean pharetra magna ac. Learning from home made joyful and interactive.",
+      desc: "Eu turpis egestas pretium aenean pharetra magna ac.",
       image:
         "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: 2,
       title: "Formal Tuition",
-      desc: "Posuere ac ut consequat semper viverra nam libero justo. Strong concepts with guided classroom learning.",
+      desc: "Strong concepts with guided classroom learning.",
       image:
         "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: 3,
       title: "Special Tuition",
-      desc: "Tristique risus nec feugiat in auctor augue mauris. Extra care and attention for every learner.",
+      desc: "Extra care and attention for every learner.",
       image:
         "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
     },
     {
       id: 4,
       title: "Preschool",
-      desc: "Adipiscing diam donec adipiscing tristique risus entum. Early years learning with fun and creativity.",
+      desc: "Early years learning with fun and creativity.",
       image:
         "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
     },
   ];
 
+   /* responsive cards */
+
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 600) {
+        setPerPage(1);
+      } else {
+        setPerPage(2);
+      }
+    };
+
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const totalPages = Math.ceil(programs.length / perPage);
+
+  /* auto slide */
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPage((p) => (p + 1) % totalPages);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, [totalPages]);
+
+  const current = page;
+
+  /* animation visible */
+
+  useEffect(() => {
+    const currentEl = sectionRef.current;
+    if (!currentEl) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.unobserve(currentEl);
+        }
+      },
+      { threshold: 0.2 }
+    );
+
+    observer.observe(currentEl);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section
-      ref={sectionRef}
-      className={`${base} ${visible ? `${base}--visible` : ""}`}
-    >
-      <div className={`${base}__topBg`}></div>
+<section
+  ref={sectionRef}
+  className={`${base} ${visible ? `${base}--visible` : ""}`}
+>
+  <div className={`${base}__topBg`} />
 
       <div className={`${base}__decor ${base}__decor--star`}>
         <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -461,44 +517,103 @@ const EssentialSkill = () => {
           </p>
         </div>
 
-        <div className={`${base}__cardGrid`}>
-          {programs.map((item, index) => (
-            <article
-              className={`${base}__card`}
-              key={item.id}
-              style={{ animationDelay: `${0.12 * (index + 1)}s` }}
-            >
-              <div className={`${base}__cardImageWrap`}>
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className={`${base}__cardImage`}
-                />
-                <span
-                  className={`${base}__bubble ${base}__bubble--one`}
-                ></span>
-                <span
-                  className={`${base}__bubble ${base}__bubble--two`}
-                ></span>
-                <span
-                  className={`${base}__bubble ${base}__bubble--three`}
-                ></span>
-              </div>
+        
 
-              <div className={`${base}__cardContent`}>
-                <h4 className={`${base}__cardTitle`}>{item.title}</h4>
-                <p className={`${base}__cardDesc`}>{item.desc}</p>
-                <a
-                  href="/"
-                  className={`${base}__cardLink`}
-                  onClick={(e) => e.preventDefault()}
+    {/* ========================= */}
+    {/* ===== SLIDER START ===== */}
+    {/* ========================= */}
+
+    <div className={`${base}__slider`}>
+
+      <div
+        className={`${base}__sliderTrack`}
+        style={{
+          transform: `translateX(-${page * 100}%)`,
+        }}
+      >
+
+        {Array.from({ length: totalPages }).map((_, pageIndex) => (
+
+          <div
+            key={pageIndex}
+            className={`${base}__slidePage`}
+          >
+
+            {programs
+              .slice(
+                pageIndex * perPage,
+                pageIndex * perPage + perPage
+              )
+              .map((item, index) => (
+
+                <article
+                  className={`${base}__card`}
+                  key={item.id}
                 >
-                  Learn More
-                </a>
-              </div>
-            </article>
-          ))}
-        </div>
+
+                  <div className={`${base}__cardImageWrap`}>
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className={`${base}__cardImage`}
+                    />
+
+                    <span className={`${base}__bubble ${base}__bubble--one`} />
+                    <span className={`${base}__bubble ${base}__bubble--two`} />
+                    <span className={`${base}__bubble ${base}__bubble--three`} />
+
+                  </div>
+
+                  <div className={`${base}__cardContent`}>
+
+                    <h4 className={`${base}__cardTitle`}>
+                      {item.title}
+                    </h4>
+
+                    <p className={`${base}__cardDesc`}>
+                      {item.desc}
+                    </p>
+
+                    <a
+                      href="/"
+                      className={`${base}__cardLink`}
+                      onClick={(e) => e.preventDefault()}
+                    >
+                      Learn More
+                    </a>
+
+                  </div>
+
+                </article>
+
+              ))}
+
+          </div>
+
+        ))}
+
+      </div>
+
+
+      {/* ===== dots ===== */}
+
+      <div className={`${base}__dots`}>
+
+        {Array.from({ length: totalPages }).map((_, i) => (
+
+          <span
+            key={i}
+            className={`${base}__dot ${
+              i === page ? `${base}__dot--active` : ""
+            }`}
+            onClick={() => setPage(i)}
+          />
+
+        ))}
+
+      </div>
+
+    </div>
 
         <div className={`${base}__action`}>
           <button

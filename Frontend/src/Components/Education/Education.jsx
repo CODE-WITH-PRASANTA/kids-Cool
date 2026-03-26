@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Education.css";
 
-import fieldBg from "../../assets/field.webp";
+import fieldBg from "../../assets/field-removebg-preview.webp";
 import heroImg from "../../assets/Section1.webp";
 import img2 from "../../assets/Section2.webp";
 import img3 from "../../assets/Section3.webp";
 import img4 from "../../assets/Section4.webp";
 import img5 from "../../assets/Section5.webp";
-import img6 from "../../assets/Section6.webp";
 import pencilGirl from "../../assets/pencile.webp";
 import pencilBoy from "../../assets/pencileboy.webp";
 
@@ -48,12 +47,12 @@ const Education = () => {
       alt: "Kids group learning together",
       className: `${base}__card ${base}__card--wide`,
     },
-    {
-      id: 6,
-      image: img6,
-      alt: "Toddler playing with blocks",
-      className: `${base}__card ${base}__card--bottom`,
-    },
+    // {
+    //   id: 6,
+    //   image: img6,
+    //   alt: "Toddler playing with blocks",
+    //   className: `${base}__card ${base}__card--bottom`,
+    // },
   ];
 
   useEffect(() => {
