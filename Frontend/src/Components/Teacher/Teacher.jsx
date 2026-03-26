@@ -10,6 +10,7 @@ const Teacher = () => {
   const base = "teacherSection";
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const [currentTeacher, setCurrentTeacher] = useState(0);
 
   useEffect(() => {
     const current = sectionRef.current;
@@ -59,6 +60,20 @@ const Teacher = () => {
     },
   ];
 
+  const activeTeacher = teachers[currentTeacher];
+
+  const handlePrev = () => {
+    setCurrentTeacher((prev) =>
+      prev === 0 ? teachers.length - 1 : prev - 1
+    );
+  };
+
+  const handleNext = () => {
+    setCurrentTeacher((prev) =>
+      prev === teachers.length - 1 ? 0 : prev + 1
+    );
+  };
+
   return (
     <section
       ref={sectionRef}
@@ -66,7 +81,10 @@ const Teacher = () => {
     >
       <div className={`${base}__container`}>
         <div className={`${base}__header`}>
-          <div className={`${base}__topIcon ${base}__topIcon--left`} aria-hidden="true">
+          <div
+            className={`${base}__topIcon ${base}__topIcon--left`}
+            aria-hidden="true"
+          >
             <svg viewBox="0 0 120 120" fill="none">
               <g
                 stroke="currentColor"
@@ -123,32 +141,68 @@ const Teacher = () => {
           </div>
         </div>
 
-        <div className={`${base}__cards`}>
-          {teachers.map((teacher, index) => (
+        <div className={`${base}__sliderWrap`}>
+          <div className={`${base}__controls`}>
+            <button
+              type="button"
+              className={`${base}__navBtn`}
+              onClick={handlePrev}
+              aria-label="Previous teacher"
+            >
+              ‹
+            </button>
+
+            <div className={`${base}__dots`}>
+              {teachers.map((teacher, index) => (
+                <button
+                  key={teacher.id}
+                  type="button"
+                  className={`${base}__dot ${
+                    currentTeacher === index ? `${base}__dot--active` : ""
+                  }`}
+                  onClick={() => setCurrentTeacher(index)}
+                  aria-label={`Go to ${teacher.name}`}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className={`${base}__navBtn`}
+              onClick={handleNext}
+              aria-label="Next teacher"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className={`${base}__cards`}>
             <article
-              className={`${base}__card ${base}__card--${index + 1}`}
-              key={teacher.id}
+              className={`${base}__card ${base}__card--active`}
+              key={activeTeacher.id}
             >
               <div className={`${base}__imageWrap`}>
                 <span
-                  className={`${base}__dot ${base}__dot--left`}
+                  className={`${base}__dotDecor ${base}__dotDecor--left`}
                   aria-hidden="true"
                 ></span>
 
                 <div className={`${base}__imageBlob`}>
-                  <img src={teacher.image} alt={teacher.name} />
+                  <img src={activeTeacher.image} alt={activeTeacher.name} />
                 </div>
 
                 <div
-                  className={`${base}__arrow ${base}__arrow--${
-                    index === 1 ? "bottom" : "top"
+                  className={`${base}__arrow ${
+                    currentTeacher === 1
+                      ? `${base}__arrow--bottom`
+                      : `${base}__arrow--top`
                   }`}
                   aria-hidden="true"
                 >
                   <svg viewBox="0 0 170 70" fill="none">
                     <path
                       d={
-                        index === 1
+                        currentTeacher === 1
                           ? "M12 20c20 22 35 22 50 8 14-14 28-14 44 1 17 16 31 16 50 2"
                           : "M12 56c19-23 35-23 50-8 14 13 28 13 44-2 16-15 31-15 50-2"
                       }
@@ -158,7 +212,11 @@ const Teacher = () => {
                       strokeDasharray="3 5"
                     />
                     <path
-                      d={index === 1 ? "M148 24l8 7-10 3" : "M148 50l8-7-10-3"}
+                      d={
+                        currentTeacher === 1
+                          ? "M148 24l8 7-10 3"
+                          : "M148 50l8-7-10-3"
+                      }
                       fill="currentColor"
                     />
                   </svg>
@@ -166,26 +224,42 @@ const Teacher = () => {
               </div>
 
               <div className={`${base}__contentBox`}>
-                <h3 className={`${base}__name`}>{teacher.name}</h3>
-                <p className={`${base}__text`}>{teacher.description}</p>
+                <p className={`${base}__role`}>{activeTeacher.role}</p>
+                <h3 className={`${base}__name`}>{activeTeacher.name}</h3>
+                <p className={`${base}__text`}>{activeTeacher.description}</p>
 
                 <div className={`${base}__socials`}>
-                  <a href="/" onClick={(e) => e.preventDefault()} aria-label="Facebook">
+                  <a
+                    href="/"
+                    onClick={(e) => e.preventDefault()}
+                    aria-label="Facebook"
+                  >
                     <FaFacebookF />
                   </a>
-                  <a href="/" onClick={(e) => e.preventDefault()} aria-label="Twitter">
+                  <a
+                    href="/"
+                    onClick={(e) => e.preventDefault()}
+                    aria-label="Twitter"
+                  >
                     <FaTwitter />
                   </a>
-                  <a href="/" onClick={(e) => e.preventDefault()} aria-label="LinkedIn">
+                  <a
+                    href="/"
+                    onClick={(e) => e.preventDefault()}
+                    aria-label="LinkedIn"
+                  >
                     <FaLinkedinIn />
                   </a>
                 </div>
               </div>
             </article>
-          ))}
+          </div>
         </div>
 
-        <div className={`${base}__sideDecor ${base}__sideDecor--left`} aria-hidden="true">
+        <div
+          className={`${base}__sideDecor ${base}__sideDecor--left`}
+          aria-hidden="true"
+        >
           <span className={`${base}__robot`}>
             <svg viewBox="0 0 70 70" fill="none">
               <rect x="20" y="20" width="28" height="24" rx="7" fill="#43587d" />
@@ -199,7 +273,10 @@ const Teacher = () => {
           </span>
         </div>
 
-        <div className={`${base}__sideDecor ${base}__sideDecor--right`} aria-hidden="true">
+        <div
+          className={`${base}__sideDecor ${base}__sideDecor--right`}
+          aria-hidden="true"
+        >
           <span className={`${base}__robot`}>
             <svg viewBox="0 0 70 70" fill="none">
               <rect x="20" y="20" width="28" height="24" rx="7" fill="#43587d" />
