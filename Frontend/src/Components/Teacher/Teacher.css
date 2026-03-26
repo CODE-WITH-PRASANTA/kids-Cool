@@ -21,7 +21,7 @@
 
 .teacherSection__header {
   max-width: 620px;
-  margin: 0 auto 62px;
+  margin: 0 auto 52px;
   position: relative;
 }
 
@@ -95,16 +95,72 @@
   line-height: 1.9;
 }
 
-.teacherSection__cards {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 34px;
-  align-items: start;
+.teacherSection__sliderWrap {
   position: relative;
   z-index: 2;
 }
 
+.teacherSection__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.teacherSection__navBtn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--teacher-dark);
+  font-size: 30px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(28, 39, 75, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.teacherSection__navBtn:hover {
+  transform: translateY(-3px);
+  background: #fff2f6;
+  box-shadow: 0 14px 30px rgba(255, 79, 125, 0.2);
+}
+
+.teacherSection__dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.teacherSection__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(36, 50, 74, 0.22);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.teacherSection__dot--active {
+  width: 30px;
+  border-radius: 999px;
+  background: var(--teacher-accent);
+}
+
+.teacherSection__cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 560px;
+}
+
 .teacherSection__card {
+  width: 100%;
+  max-width: 430px;
   text-align: center;
   opacity: 0;
   transform: translateY(42px);
@@ -113,21 +169,10 @@
     opacity 0.9s ease;
 }
 
-.teacherSection--visible .teacherSection__card {
+.teacherSection--visible .teacherSection__card,
+.teacherSection__card--active {
   opacity: 1;
   transform: translateY(0);
-}
-
-.teacherSection--visible .teacherSection__card--1 {
-  transition-delay: 0.08s;
-}
-
-.teacherSection--visible .teacherSection__card--2 {
-  transition-delay: 0.2s;
-}
-
-.teacherSection--visible .teacherSection__card--3 {
-  transition-delay: 0.32s;
 }
 
 .teacherSection__imageWrap {
@@ -136,7 +181,7 @@
   padding-top: 14px;
 }
 
-.teacherSection__dot {
+.teacherSection__dotDecor {
   position: absolute;
   width: 18px;
   height: 18px;
@@ -147,13 +192,13 @@
   z-index: 1;
 }
 
-.teacherSection__dot--left {
-  left: -18px;
+.teacherSection__dotDecor--left {
+  left: 8px;
 }
 
 .teacherSection__imageBlob {
   position: relative;
-  width: min(100%, 315px);
+  width: min(100%, 360px);
   aspect-ratio: 1.16 / 0.88;
   margin: 0 auto;
   overflow: hidden;
@@ -211,14 +256,23 @@
 }
 
 .teacherSection__contentBox {
-  max-width: 320px;
+  max-width: 360px;
   margin: 0 auto;
+}
+
+.teacherSection__role {
+  margin: 0 0 8px;
+  color: var(--teacher-accent);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .teacherSection__name {
   margin: 0 0 12px;
   color: var(--teacher-teal);
-  font-size: 22px;
+  font-size: 24px;
   line-height: 1.2;
   font-weight: 800;
 }
@@ -228,7 +282,7 @@
   color: var(--teacher-muted);
   font-size: 15px;
   line-height: 1.9;
-  max-width: 300px;
+  max-width: 320px;
 }
 
 .teacherSection__socials {
@@ -239,8 +293,8 @@
 }
 
 .teacherSection__socials a {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: var(--teacher-accent);
   color: #ffffff;
@@ -263,7 +317,7 @@
 
 .teacherSection__sideDecor {
   position: absolute;
-  top: 360px;
+  top: 380px;
   z-index: 1;
 }
 
@@ -290,7 +344,7 @@
 
 .teacherSection__bottomPattern {
   width: min(760px, 78%);
-  margin: 88px auto 0;
+  margin: 72px auto 0;
   opacity: 0.98;
 }
 
@@ -301,7 +355,8 @@
 }
 
 @keyframes teacherFloatSoft {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -310,7 +365,8 @@
 }
 
 @keyframes teacherArrowFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -319,7 +375,8 @@
 }
 
 @keyframes teacherRobotFloat {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateX(0) translateY(0);
   }
   50% {
@@ -330,10 +387,6 @@
 @media (max-width: 1199px) {
   .teacherSection__container {
     width: min(1120px, calc(100% - 32px));
-  }
-
-  .teacherSection__cards {
-    gap: 24px;
   }
 
   .teacherSection__sideDecor--left {
@@ -351,7 +404,7 @@
   }
 
   .teacherSection__header {
-    margin-bottom: 48px;
+    margin-bottom: 42px;
   }
 
   .teacherSection__topIcon--left {
@@ -362,24 +415,17 @@
     display: block;
   }
 
-  .teacherSection__cards {
-    grid-template-columns: 1fr 1fr;
-    gap: 28px 20px;
-  }
-
-  .teacherSection__card--3 {
-    grid-column: 1 / -1;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-
   .teacherSection__sideDecor {
     display: none;
   }
 
+  .teacherSection__cards {
+    min-height: 520px;
+  }
+
   .teacherSection__bottomPattern {
     width: min(620px, 90%);
-    margin-top: 68px;
+    margin-top: 60px;
   }
 }
 
@@ -401,14 +447,19 @@
     line-height: 1.75;
   }
 
-  .teacherSection__cards {
-    grid-template-columns: 1fr;
-    gap: 34px;
+  .teacherSection__controls {
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
-  .teacherSection__card--3 {
-    grid-column: auto;
-    max-width: none;
+  .teacherSection__navBtn {
+    width: 42px;
+    height: 42px;
+    font-size: 26px;
+  }
+
+  .teacherSection__cards {
+    min-height: auto;
   }
 
   .teacherSection__imageWrap {
@@ -424,7 +475,7 @@
   }
 
   .teacherSection__name {
-    font-size: 20px;
+    font-size: 21px;
   }
 
   .teacherSection__text {
@@ -434,11 +485,15 @@
 
   .teacherSection__bottomPattern {
     width: min(520px, 96%);
-    margin-top: 56px;
+    margin-top: 52px;
   }
 }
 
 @media (max-width: 480px) {
+  .teacherSection {
+    padding: 44px 0 62px;
+  }
+
   .teacherSection__tagRow {
     flex-wrap: wrap;
   }
@@ -456,8 +511,34 @@
     font-size: 26px;
   }
 
+  .teacherSection__controls {
+    gap: 10px;
+  }
+
+  .teacherSection__navBtn {
+    width: 38px;
+    height: 38px;
+    font-size: 24px;
+  }
+
+  .teacherSection__dot--active {
+    width: 24px;
+  }
+
   .teacherSection__imageBlob {
     width: min(100%, 310px);
+  }
+
+  .teacherSection__dotDecor--left {
+    left: 0;
+  }
+
+  .teacherSection__role {
+    font-size: 12px;
+  }
+
+  .teacherSection__name {
+    font-size: 20px;
   }
 
   .teacherSection__socials a {
@@ -466,6 +547,28 @@
   }
 
   .teacherSection__bottomPattern {
-    margin-top: 48px;
+    margin-top: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .teacherSection__container {
+    width: min(100%, calc(100% - 16px));
+  }
+
+  .teacherSection__title {
+    font-size: 23px;
+  }
+
+  .teacherSection__imageBlob {
+    width: min(100%, 280px);
+  }
+
+  .teacherSection__arrow {
+    width: 80px;
+  }
+
+  .teacherSection__text {
+    font-size: 13.5px;
   }
 }

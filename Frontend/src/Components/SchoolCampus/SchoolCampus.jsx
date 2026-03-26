@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./SchoolCampus.css";
 
 import classroomImg from "../../assets/Classroom.webp";
@@ -12,6 +12,7 @@ const SchoolCampus = () => {
   const base = "schoolCampus";
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
     const current = sectionRef.current;
@@ -73,40 +74,152 @@ const SchoolCampus = () => {
     { id: 4, count: "8+", label: "Years Experience", icon: "pencil" },
   ];
 
+  const cardsPerPage = 2;
+  const totalPages = Math.ceil(campusCards.length / cardsPerPage);
+
+  const paginatedCards = useMemo(() => {
+    const start = currentPage * cardsPerPage;
+    return campusCards.slice(start, start + cardsPerPage);
+  }, [currentPage]);
+
+  const handlePrev = () => {
+    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+  };
+
   const renderFacilityIcon = (type) => {
     switch (type) {
       case "book":
         return (
           <svg viewBox="0 0 64 64" className={`${base}__facilitySvg`}>
-            <path d="M14 16c0-3 2-5 5-5h25c3 0 6 2 6 5v28c0 2-2 4-4 4H22c-4 0-8 2-8 5V16z" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M22 48V15" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M28 21h14M28 28h14M28 35h10" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+            <path
+              d="M14 16c0-3 2-5 5-5h25c3 0 6 2 6 5v28c0 2-2 4-4 4H22c-4 0-8 2-8 5V16z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M22 48V15"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M28 21h14M28 28h14M28 35h10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
           </svg>
         );
+
       case "bus":
         return (
           <svg viewBox="0 0 64 64" className={`${base}__facilitySvg`}>
-            <rect x="13" y="17" width="38" height="25" rx="6" fill="none" stroke="currentColor" strokeWidth="2.6" />
-            <path d="M20 17v-4h24v4" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M18 27h28M22 22h8M34 22h10" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-            <circle cx="23" cy="45" r="4" fill="none" stroke="currentColor" strokeWidth="2.6" />
-            <circle cx="41" cy="45" r="4" fill="none" stroke="currentColor" strokeWidth="2.6" />
+            <rect
+              x="13"
+              y="17"
+              width="38"
+              height="25"
+              rx="6"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+            />
+            <path
+              d="M20 17v-4h24v4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M18 27h28M22 22h8M34 22h10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <circle
+              cx="23"
+              cy="45"
+              r="4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+            />
+            <circle
+              cx="41"
+              cy="45"
+              r="4"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+            />
           </svg>
         );
+
       case "play":
         return (
           <svg viewBox="0 0 64 64" className={`${base}__facilitySvg`}>
-            <path d="M18 50V28l14-12 14 12v22" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M32 16v34" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M18 32h28" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M46 50l8-10M22 50l-8-10" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
+            <path
+              d="M18 50V28l14-12 14 12v22"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M32 16v34"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M18 32h28"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M46 50l8-10M22 50l-8-10"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
           </svg>
         );
+
       default:
         return (
           <svg viewBox="0 0 64 64" className={`${base}__facilitySvg`}>
-            <path d="M32 51c-10-7-17-14-17-24 0-6 4-10 10-10 4 0 6 2 7 4 1-2 3-4 7-4 6 0 10 4 10 10 0 10-7 17-17 24z" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M22 33c2 0 4-2 6-6 1 5 3 7 5 7 2 0 3-1 4-3h5" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+            <path
+              d="M32 51c-10-7-17-14-17-24 0-6 4-10 10-10 4 0 6 2 7 4 1-2 3-4 7-4 6 0 10 4 10 10 0 10-7 17-17 24z"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M22 33c2 0 4-2 6-6 1 5 3 7 5 7 2 0 3-1 4-3h5"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         );
     }
@@ -118,27 +231,67 @@ const SchoolCampus = () => {
         return (
           <svg viewBox="0 0 64 64" className={`${base}__statSvg`}>
             <rect x="18" y="19" width="28" height="30" rx="8" fill="#7a7a7a" />
-            <path d="M24 20v-4c0-4 3-6 8-6s8 2 8 6v4" fill="none" stroke="#303030" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M18 28h28" fill="none" stroke="#ffffff" strokeWidth="2.3" />
+            <path
+              d="M24 20v-4c0-4 3-6 8-6s8 2 8 6v4"
+              fill="none"
+              stroke="#303030"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M18 28h28"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="2.3"
+            />
             <circle cx="32" cy="34" r="6" fill="#ffffff" opacity="0.95" />
           </svg>
         );
+
       case "cup":
         return (
           <svg viewBox="0 0 64 64" className={`${base}__statSvg`}>
-            <path d="M20 17h24v18c0 7-5 12-12 12s-12-5-12-12V17z" fill="#5fa7ff" />
-            <path d="M44 21h4c4 0 6 2 6 6s-3 7-8 7h-2" fill="none" stroke="#2f5c9f" strokeWidth="2.3" strokeLinecap="round" />
-            <path d="M22 50h20" fill="none" stroke="#f19a2a" strokeWidth="3" strokeLinecap="round" />
+            <path
+              d="M20 17h24v18c0 7-5 12-12 12s-12-5-12-12V17z"
+              fill="#5fa7ff"
+            />
+            <path
+              d="M44 21h4c4 0 6 2 6 6s-3 7-8 7h-2"
+              fill="none"
+              stroke="#2f5c9f"
+              strokeWidth="2.3"
+              strokeLinecap="round"
+            />
+            <path
+              d="M22 50h20"
+              fill="none"
+              stroke="#f19a2a"
+              strokeWidth="3"
+              strokeLinecap="round"
+            />
           </svg>
         );
+
       case "bag":
         return (
           <svg viewBox="0 0 64 64" className={`${base}__statSvg`}>
             <rect x="20" y="19" width="24" height="27" rx="6" fill="#ffb347" />
-            <path d="M25 20v-3c0-3 2-5 7-5s7 2 7 5v3" fill="none" stroke="#9b5814" strokeWidth="2.6" strokeLinecap="round" />
-            <path d="M20 28h24" fill="none" stroke="#fff" strokeWidth="2.3" />
+            <path
+              d="M25 20v-3c0-3 2-5 7-5s7 2 7 5v3"
+              fill="none"
+              stroke="#9b5814"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+            />
+            <path
+              d="M20 28h24"
+              fill="none"
+              stroke="#fff"
+              strokeWidth="2.3"
+            />
           </svg>
         );
+
       default:
         return (
           <svg viewBox="0 0 64 64" className={`${base}__statSvg`}>
@@ -182,47 +335,99 @@ const SchoolCampus = () => {
           <header className={`${base}__headingWrap`}>
             <div className={`${base}__miniIcon`}>
               <svg viewBox="0 0 64 64">
-                <path d="M16 25l16-10 16 10-16 10-16-10zM21 31v8c0 5 6 10 11 10s11-5 11-10v-8" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M16 25l16-10 16 10-16 10-16-10zM21 31v8c0 5 6 10 11 10s11-5 11-10v-8"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
             </div>
+
             <p className={`${base}__tag`}>School Facilities</p>
-            <h2 className={`${base}__title`}>Engaging &amp; Spacious School Campus</h2>
+            <h2 className={`${base}__title`}>
+              Engaging &amp; Spacious School Campus
+            </h2>
             <p className={`${base}__subtitle`}>
               Hise sed augue vitae felis pellentesque varius nec quis nunc.
               Morbi mauris augue, pulvinar quis luctus eget.
             </p>
           </header>
 
-          <div className={`${base}__cardsGrid`}>
-            {campusCards.map((card, index) => (
-              <article
-                key={card.id}
-                className={`${base}__card ${base}__card--${card.theme}`}
-                style={{ animationDelay: `${index * 0.12}s` }}
+          <div className={`${base}__cardsSliderWrap`}>
+            <div className={`${base}__cardsControls`}>
+              <button
+                type="button"
+                className={`${base}__navBtn`}
+                onClick={handlePrev}
+                aria-label="Previous cards"
               >
-                <div className={`${base}__cardInner`}>
-                  <div className={`${base}__imgWrapper`}>
-                    <img src={card.image} alt={card.title} className={`${base}__cardImg`} />
+                ‹
+              </button>
+
+              <div className={`${base}__paginationDots`}>
+                {Array.from({ length: totalPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={`${base}__dot ${
+                      currentPage === index ? `${base}__dot--active` : ""
+                    }`}
+                    onClick={() => setCurrentPage(index)}
+                    aria-label={`Go to page ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className={`${base}__navBtn`}
+                onClick={handleNext}
+                aria-label="Next cards"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className={`${base}__cardsGrid ${base}__cardsGrid--paged`}>
+              {paginatedCards.map((card, index) => (
+                <article
+                  key={card.id}
+                  className={`${base}__card ${base}__card--${card.theme}`}
+                  style={{ animationDelay: `${index * 0.12}s` }}
+                >
+                  <div className={`${base}__cardInner`}>
+                    <div className={`${base}__imgWrapper`}>
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        className={`${base}__cardImg`}
+                      />
+                    </div>
+
+                    <h3 className={`${base}__cardTitle`}>{card.title}</h3>
+
+                    <div className={`${base}__waveDivider`}>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+
+                    <p className={`${base}__cardDesc`}>{card.desc}</p>
+
+                    <button className={`${base}__cardBtn`} type="button">
+                      View More
+                    </button>
+
+                    <div className={`${base}__bottomDeco`}>
+                      {renderFacilityIcon(card.iconType)}
+                    </div>
                   </div>
-
-                  <h3 className={`${base}__cardTitle`}>{card.title}</h3>
-
-                  <div className={`${base}__waveDivider`}>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-
-                  <p className={`${base}__cardDesc`}>{card.desc}</p>
-
-                  <button className={`${base}__cardBtn`}>View More</button>
-
-                  <div className={`${base}__bottomDeco`}>
-                    {renderFacilityIcon(card.iconType)}
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
         </div>
       </div>
