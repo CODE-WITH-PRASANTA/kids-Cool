@@ -78,18 +78,14 @@ export default function Footer() {
     <ul>
       <li>Home</li>
       <li>About</li>
-      <li>Why Choose Us</li>
+      {/* <li>Why Choose Us</li> */}
       <li>Our Teachers</li>
-      <li>Our History</li>
-    </ul>
-
-    <ul>
-      <li>Growing Stage</li>
       <li>Programms</li>
-      <li>News</li>
+      {/* <li>Our History</li> */}
       <li>Gallery</li>
+      <li>News</li>
     </ul>
-
+    
   </div>
 </div>
 

@@ -329,3 +329,48 @@
     width: 240px;
   }
 }
+
+/* ===== 1200 ===== */
+
+@media (max-width:1200px){
+
+.nb-btn{
+  padding: 6px 16px;
+  font-size: 14px;
+}
+
+.nb-number{
+  font-size: 12px;
+}
+
+}
+
+/* ===== 1024 ===== */
+
+@media (max-width:1024px){
+
+.nb-btn{
+  padding: 6px 12px;
+  font-size: 13px;
+}
+
+.nb-number{
+  font-size: 11px;
+}
+
+}
+
+/* ===== 768 ===== */
+
+@media (max-width:768px){
+
+.nb-btn{
+  padding: 5px 10px;
+  font-size: 12px;
+}
+
+.nb-number{
+  font-size: 10px;
+}
+
+}

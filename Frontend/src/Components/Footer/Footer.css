@@ -17,8 +17,8 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 800px;
-  background: url("../../assets/footer-mask-dark.webp") repeat top center;
+  height: 830px;
+  background: url("../../assets/footer-mask-dark.webp") no-repeat top center;
   background-size: cover;
   z-index: 1;
 }
@@ -71,6 +71,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
+  max-width: 170px;
 }
 
 .ft-gallery img {
@@ -323,8 +324,11 @@
   z-index: 5;
   display: flex;
   justify-content: space-between;
-  padding: 20px 40px;
+  padding: 1px 40px;
   font-size: 14px;
+  align-items:center;
+  flex-wrap:nowrap;   /* prevent line break */
+  white-space:nowrap;
 }
 
 /* ===============================
@@ -438,7 +442,7 @@ display:none;
 .ft-container{
 grid-template-columns: 1fr 1fr;
         gap: 6px;
-        padding: 30px 16px;
+        padding: 7px 16px;
 }
 
 .ft-logo{
@@ -459,6 +463,7 @@ grid-template-columns:repeat(3,1fr);
 .ft-container{
 grid-template-columns:1fr 1fr;
 text-align:center;
+padding: 1px;
 }
 
 .ft-col{
