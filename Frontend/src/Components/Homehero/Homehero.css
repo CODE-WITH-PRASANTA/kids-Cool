@@ -1,0 +1,734 @@
+.homehero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(180deg, #55d6e4 0%, #38c7d7 100%);
+}
+
+.homehero__slider {
+  position: relative;
+  width: 100%;
+  height: min(52vw, 920px);
+  min-height: 560px;
+}
+
+.homehero__slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(1.03);
+  transition:
+    opacity 0.9s ease,
+    visibility 0.9s ease,
+    transform 1.2s ease;
+  overflow: hidden;
+}
+
+.homehero__slide--active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  z-index: 2;
+}
+
+.homehero__bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.homehero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(18, 187, 207, 0.08) 0%, rgba(0, 0, 0, 0.05) 100%),
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.2), transparent 28%),
+    radial-gradient(circle at 20% 35%, rgba(255, 255, 255, 0.12), transparent 16%),
+    radial-gradient(circle at 78% 32%, rgba(255, 255, 255, 0.12), transparent 18%);
+  pointer-events: none;
+}
+
+.homehero__glassGlow {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04), transparent 30%, rgba(255, 255, 255, 0.05) 65%, transparent),
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.16), transparent 22%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.homehero__floatingWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.homehero__contentWrap {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}
+
+.homehero__content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(700px, 90%);
+  transform: translate(-50%, -48%);
+  text-align: center;
+}
+
+.homehero__miniTag,
+.homehero__percent,
+.homehero__heading,
+.homehero__subheading,
+.homehero__btn,
+.homehero__badgeFlower,
+.homehero__cloud,
+.homehero__planePath,
+.homehero__rocketBtn,
+.homehero__cloudImage,
+.homehero__controls {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.homehero--visible .homehero__slide--active .homehero__miniTag {
+  animation: homeheroFadeUp 0.75s ease forwards;
+  animation-delay: 0.1s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__percent {
+  animation: homeheroFadeUp 0.75s ease forwards;
+  animation-delay: 0.18s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__heading {
+  animation: homeheroFadeUp 0.75s ease forwards;
+  animation-delay: 0.32s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__subheading {
+  animation: homeheroFadeUp 0.75s ease forwards;
+  animation-delay: 0.46s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__btn {
+  animation: homeheroFadeUp 0.75s ease forwards;
+  animation-delay: 0.6s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__badgeFlower {
+  animation: homeheroFadeUp 0.8s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__cloud-one {
+  animation: homeheroFadeUp 0.8s ease forwards;
+  animation-delay: 0.28s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__planePath {
+  animation: homeheroFadeUp 0.8s ease forwards;
+  animation-delay: 0.36s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__rocketBtn--left {
+  animation: homeheroFadeUp 0.8s ease forwards;
+  animation-delay: 0.42s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__rocketBtn--right {
+  animation: homeheroFadeUp 0.8s ease forwards;
+  animation-delay: 0.48s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__cloud-two {
+  animation: homeheroFadeUp 0.8s ease forwards;
+  animation-delay: 0.56s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__cloudImage {
+  animation: homeheroFadeUp 0.85s ease forwards;
+  animation-delay: 0.2s;
+}
+
+.homehero--visible .homehero__slide--active .homehero__controls {
+  animation: homeheroFadeUp 0.85s ease forwards;
+  animation-delay: 0.3s;
+}
+
+.homehero__miniTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+.homehero__percent {
+  margin: 0;
+  font-size: clamp(4.8rem, 10vw, 11rem);
+  line-height: 0.9;
+  font-weight: 900;
+  letter-spacing: -0.06em;
+  color: #ffffff;
+  text-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    6px 6px 0 rgba(99, 102, 156, 0.34);
+}
+
+.homehero__heading {
+  margin: 20px 0 0;
+  font-size: clamp(2.5rem, 4.7vw, 5.1rem);
+  line-height: 1;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.homehero__subheading {
+  margin: 24px 0 0;
+  font-size: clamp(2.2rem, 4.2vw, 4.5rem);
+  line-height: 1.1;
+  font-weight: 500;
+  color: #ffffff;
+  text-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.homehero__btn {
+  margin-top: 34px;
+  min-width: 220px;
+  height: 74px;
+  padding: 0 34px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff0f68 0%, #ff2f87 50%, #ff0c73 100%);
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow:
+    0 20px 35px rgba(255, 9, 100, 0.26),
+    0 0 0 6px rgba(255, 255, 255, 0.08);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    filter 0.35s ease;
+}
+
+.homehero__btn:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 24px 40px rgba(255, 9, 100, 0.34),
+    0 0 0 8px rgba(255, 255, 255, 0.12);
+  filter: brightness(1.05);
+}
+
+.homehero__badgeFlower {
+  position: absolute;
+  left: 21%;
+  top: 20%;
+  width: 64px;
+  height: 64px;
+  border: 5px solid #f4c315;
+  border-radius: 16px;
+  transform: rotate(12deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.12);
+  animation: homeheroFloat 3.8s ease-in-out infinite;
+}
+
+.homehero__badgeFlowerInner {
+  font-size: 2rem;
+  color: #ffffff;
+  transform: rotate(-12deg);
+}
+
+.homehero__cloud {
+  position: absolute;
+  border: 4px solid rgba(255, 255, 255, 0.96);
+  border-radius: 999px;
+  background: transparent;
+  box-sizing: border-box;
+  filter: drop-shadow(0 8px 12px rgba(255, 255, 255, 0.12));
+}
+
+.homehero__cloud::before,
+.homehero__cloud::after {
+  content: "";
+  position: absolute;
+  border: 4px solid rgba(255, 255, 255, 0.96);
+  border-radius: 50%;
+  background: transparent;
+  box-sizing: border-box;
+}
+
+.homehero__cloud-one {
+  left: 50%;
+  top: 10%;
+  width: 152px;
+  height: 72px;
+  transform: translateX(-50%);
+  animation: homeheroFloat 4s ease-in-out infinite;
+}
+
+.homehero__cloud-one::before {
+  width: 58px;
+  height: 58px;
+  left: 20px;
+  top: -26px;
+}
+
+.homehero__cloud-one::after {
+  width: 54px;
+  height: 54px;
+  right: 18px;
+  top: -18px;
+}
+
+.homehero__cloud-two {
+  right: 12.5%;
+  bottom: 18%;
+  width: 84px;
+  height: 40px;
+  animation: homeheroFloat 4.3s ease-in-out infinite;
+}
+
+.homehero__cloud-two::before {
+  width: 36px;
+  height: 36px;
+  left: 7px;
+  top: -15px;
+}
+
+.homehero__cloud-two::after {
+  width: 34px;
+  height: 34px;
+  right: 8px;
+  top: -12px;
+}
+
+.homehero__planePath {
+  position: absolute;
+  left: 31%;
+  top: 24%;
+  width: 160px;
+  height: 80px;
+  animation: homeheroPlaneFloat 4.5s ease-in-out infinite;
+}
+
+.homehero__airplane {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+  filter: drop-shadow(0 10px 16px rgba(255, 255, 255, 0.18));
+}
+
+.homehero__rocketBtn {
+  position: absolute;
+  width: 110px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+
+.homehero__rocketBtn:hover {
+  filter: drop-shadow(0 10px 18px rgba(255, 255, 255, 0.16));
+}
+
+.homehero__rocketBtn--left {
+  left: 4%;
+  top: 46%;
+  animation: homeheroRocketFloat 3.6s ease-in-out infinite;
+}
+
+.homehero__rocketBtn--right {
+  right: 4%;
+  top: 46%;
+  transform: scaleX(-1);
+  animation: homeheroRocketFloatRight 3.8s ease-in-out infinite;
+}
+
+.homehero__rocketSvg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.homehero__cloudImage {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 3;
+  pointer-events: none;
+
+  /* black cloud to white */
+  filter:
+    brightness(0)
+    invert(1)
+    drop-shadow(0 -10px 20px rgba(255, 255, 255, 0.22));
+  opacity: 0.98;
+}
+
+.homehero__controls {
+  position: absolute;
+  top: 16px;
+  left: 24px;
+  z-index: 10;
+  height: 54px;
+  min-width: 160px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 0 0 24px 0;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.1);
+}
+
+.homehero__controlDot,
+.homehero__controlPill {
+  border: none;
+  background: #ffffff;
+  cursor: pointer;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease,
+    background 0.3s ease;
+}
+
+.homehero__controlDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.homehero__controlPill {
+  width: 34px;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff0f68 0%, #ff2f87 100%);
+}
+
+.homehero__controlDot:hover,
+.homehero__controlPill:hover {
+  transform: scale(1.08);
+}
+
+.homehero__dots {
+  position: absolute;
+  left: 50%;
+  bottom: 26px;
+  transform: translateX(-50%);
+  display: none;
+}
+
+.homehero__dot {
+  display: none;
+}
+
+@keyframes homeheroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes homeheroFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes homeheroPlaneFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes homeheroRocketFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes homeheroRocketFloatRight {
+  0%, 100% {
+    transform: scaleX(-1) translateY(0);
+  }
+  50% {
+    transform: scaleX(-1) translateY(-8px);
+  }
+}
+
+@media (max-width: 1400px) {
+  .homehero__slider {
+    height: min(56vw, 820px);
+  }
+
+  .homehero__content {
+    width: min(620px, 88%);
+  }
+
+  .homehero__badgeFlower {
+    left: 18%;
+    top: 19%;
+  }
+
+  .homehero__planePath {
+    left: 28%;
+    top: 24%;
+    width: 138px;
+  }
+}
+
+@media (max-width: 991px) {
+  .homehero__slider {
+    height: 78vw;
+    min-height: 520px;
+  }
+
+  .homehero__content {
+    width: 88%;
+    top: 52%;
+  }
+
+  .homehero__miniTag {
+    font-size: 0.78rem;
+    padding: 8px 16px;
+  }
+
+  .homehero__percent {
+    font-size: clamp(3.8rem, 12vw, 7rem);
+  }
+
+  .homehero__heading {
+    font-size: clamp(2rem, 5.5vw, 3.5rem);
+  }
+
+  .homehero__subheading {
+    font-size: clamp(1.8rem, 5vw, 3rem);
+  }
+
+  .homehero__btn {
+    min-width: 180px;
+    height: 60px;
+    font-size: 1.3rem;
+    margin-top: 26px;
+  }
+
+  .homehero__badgeFlower {
+    left: 16%;
+    top: 18%;
+    width: 54px;
+    height: 54px;
+  }
+
+  .homehero__planePath {
+    left: 27%;
+    top: 24%;
+    width: 114px;
+    height: 64px;
+  }
+
+  .homehero__rocketBtn {
+    width: 84px;
+    height: 38px;
+  }
+
+  .homehero__rocketBtn--left {
+    left: 2%;
+    top: 49%;
+  }
+
+  .homehero__rocketBtn--right {
+    right: 2%;
+    top: 49%;
+  }
+
+  .homehero__controls {
+    min-width: 136px;
+    height: 46px;
+    padding: 0 16px;
+    gap: 10px;
+  }
+}
+
+@media (max-width: 767px) {
+  .homehero__slider {
+    height: 132vw;
+    min-height: 540px;
+  }
+
+  .homehero__content {
+    width: 92%;
+    top: 52%;
+    transform: translate(-50%, -50%);
+  }
+
+  .homehero__miniTag {
+    font-size: 0.72rem;
+    padding: 7px 14px;
+    margin-bottom: 10px;
+  }
+
+  .homehero__percent {
+    font-size: clamp(3.2rem, 15vw, 5.4rem);
+    text-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.12),
+      4px 4px 0 rgba(99, 102, 156, 0.28);
+  }
+
+  .homehero__heading {
+    margin-top: 14px;
+    font-size: clamp(1.7rem, 8vw, 2.8rem);
+  }
+
+  .homehero__subheading {
+    margin-top: 18px;
+    font-size: clamp(1.4rem, 7vw, 2.3rem);
+  }
+
+  .homehero__btn {
+    min-width: 148px;
+    height: 48px;
+    padding: 0 20px;
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+
+  .homehero__badgeFlower {
+    left: 17%;
+    top: 18%;
+    width: 42px;
+    height: 42px;
+    border-width: 3px;
+    border-radius: 10px;
+  }
+
+  .homehero__badgeFlowerInner {
+    font-size: 1.2rem;
+  }
+
+  .homehero__cloud-one {
+    width: 88px;
+    height: 42px;
+    border-width: 3px;
+    top: 10.5%;
+  }
+
+  .homehero__cloud-one::before,
+  .homehero__cloud-one::after,
+  .homehero__cloud-two::before,
+  .homehero__cloud-two::after,
+  .homehero__cloud-two {
+    border-width: 3px;
+  }
+
+  .homehero__cloud-one::before {
+    width: 32px;
+    height: 32px;
+    left: 12px;
+    top: -14px;
+  }
+
+  .homehero__cloud-one::after {
+    width: 30px;
+    height: 30px;
+    right: 12px;
+    top: -10px;
+  }
+
+  .homehero__cloud-two {
+    width: 54px;
+    height: 26px;
+    right: 6%;
+    bottom: 20%;
+  }
+
+  .homehero__planePath {
+    left: 28%;
+    top: 23%;
+    width: 82px;
+    height: 48px;
+  }
+
+  .homehero__rocketBtn {
+    width: 62px;
+    height: 28px;
+  }
+
+  .homehero__rocketBtn--left {
+    left: 4%;
+    top: 47%;
+  }
+
+  .homehero__rocketBtn--right {
+    right: 4%;
+    top: 47%;
+  }
+
+  .homehero__cloudImage {
+    bottom: 0;
+  }
+
+  .homehero__controls {
+    top: 10px;
+    left: 10px;
+    min-width: 116px;
+    height: 40px;
+    padding: 0 14px;
+    gap: 8px;
+  }
+
+  .homehero__controlDot {
+    width: 10px;
+    height: 10px;
+  }
+
+  .homehero__controlPill {
+    width: 28px;
+    height: 10px;
+  }
+}

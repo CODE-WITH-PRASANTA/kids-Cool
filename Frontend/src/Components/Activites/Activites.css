@@ -1,0 +1,466 @@
+.activitiesSection {
+  --activities-bg: #f6f6f6;
+  --activities-text: #171717;
+  --activities-muted: #7f8499;
+  --activities-accent: #ff4f7d;
+  --activities-shadow: 0 18px 46px rgba(31, 41, 68, 0.08);
+
+  position: relative;
+  overflow: hidden;
+  background: var(--activities-bg);
+  padding: 74px 0 82px;
+}
+
+.activitiesSection__container {
+  width: min(1240px, calc(100% - 40px));
+  margin: 0 auto;
+  position: relative;
+}
+
+.activitiesSection__headerWrap {
+  position: relative;
+  max-width: 980px;
+  margin: 0 auto 54px;
+  min-height: 180px;
+}
+
+.activitiesSection__header {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.activitiesSection__miniIcon {
+  width: 28px;
+  height: 28px;
+  color: #cfc9c6;
+  margin: 0 auto 8px;
+}
+
+.activitiesSection__miniIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.activitiesSection__subTitle {
+  margin: 0 0 8px;
+  color: var(--activities-accent);
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.activitiesSection__title {
+  margin: 0 0 14px;
+  color: var(--activities-text);
+  font-size: clamp(30px, 4vw, 50px);
+  line-height: 1.12;
+  font-weight: 800;
+}
+
+.activitiesSection__desc {
+  max-width: 560px;
+  margin: 0 auto;
+  color: var(--activities-muted);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.activitiesSection__rainbowHead {
+  position: absolute;
+  top: 8px;
+  right: 40px;
+  width: 185px;
+  z-index: 2;
+  animation: activitiesFloat 4.8s ease-in-out infinite;
+}
+
+.activitiesSection__rainbowHead svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.activitiesSection__stage {
+  position: relative;
+  padding: 10px 72px 0;
+}
+
+.activitiesSection__nav {
+  position: absolute;
+  top: 208px;
+  z-index: 3;
+  width: 122px;
+  height: 52px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.activitiesSection__nav--left {
+  left: 18px;
+}
+
+.activitiesSection__nav--right {
+  right: 18px;
+}
+
+.activitiesSection__spider {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.28s ease;
+}
+
+.activitiesSection__spider svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.activitiesSection__nav:hover .activitiesSection__spider {
+  transform: scale(1.06) translateY(-2px);
+}
+
+.activitiesSection__cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 34px;
+  align-items: start;
+  position: relative;
+  z-index: 2;
+}
+
+.activitiesSection__card {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(42px);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.activitiesSection--visible .activitiesSection__card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.activitiesSection--visible .activitiesSection__card--index1 {
+  transition-delay: 0.08s;
+}
+
+.activitiesSection--visible .activitiesSection__card--index2 {
+  transition-delay: 0.2s;
+}
+
+.activitiesSection--visible .activitiesSection__card--index3 {
+  transition-delay: 0.32s;
+}
+
+.activitiesSection__shapeWrap {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto 22px;
+  padding-top: 22px;
+}
+
+.activitiesSection__shapeIcon {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 58px;
+  height: 58px;
+  transform: translateX(-50%);
+  z-index: 3;
+}
+
+.activitiesSection__shapeIcon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.activitiesSection__card--violet .activitiesSection__shapeIcon {
+  color: #a55df2;
+}
+
+.activitiesSection__card--mint .activitiesSection__shapeIcon {
+  color: #69efb6;
+}
+
+.activitiesSection__card--cyan .activitiesSection__shapeIcon {
+  color: #49d1db;
+}
+
+.activitiesSection__card--yellow .activitiesSection__shapeIcon {
+  color: #f2c400;
+}
+
+.activitiesSection__card--orange .activitiesSection__shapeIcon {
+  color: #f3941c;
+}
+
+.activitiesSection__imageHolder {
+  width: 255px;
+  height: 255px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: var(--activities-shadow);
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.activitiesSection__imageHolder img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.45s ease;
+}
+
+.activitiesSection__card:hover .activitiesSection__imageHolder {
+  transform: translateY(-8px);
+  box-shadow: 0 26px 60px rgba(31, 41, 68, 0.14);
+}
+
+.activitiesSection__card:hover .activitiesSection__imageHolder img {
+  transform: scale(1.05);
+}
+
+.activitiesSection__card--square .activitiesSection__imageHolder {
+  border: 8px solid #52d1dc;
+  border-radius: 12px;
+}
+
+.activitiesSection__card--circle .activitiesSection__imageHolder {
+  border: 8px solid #f2c400;
+  border-radius: 50%;
+}
+
+.activitiesSection__card--triangle .activitiesSection__imageHolder {
+  width: 255px;
+  height: 240px;
+  border: 8px solid #f3941c;
+  clip-path: polygon(50% 2%, 98% 96%, 2% 96%);
+  border-radius: 20px;
+}
+
+.activitiesSection__card--hexagon .activitiesSection__imageHolder {
+  border: 8px solid #a55df2;
+  clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0 50%);
+  border-radius: 20px;
+}
+
+.activitiesSection__content {
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.activitiesSection__cardTitle {
+  margin: 0 0 10px;
+  color: #171717;
+  font-size: 21px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.activitiesSection__cardText {
+  margin: 0 auto;
+  color: var(--activities-muted);
+  font-size: 15px;
+  line-height: 1.85;
+  max-width: 310px;
+}
+
+@keyframes activitiesFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@media (max-width: 1199px) {
+  .activitiesSection__container {
+    width: min(1120px, calc(100% - 32px));
+  }
+
+  .activitiesSection__headerWrap {
+    max-width: 900px;
+  }
+
+  .activitiesSection__rainbowHead {
+    right: 10px;
+    width: 165px;
+  }
+
+  .activitiesSection__stage {
+    padding-inline: 48px;
+  }
+
+  .activitiesSection__nav--left {
+    left: 0;
+  }
+
+  .activitiesSection__nav--right {
+    right: 0;
+  }
+
+  .activitiesSection__cards {
+    gap: 22px;
+  }
+
+  .activitiesSection__imageHolder,
+  .activitiesSection__card--triangle .activitiesSection__imageHolder {
+    width: 225px;
+    height: 225px;
+  }
+
+  .activitiesSection__card--triangle .activitiesSection__imageHolder {
+    height: 214px;
+  }
+}
+
+@media (max-width: 991px) {
+  .activitiesSection {
+    padding: 60px 0 70px;
+  }
+
+  .activitiesSection__headerWrap {
+    max-width: 620px;
+    min-height: auto;
+    margin-bottom: 40px;
+  }
+
+  .activitiesSection__rainbowHead {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 18px auto 0;
+    width: 150px;
+  }
+
+  .activitiesSection__stage {
+    padding: 0;
+  }
+
+  .activitiesSection__nav {
+    top: auto;
+    bottom: -68px;
+    width: 110px;
+  }
+
+  .activitiesSection__nav--left {
+    left: 50%;
+    transform: translateX(-126px);
+  }
+
+  .activitiesSection__nav--right {
+    right: 50%;
+    transform: translateX(126px);
+  }
+
+  .activitiesSection__cards {
+    grid-template-columns: 1fr 1fr;
+    gap: 28px 20px;
+  }
+
+  .activitiesSection__card--index3 {
+    grid-column: 1 / -1;
+    max-width: 340px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .activitiesSection {
+    padding: 50px 0 100px;
+  }
+
+  .activitiesSection__container {
+    width: min(100%, calc(100% - 20px));
+  }
+
+  .activitiesSection__title {
+    font-size: 30px;
+  }
+
+  .activitiesSection__desc,
+  .activitiesSection__cardText {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+  .activitiesSection__cards {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .activitiesSection__card--index3 {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .activitiesSection__imageHolder,
+  .activitiesSection__card--triangle .activitiesSection__imageHolder {
+    width: 235px;
+    height: 235px;
+  }
+
+  .activitiesSection__card--triangle .activitiesSection__imageHolder {
+    height: 220px;
+  }
+
+  .activitiesSection__nav {
+    width: 92px;
+    bottom: -78px;
+  }
+
+  .activitiesSection__nav--left {
+    transform: translateX(-102px);
+  }
+
+  .activitiesSection__nav--right {
+    transform: translateX(102px);
+  }
+}
+
+@media (max-width: 480px) {
+  .activitiesSection__subTitle {
+    font-size: 13px;
+  }
+
+  .activitiesSection__title {
+    font-size: 26px;
+  }
+
+  .activitiesSection__imageHolder,
+  .activitiesSection__card--triangle .activitiesSection__imageHolder {
+    width: 210px;
+    height: 210px;
+  }
+
+  .activitiesSection__card--triangle .activitiesSection__imageHolder {
+    height: 198px;
+  }
+
+  .activitiesSection__cardTitle {
+    font-size: 19px;
+  }
+
+  .activitiesSection__nav {
+    width: 84px;
+  }
+
+  .activitiesSection__nav--left {
+    transform: translateX(-92px);
+  }
+
+  .activitiesSection__nav--right {
+    transform: translateX(92px);
+  }
+}

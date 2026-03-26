@@ -1,0 +1,178 @@
+.creativeSection {
+  --pink: #f51b68;
+  --text-gray: #6b7280;
+  --heading: #1a1a1a;
+  
+  padding: 120px 0;
+  background: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+.creativeSection__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Typography & Content */
+.creativeSection__labelWrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.creativeSection__capIcon {
+  width: 20px;
+  color: #999;
+}
+
+.creativeSection__eyebrow {
+  color: var(--pink);
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.creativeSection__title {
+  font-size: 44px; /* Matches reference scale */
+  font-weight: 700;
+  line-height: 1.15;
+  color: var(--heading);
+  margin: 0 0 25px 0;
+}
+
+.creativeSection__desc {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-gray);
+  max-width: 480px;
+  margin-bottom: 40px;
+}
+
+/* Action Area with FlyBoy */
+.creativeSection__actionArea {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+}
+
+.creativeSection__button {
+  background: var(--pink);
+  color: #fff;
+  border: none;
+  padding: 16px 36px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.creativeSection__flyWrap {
+    position: relative;
+    width: 180px;
+}
+
+.creativeSection__flyBoy {
+    width: 100%;
+    position: relative;
+    z-index: 3;
+}
+
+.creativeSection__rainbow {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    z-index: 1;
+}
+
+.creativeSection__dashArrow {
+    position: absolute;
+    left: -110px;
+    bottom: -10px;
+    width: 100px;
+    opacity: 0.5;
+}
+
+/* Image Grids - Matching the "Quarter Circle" look */
+.creativeSection__right {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+  position: relative;
+}
+
+.creativeSection__imgFrame {
+  width: 280px;
+  height: 340px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/* Top Image: Rounded bottom-right */
+.creativeSection__imgFrame--top {
+  border-radius: 0 0 160px 0;
+  transform: translateY(-30px);
+}
+
+/* Bottom Image: Rounded top-left */
+.creativeSection__imgFrame--bottom {
+  border-radius: 160px 0 0 0;
+  transform: translateY(30px);
+}
+
+.creativeSection__imgFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Floating Hands - Pushed to the far right */
+.creativeSection__handDecor {
+  position: absolute;
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 90px;
+  z-index: 10;
+}
+
+/* Animations */
+.creativeSection__left, 
+.creativeSection__right {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 1s ease-out;
+}
+
+.creativeSection--show .creativeSection__left,
+.creativeSection--show .creativeSection__right {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .creativeSection__container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    .creativeSection__labelWrap, .creativeSection__actionArea {
+        justify-content: center;
+    }
+    .creativeSection__desc {
+        margin: 0 auto 40px auto;
+    }
+    .creativeSection__right {
+        justify-content: center;
+        margin-top: 50px;
+    }
+}

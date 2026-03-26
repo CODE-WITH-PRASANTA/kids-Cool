@@ -1,13 +1,14 @@
-import { useState } from 'react'
-import './App.css'
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Homehero from "./Components/Homehero/Homehero";
+import Home from "./Pages/Home/Home";
 
-function App() {
-
+const App = () => {
   return (
- <>
- 
- </>
-  )
-}
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+    </Routes>
+  );
+};
 
-export default App
+export default App;
