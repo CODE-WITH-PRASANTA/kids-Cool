@@ -246,19 +246,9 @@
   transition-delay: 0.46s;
 }
 
-.educationSection__field {
-  position: relative;
-  z-index: 110;
-  margin-top: 4px;
-  height: 380px;
-  /* background-repeat: no-repeat; */
-  background-position: center bottom;
-  background-size: cover;
-}
-
 .educationSection__kid {
   position: absolute;
-  bottom: 24px;
+  bottom: -14px;
   width: 100px;
   pointer-events: none;
   z-index: 3;
@@ -267,13 +257,13 @@
 
 .educationSection__kid--left {
   left: max(2%, 22px);
-  top: -35px;
+  top: 35px;
 }
 
 .educationSection__kid--right {
   right: max(2%, 22px);
   animation-delay: 0.6s;
-  top: -33px;
+  top: 25px;
 }
 
 .educationSection__modal {
@@ -686,4 +676,47 @@
     width: 74px;
     height: 74px;
   }
+}
+
+/* MOBILE SLIDER */
+.educationSection__mobileSlider img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+/* CONTROLS */
+.educationSection__controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.educationSection__controls button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* DOTS */
+.educationSection__dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.educationSection__dots span {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.educationSection__dots span.active {
+  background: #000;
 }

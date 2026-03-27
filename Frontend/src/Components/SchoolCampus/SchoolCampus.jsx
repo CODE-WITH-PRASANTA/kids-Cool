@@ -74,21 +74,47 @@ const SchoolCampus = () => {
     { id: 4, count: "8+", label: "Years Experience", icon: "pencil" },
   ];
 
-  const cardsPerPage = 2;
-  const totalPages = Math.ceil(campusCards.length / cardsPerPage);
+// ✅ dynamic cards per page
+const [cardsPerPage, setCardsPerPage] = useState(4);
 
-  const paginatedCards = useMemo(() => {
-    const start = currentPage * cardsPerPage;
-    return campusCards.slice(start, start + cardsPerPage);
-  }, [currentPage]);
+useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth <= 1024) {
+      setCardsPerPage(2); // mobile
+    } else {
+      setCardsPerPage(4); // desktop
+    }
 
-  const handlePrev = () => {
-    setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+    setCurrentPage(0); // reset page on resize (important)
   };
 
-  const handleNext = () => {
-    setCurrentPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
-  };
+  handleResize();
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
+// ✅ total pages
+const totalPages = Math.ceil(campusCards.length / cardsPerPage);
+
+// ✅ paginated cards
+const paginatedCards = useMemo(() => {
+  const start = currentPage * cardsPerPage;
+  return campusCards.slice(start, start + cardsPerPage);
+}, [currentPage, cardsPerPage]);
+
+// ✅ prev
+const handlePrev = () => {
+  setCurrentPage((prev) =>
+    prev === 0 ? totalPages - 1 : prev - 1
+  );
+};
+
+// ✅ next
+const handleNext = () => {
+  setCurrentPage((prev) =>
+    prev === totalPages - 1 ? 0 : prev + 1
+  );
+};
 
   const renderFacilityIcon = (type) => {
     switch (type) {

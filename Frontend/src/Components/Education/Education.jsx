@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Education.css";
 
-import fieldBg from "../../assets/field-removebg-preview.webp";
 import heroImg from "../../assets/Section1.webp";
 import img2 from "../../assets/Section2.webp";
 import img3 from "../../assets/Section3.webp";
@@ -15,6 +14,10 @@ const Education = () => {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
   const [activeImage, setActiveImage] = useState(null);
+
+  // ✅ mobile pagination
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   const galleryImages = [
     {
@@ -47,14 +50,17 @@ const Education = () => {
       alt: "Kids group learning together",
       className: `${base}__card ${base}__card--wide`,
     },
-    // {
-    //   id: 6,
-    //   image: img6,
-    //   alt: "Toddler playing with blocks",
-    //   className: `${base}__card ${base}__card--bottom`,
-    // },
   ];
 
+  // ✅ detect mobile
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  // ✅ intersection observer (fixed duplicate)
   useEffect(() => {
     const current = sectionRef.current;
     if (!current) return;
@@ -70,10 +76,10 @@ const Education = () => {
     );
 
     observer.observe(current);
-
     return () => observer.disconnect();
   }, []);
 
+  // ✅ modal ESC + scroll lock (fixed duplicate)
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") {
@@ -94,6 +100,17 @@ const Education = () => {
       document.body.style.overflow = "";
     };
   }, [activeImage]);
+
+  // ✅ pagination
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length
+    );
+  };
 
   return (
     <>
@@ -167,151 +184,100 @@ const Education = () => {
             <div className={`${base}__topIcon`} aria-hidden="true">
               <svg viewBox="0 0 120 120" fill="none">
                 <g className={`${base}__topIconDraw`}>
-                  <path
-                    d="M50 22C63 28 72 41 73 54"
-                    stroke="#9b87f5"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M72 54C74 68 68 82 56 92"
-                    stroke="#7f72ff"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M55 19C77 25 94 42 99 64"
-                    stroke="#c8b9ff"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M46 23L82 43L60 97L35 68L46 23Z"
-                    fill="#f7f1ff"
-                    stroke="#a48cff"
-                    strokeWidth="2.8"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M56 34C63 34 68 39 68 46C68 53 63 58 56 58C49 58 44 53 44 46C44 39 49 34 56 34Z"
-                    fill="#fff4ea"
-                    stroke="#ff9955"
-                    strokeWidth="2.2"
-                  />
-                  <path
-                    d="M56 39C60 39 63 42 63 46C63 50 60 53 56 53C52 53 49 50 49 46C49 42 52 39 56 39Z"
-                    fill="#ffd36f"
-                    stroke="#ffb648"
-                    strokeWidth="1.8"
-                  />
-                  <path
-                    d="M41 67L30 79"
-                    stroke="#8b7ef8"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M47 72L39 88"
-                    stroke="#ff7d64"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M53 76L49 94"
-                    stroke="#ff6a59"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M80 43L95 40L87 54L80 43Z"
-                    fill="#dae6ff"
-                    stroke="#8d83ff"
-                    strokeWidth="2.2"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M71 85L80 99"
-                    stroke="#ff7d64"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M78 80L92 93"
-                    stroke="#ff9b6a"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
+                  <path d="M50 22C63 28 72 41 73 54" stroke="#9b87f5" strokeWidth="2.6" strokeLinecap="round"/>
+                  <path d="M72 54C74 68 68 82 56 92" stroke="#7f72ff" strokeWidth="2.6" strokeLinecap="round"/>
+                  <path d="M55 19C77 25 94 42 99 64" stroke="#c8b9ff" strokeWidth="2.6" strokeLinecap="round"/>
+                  <path d="M46 23L82 43L60 97L35 68L46 23Z" fill="#f7f1ff" stroke="#a48cff" strokeWidth="2.8"/>
+                  <path d="M56 34C63 34 68 39 68 46C68 53 63 58 56 58C49 58 44 53 44 46C44 39 49 34 56 34Z" fill="#fff4ea" stroke="#ff9955" strokeWidth="2.2"/>
+                  <path d="M56 39C60 39 63 42 63 46C63 50 60 53 56 53C52 53 49 50 49 46C49 42 52 39 56 39Z" fill="#ffd36f" stroke="#ffb648" strokeWidth="1.8"/>
                 </g>
               </svg>
             </div>
           </div>
 
+          {/* ===== GALLERY ===== */}
           <div className={`${base}__gallery`}>
-            <div className={`${base}__left`}>
-              <button
-                type="button"
-                className={`${base}__imageButton ${base}__imageButton--main`}
-                onClick={() => setActiveImage(galleryImages[0])}
-                aria-label="Open main image preview"
-              >
-                <div className={galleryImages[0].className}>
-                  <img src={galleryImages[0].image} alt={galleryImages[0].alt} />
-                </div>
-              </button>
-            </div>
-
-            <div className={`${base}__right`}>
-              {galleryImages.slice(1).map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={`${base}__imageButton ${base}__stagger${index + 1}`}
-                  onClick={() => setActiveImage(item)}
-                  aria-label={`Open preview ${item.id}`}
+            {isMobile ? (
+              <div className={`${base}__mobileSlider`}>
+                <div
+                  className={galleryImages[currentIndex].className}
+                  onClick={() => setActiveImage(galleryImages[currentIndex])}
                 >
-                  <div className={item.className}>
-                    <img src={item.image} alt={item.alt} />
-                  </div>
-                </button>
-              ))}
-            </div>
+                  <img
+                    src={galleryImages[currentIndex].image}
+                    alt={galleryImages[currentIndex].alt}
+                  />
+                </div>
+
+                <div className={`${base}__controls`}>
+                  <button onClick={prevSlide}>‹</button>
+                  <span>
+                    {currentIndex + 1} / {galleryImages.length}
+                  </span>
+                  <button onClick={nextSlide}>›</button>
+                </div>
+
+                <div className={`${base}__dots`}>
+                  {galleryImages.map((_, i) => (
+                    <span
+                      key={i}
+                      className={i === currentIndex ? "active" : ""}
+                      onClick={() => setCurrentIndex(i)}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className={`${base}__left`}>
+                  <button
+                    className={`${base}__imageButton ${base}__imageButton--main`}
+                    onClick={() => setActiveImage(galleryImages[0])}
+                  >
+                    <div className={galleryImages[0].className}>
+                      <img src={galleryImages[0].image} alt="" />
+                    </div>
+                  </button>
+                </div>
+
+                <div className={`${base}__right`}>
+                  {galleryImages.slice(1).map((item, index) => (
+                    <button
+                      key={item.id}
+                      className={`${base}__imageButton ${base}__stagger${index + 1}`}
+                      onClick={() => setActiveImage(item)}
+                    >
+                      <div className={item.className}>
+                        <img src={item.image} alt="" />
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        <div
-          className={`${base}__field`}
-          style={{ backgroundImage: `url(${fieldBg})` }}
-          aria-hidden="true"
-        >
-          <img
-            src={pencilGirl}
-            alt=""
-            className={`${base}__kid ${base}__kid--left`}
-          />
-          <img
-            src={pencilBoy}
-            alt=""
-            className={`${base}__kid ${base}__kid--right`}
-          />
+        {/* kids images */}
+        <div>
+          <img src={pencilGirl} className={`${base}__kid ${base}__kid--left`} />
+          <img src={pencilBoy} className={`${base}__kid ${base}__kid--right`} />
         </div>
       </section>
 
+      {/* ===== FULL MODAL (RESTORED) ===== */}
       {activeImage && (
         <div
           className={`${base}__modal`}
           onClick={() => setActiveImage(null)}
-          role="dialog"
-          aria-modal="true"
         >
           <div
             className={`${base}__modalCard`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              type="button"
               className={`${base}__close`}
               onClick={() => setActiveImage(null)}
-              aria-label="Close preview"
             >
               ×
             </button>
