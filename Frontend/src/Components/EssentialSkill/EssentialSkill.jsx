@@ -18,51 +18,50 @@ const EssentialSkill = () => {
           observer.unobserve(current);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.15 },
     );
 
     observer.observe(current);
     return () => observer.disconnect();
   }, []);
 
-
   /* ================= slider ================= */
 
   const [page, setPage] = useState(0);
   const [perPage, setPerPage] = useState(2);
 
-  const programs = [
-    {
-      id: 1,
-      title: "Online Class",
-      desc: "Eu turpis egestas pretium aenean pharetra magna ac.",
-      image:
-        "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 2,
-      title: "Formal Tuition",
-      desc: "Strong concepts with guided classroom learning.",
-      image:
-        "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 3,
-      title: "Special Tuition",
-      desc: "Extra care and attention for every learner.",
-      image:
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 4,
-      title: "Preschool",
-      desc: "Early years learning with fun and creativity.",
-      image:
-        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
-    },
-  ];
+const programs = [
+  {
+    id: 1,
+    title: "Play Group",
+    desc: "Our Play Group program introduces children to a fun and engaging learning environment through play-based activities. It helps develop social skills, creativity, and confidence, making it an ideal start for early childhood education in Bhubaneswar.",
+    image:
+      "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 2,
+    title: "Nursery",
+    desc: "The Nursery program focuses on building strong foundational skills through activity-based learning. Children develop early literacy, numeracy, and communication skills in a structured yet enjoyable environment.",
+    image:
+      "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 3,
+    title: "LKG / UKG",
+    desc: "Our LKG and UKG programs prepare children for primary education with a focus on academics, communication, and personality development. It ensures a smooth transition to formal schooling.",
+    image:
+      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    id: 4,
+    title: "Day Care",
+    desc: "We provide a safe and reliable day care environment in Bhubaneswar where children are cared for with attention and love. It includes supervised activities, healthy routines, and a secure setting for working parents.",
+    image:
+      "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
+  },
+];
 
-   /* responsive cards */
+  /* responsive cards */
 
   useEffect(() => {
     const update = () => {
@@ -105,7 +104,7 @@ const EssentialSkill = () => {
           observer.unobserve(currentEl);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     observer.observe(currentEl);
@@ -113,11 +112,11 @@ const EssentialSkill = () => {
   }, []);
 
   return (
-<section
-  ref={sectionRef}
-  className={`${base} ${visible ? `${base}--visible` : ""}`}
->
-  <div className={`${base}__topBg`} />
+    <section
+      ref={sectionRef}
+      className={`${base} ${visible ? `${base}--visible` : ""}`}
+    >
+      <div className={`${base}__topBg`} />
 
       <div className={`${base}__decor ${base}__decor--star`}>
         <svg viewBox="0 0 120 120" aria-hidden="true">
@@ -165,10 +164,7 @@ const EssentialSkill = () => {
               d="M58 14 C87 22 105 48 101 88 C78 91 53 80 39 60 C36 42 45 25 58 14 Z"
               fill="#f4f4f4"
             />
-            <path
-              d="M61 16 C79 18 93 34 97 48 L74 47 Z"
-              fill="#0b6d82"
-            />
+            <path d="M61 16 C79 18 93 34 97 48 L74 47 Z" fill="#0b6d82" />
             <circle cx="68" cy="58" r="13" fill="#0e7387" />
             <circle cx="68" cy="58" r="8" fill="#176f86" />
             <path d="M46 70 L27 77 L42 58 Z" fill="#f6b08d" />
@@ -381,19 +377,24 @@ const EssentialSkill = () => {
             </div>
 
             <h2 className={`${base}__title`}>
-              We Educate Knowledge & <br />
-              Essential Skills!
+              Dream Flower Pre School & Day Care – Bhubaneswar
             </h2>
 
             <p className={`${base}__desc`}>
-              Phasellus gravida lacus quis eros lobortis, nec dapibus quam
-              gravida. Duis sed augue vitae felis pellentesque varius nec quis
-              nunc. Morbi mauris augue, pulvinar quis luctus eget, pretium sed
-              massa.
+              Looking for the best pre school in Bhubaneswar that nurtures your
+              child’s growth with care, creativity, and quality education?
+              Welcome to Dream Flower Pre School & Day Care, where we lay the
+              foundation for lifelong learning through fun, engaging, and
+              structured programs. Recognized as a top pre school and day care
+              center in Bhubaneswar, we provide a safe, supportive, and
+              stimulating environment for young minds to explore, learn, and
+              grow. <br />
+
+              At Dream Flower Pre School, we believe that every child is unique and deserves the best start in life. Our curriculum is designed to balance education, creativity, and play-based learning, ensuring holistic development.
             </p>
 
             <button className={`${base}__btn`} type="button">
-              Read More
+             Contact Us
             </button>
 
             <span className={`${base}__spark`}>
@@ -414,10 +415,7 @@ const EssentialSkill = () => {
                     d="M58 14 C87 22 105 48 101 88 C78 91 53 80 39 60 C36 42 45 25 58 14 Z"
                     fill="#f8f8f8"
                   />
-                  <path
-                    d="M61 16 C79 18 93 34 97 48 L74 47 Z"
-                    fill="#0b6d82"
-                  />
+                  <path d="M61 16 C79 18 93 34 97 48 L74 47 Z" fill="#0b6d82" />
                   <circle cx="68" cy="58" r="13" fill="#0e7387" />
                   <path d="M46 70 L27 77 L42 58 Z" fill="#f6b08d" />
                   <path d="M55 84 L50 104 L67 89 Z" fill="#f6b08d" />
@@ -507,119 +505,84 @@ const EssentialSkill = () => {
 
           <p className={`${base}__programTag`}>Educational Programs</p>
           <h3 className={`${base}__programTitle`}>
-            Step By Step Systematic <br />
-            Education
+           Systematic Early Education for Every Step of Growth
           </h3>
           <p className={`${base}__programDesc`}>
-            Duis sed augue vitae felis pellentesque varius nec quis nunc. Morbi
-            mauris augue, pulvinar quis luctus eget. Phasellus gravida lacus
-            quis eros lobortis, nec dapibus quam gravida.
+           At Dream Flower Pre School & Day Care in Bhubaneswar, we offer carefully planned early education programs that support holistic child development. Through a mix of play-based learning, structured guidance, and creative exploration, we create a strong foundation for your child’s future learning journey.
           </p>
         </div>
 
-        
+        {/* ========================= */}
+        {/* ===== SLIDER START ===== */}
+        {/* ========================= */}
 
-    {/* ========================= */}
-    {/* ===== SLIDER START ===== */}
-    {/* ========================= */}
-
-    <div className={`${base}__slider`}>
-
-      <div
-        className={`${base}__sliderTrack`}
-        style={{
-          transform: `translateX(-${page * 100}%)`,
-        }}
-      >
-
-        {Array.from({ length: totalPages }).map((_, pageIndex) => (
-
+        <div className={`${base}__slider`}>
           <div
-            key={pageIndex}
-            className={`${base}__slidePage`}
+            className={`${base}__sliderTrack`}
+            style={{
+              transform: `translateX(-${page * 100}%)`,
+            }}
           >
+            {Array.from({ length: totalPages }).map((_, pageIndex) => (
+              <div key={pageIndex} className={`${base}__slidePage`}>
+                {programs
+                  .slice(pageIndex * perPage, pageIndex * perPage + perPage)
+                  .map((item, index) => (
+                    <article className={`${base}__card`} key={item.id}>
+                      <div className={`${base}__cardImageWrap`}>
+                        <img
+                          src={item.image}
+                          alt={item.title}
+                          className={`${base}__cardImage`}
+                        />
 
-            {programs
-              .slice(
-                pageIndex * perPage,
-                pageIndex * perPage + perPage
-              )
-              .map((item, index) => (
+                        <span
+                          className={`${base}__bubble ${base}__bubble--one`}
+                        />
+                        <span
+                          className={`${base}__bubble ${base}__bubble--two`}
+                        />
+                        <span
+                          className={`${base}__bubble ${base}__bubble--three`}
+                        />
+                      </div>
 
-                <article
-                  className={`${base}__card`}
-                  key={item.id}
-                >
+                      <div className={`${base}__cardContent`}>
+                        <h4 className={`${base}__cardTitle`}>{item.title}</h4>
 
-                  <div className={`${base}__cardImageWrap`}>
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className={`${base}__cardImage`}
-                    />
+                        <p className={`${base}__cardDesc`}>{item.desc}</p>
 
-                    <span className={`${base}__bubble ${base}__bubble--one`} />
-                    <span className={`${base}__bubble ${base}__bubble--two`} />
-                    <span className={`${base}__bubble ${base}__bubble--three`} />
-
-                  </div>
-
-                  <div className={`${base}__cardContent`}>
-
-                    <h4 className={`${base}__cardTitle`}>
-                      {item.title}
-                    </h4>
-
-                    <p className={`${base}__cardDesc`}>
-                      {item.desc}
-                    </p>
-
-                    <a
-                      href="/"
-                      className={`${base}__cardLink`}
-                      onClick={(e) => e.preventDefault()}
-                    >
-                      Learn More
-                    </a>
-
-                  </div>
-
-                </article>
-
-              ))}
-
+                        <a
+                          href="/"
+                          className={`${base}__cardLink`}
+                          onClick={(e) => e.preventDefault()}
+                        >
+                          Contact Us
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+              </div>
+            ))}
           </div>
 
-        ))}
+          {/* ===== dots ===== */}
 
-      </div>
-
-
-      {/* ===== dots ===== */}
-
-      <div className={`${base}__dots`}>
-
-        {Array.from({ length: totalPages }).map((_, i) => (
-
-          <span
-            key={i}
-            className={`${base}__dot ${
-              i === page ? `${base}__dot--active` : ""
-            }`}
-            onClick={() => setPage(i)}
-          />
-
-        ))}
-
-      </div>
-
-    </div>
+          <div className={`${base}__dots`}>
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <span
+                key={i}
+                className={`${base}__dot ${
+                  i === page ? `${base}__dot--active` : ""
+                }`}
+                onClick={() => setPage(i)}
+              />
+            ))}
+          </div>
+        </div>
 
         <div className={`${base}__action`}>
-          <button
-            className={`${base}__btn ${base}__btn--center`}
-            type="button"
-          >
+          <button className={`${base}__btn ${base}__btn--center`} type="button">
             View More
           </button>
         </div>
