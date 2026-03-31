@@ -17,9 +17,9 @@ const Home = () => {
         <EssentialSkill/>
         <Creative/>
         <SchoolCampus/>
-        <Education/>
+         <Activites/>
         <Teacher/>
-        <Activites/>
+          <Education/>
         <Blog/>
         <TeachingMethodology/>
         <Testimonial/>

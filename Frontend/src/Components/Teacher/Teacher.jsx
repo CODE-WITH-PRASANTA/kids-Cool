@@ -1,16 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Teacher.css";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-} from "react-icons/fa";
+import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
 const Teacher = () => {
   const base = "teacherSection";
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
   const [currentTeacher, setCurrentTeacher] = useState(0);
+  const [desktopPage, setDesktopPage] = useState(0);
 
   useEffect(() => {
     const current = sectionRef.current;
@@ -33,34 +30,68 @@ const Teacher = () => {
   const teachers = [
     {
       id: 1,
-      name: "Sarah Michelle",
-      role: "Language Mentor",
+      name: "Ananya Sharma",
+      role: "Early Learning Mentor",
       image:
         "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
       description:
-        "Sit amet nisl suscipit adipiscing bibendum est. Aliquam ultrices sagittis orci a scelerisque purus.",
+        "At Dream Flower Pre-School & Day Care, Ananya ma’am creates a warm and joyful classroom where children learn through stories, playful activities, communication practice, and gentle guidance. She helps little learners build confidence, language skills, classroom discipline, and a strong emotional connection with learning from the very beginning.",
     },
     {
       id: 2,
-      name: "Mary Grace",
-      role: "Creative Trainer",
+      name: "Meera Das",
+      role: "Creative Activity Trainer",
       image:
         "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
       description:
-        "Bibendum ut tristique et egestas quis ipsum suspendisse. Euismod quis viverra nibh cras pulvinar mattis nunc.",
+        "Meera ma’am makes every day colorful and exciting with art, craft, music, movement, and interactive classroom fun. Her teaching style encourages creativity, imagination, teamwork, and self-expression, helping children enjoy a playful learning journey while developing important early childhood skills in a happy environment.",
     },
     {
       id: 3,
-      name: "Emma Grace",
-      role: "Academic Coach",
+      name: "Riya Sen",
+      role: "Academic Growth Guide",
       image:
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80",
       description:
-        "Vellentesque tristique tincidunt massa in faucibus. Sed est erat, pharetra id tortor ut, lacinia molestie ligula.",
+        "Riya ma’am focuses on building strong learning foundations through phonics, numbers, speaking activities, and concept-based teaching. With personal care and patient support, she helps children improve attention, understanding, social interaction, and readiness for the next stage of school life with confidence and comfort.",
+    },
+    {
+      id: 4,
+      name: "Pooja Verma",
+      role: "Storytelling & Language Coach",
+      image:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+      description:
+        "Pooja ma’am brings stories, conversations, and expressive speaking activities into the classroom to help children develop vocabulary, listening skills, imagination, and confidence. Her engaging teaching style makes every learning session lively, interactive, and enjoyable for young learners.",
+    },
+    {
+      id: 5,
+      name: "Neha Kapoor",
+      role: "Art & Activity Teacher",
+      image:
+        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+      description:
+        "Neha ma’am encourages children to explore colors, shapes, crafts, and hands-on creative work through joyful activity sessions. She helps students improve fine motor skills, concentration, self-expression, and imagination while making every classroom moment bright and exciting.",
+    },
+    {
+      id: 6,
+      name: "Rahul Nanda",
+      role: "Play & Development Guide",
+      image:
+        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      description:
+        "Rahul sir supports children through play-based learning, movement activities, and confidence-building routines that strengthen teamwork, discipline, and social interaction. His caring approach helps every child feel comfortable, active, valued, and motivated to participate with joy.",
     },
   ];
 
   const activeTeacher = teachers[currentTeacher];
+  const cardsPerPage = 3;
+  const totalDesktopPages = Math.ceil(teachers.length / cardsPerPage);
+
+  const desktopTeachers = useMemo(() => {
+    const start = desktopPage * cardsPerPage;
+    return teachers.slice(start, start + cardsPerPage);
+  }, [desktopPage, teachers]);
 
   const handlePrev = () => {
     setCurrentTeacher((prev) =>
@@ -73,6 +104,104 @@ const Teacher = () => {
       prev === teachers.length - 1 ? 0 : prev + 1
     );
   };
+
+  const handleDesktopPrev = () => {
+    setDesktopPage((prev) =>
+      prev === 0 ? totalDesktopPages - 1 : prev - 1
+    );
+  };
+
+  const handleDesktopNext = () => {
+    setDesktopPage((prev) =>
+      prev === totalDesktopPages - 1 ? 0 : prev + 1
+    );
+  };
+
+  const renderTeacherCard = (teacher, index, isMobile = false) => (
+    <article
+      key={teacher.id}
+      className={`${base}__card ${
+        visible ? `${base}__card--visible` : ""
+      } ${isMobile ? `${base}__card--mobile` : ""}`}
+      style={{ transitionDelay: `${index * 120}ms` }}
+    >
+      <div className={`${base}__imageWrap`}>
+        <span
+          className={`${base}__dotDecor ${base}__dotDecor--left`}
+          aria-hidden="true"
+        ></span>
+
+        <div className={`${base}__imageBlob`}>
+          <img src={teacher.image} alt={teacher.name} />
+        </div>
+
+        <div
+          className={`${base}__arrow ${
+            index % 2 === 1 ? `${base}__arrow--bottom` : `${base}__arrow--top`
+          }`}
+          aria-hidden="true"
+        >
+          <svg viewBox="0 0 170 70" fill="none">
+            <path
+              d={
+                index % 2 === 1
+                  ? "M12 20c20 22 35 22 50 8 14-14 28-14 44 1 17 16 31 16 50 2"
+                  : "M12 56c19-23 35-23 50-8 14 13 28 13 44-2 16-15 31-15 50-2"
+              }
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeDasharray="3 5"
+            />
+            <path
+              d={
+                index % 2 === 1
+                  ? "M148 24l8 7-10 3"
+                  : "M148 50l8-7-10-3"
+              }
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </div>
+
+      <div className={`${base}__contentBox`}>
+        <p className={`${base}__role`}>{teacher.role}</p>
+        <h3 className={`${base}__name`}>{teacher.name}</h3>
+        <p className={`${base}__text`}>{teacher.description}</p>
+
+        <p className={`${base}__extraInfo`}>
+          Caring teachers, joyful classrooms, playful activities, and strong
+          early learning foundations make Dream Flower Pre-School a wonderful
+          place for every child to grow with confidence.
+        </p>
+
+        <div className={`${base}__socials`}>
+          <a
+            href="/"
+            onClick={(e) => e.preventDefault()}
+            aria-label="Facebook"
+          >
+            <FaFacebookF />
+          </a>
+          <a
+            href="/"
+            onClick={(e) => e.preventDefault()}
+            aria-label="Twitter"
+          >
+            <FaTwitter />
+          </a>
+          <a
+            href="/"
+            onClick={(e) => e.preventDefault()}
+            aria-label="LinkedIn"
+          >
+            <FaLinkedinIn />
+          </a>
+        </div>
+      </div>
+    </article>
+  );
 
   return (
     <section
@@ -128,131 +257,107 @@ const Teacher = () => {
                 </svg>
               </span>
 
-              <p className={`${base}__subTitle`}>Meet Our Professional</p>
+              <p className={`${base}__subTitle`}>
+                Meet Our Professional Educators
+              </p>
             </div>
 
             <h2 className={`${base}__title`}>Teachers &amp; Trainers</h2>
 
             <p className={`${base}__desc`}>
-              Chasellus gravida lacus quis eros lobortis, nec dapibus quam
-              gravida. Duis sed augue vitae felis pellentesque varius nec quis
-              nunc. Morbi mauris augue, pulvinar quis luctus eget.
+              At Dream Flower Pre-School & Day Care, our experienced and caring
+              teachers create a joyful, safe, and inspiring learning
+              environment where every child feels valued, supported, and
+              encouraged to explore. With activity-based teaching, personal
+              attention, and playful classroom experiences, our educators help
+              children develop confidence, communication skills, creativity,
+              discipline, and strong early learning foundations for a bright
+              future.
             </p>
           </div>
         </div>
 
         <div className={`${base}__sliderWrap`}>
-          <div className={`${base}__controls`}>
-            <button
-              type="button"
-              className={`${base}__navBtn`}
-              onClick={handlePrev}
-              aria-label="Previous teacher"
-            >
-              ‹
-            </button>
+          <div className={`${base}__desktopSlider`}>
+            <div className={`${base}__desktopTopControls`}>
+              <button
+                type="button"
+                className={`${base}__desktopNavBtn`}
+                onClick={handleDesktopPrev}
+                aria-label="Previous teacher page"
+              >
+                ‹
+              </button>
 
-            <div className={`${base}__dots`}>
-              {teachers.map((teacher, index) => (
-                <button
-                  key={teacher.id}
-                  type="button"
-                  className={`${base}__dot ${
-                    currentTeacher === index ? `${base}__dot--active` : ""
-                  }`}
-                  onClick={() => setCurrentTeacher(index)}
-                  aria-label={`Go to ${teacher.name}`}
-                />
-              ))}
+              <div className={`${base}__desktopDots`}>
+                {Array.from({ length: totalDesktopPages }).map((_, index) => (
+                  <button
+                    key={index}
+                    type="button"
+                    className={`${base}__desktopDot ${
+                      desktopPage === index ? `${base}__desktopDot--active` : ""
+                    }`}
+                    onClick={() => setDesktopPage(index)}
+                    aria-label={`Go to teacher page ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                className={`${base}__desktopNavBtn`}
+                onClick={handleDesktopNext}
+                aria-label="Next teacher page"
+              >
+                ›
+              </button>
             </div>
 
-            <button
-              type="button"
-              className={`${base}__navBtn`}
-              onClick={handleNext}
-              aria-label="Next teacher"
-            >
-              ›
-            </button>
+            <div className={`${base}__desktopGrid`}>
+              {desktopTeachers.map((teacher, index) =>
+                renderTeacherCard(teacher, index)
+              )}
+            </div>
           </div>
 
-          <div className={`${base}__cards`}>
-            <article
-              className={`${base}__card ${base}__card--active`}
-              key={activeTeacher.id}
-            >
-              <div className={`${base}__imageWrap`}>
-                <span
-                  className={`${base}__dotDecor ${base}__dotDecor--left`}
-                  aria-hidden="true"
-                ></span>
+          <div className={`${base}__mobileSlider`}>
+            <div className={`${base}__controls`}>
+              <button
+                type="button"
+                className={`${base}__navBtn`}
+                onClick={handlePrev}
+                aria-label="Previous teacher"
+              >
+                ‹
+              </button>
 
-                <div className={`${base}__imageBlob`}>
-                  <img src={activeTeacher.image} alt={activeTeacher.name} />
-                </div>
-
-                <div
-                  className={`${base}__arrow ${
-                    currentTeacher === 1
-                      ? `${base}__arrow--bottom`
-                      : `${base}__arrow--top`
-                  }`}
-                  aria-hidden="true"
-                >
-                  <svg viewBox="0 0 170 70" fill="none">
-                    <path
-                      d={
-                        currentTeacher === 1
-                          ? "M12 20c20 22 35 22 50 8 14-14 28-14 44 1 17 16 31 16 50 2"
-                          : "M12 56c19-23 35-23 50-8 14 13 28 13 44-2 16-15 31-15 50-2"
-                      }
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeDasharray="3 5"
-                    />
-                    <path
-                      d={
-                        currentTeacher === 1
-                          ? "M148 24l8 7-10 3"
-                          : "M148 50l8-7-10-3"
-                      }
-                      fill="currentColor"
-                    />
-                  </svg>
-                </div>
+              <div className={`${base}__dots`}>
+                {teachers.map((teacher, index) => (
+                  <button
+                    key={teacher.id}
+                    type="button"
+                    className={`${base}__dot ${
+                      currentTeacher === index ? `${base}__dot--active` : ""
+                    }`}
+                    onClick={() => setCurrentTeacher(index)}
+                    aria-label={`Go to ${teacher.name}`}
+                  />
+                ))}
               </div>
 
-              <div className={`${base}__contentBox`}>
-                <p className={`${base}__role`}>{activeTeacher.role}</p>
-                <h3 className={`${base}__name`}>{activeTeacher.name}</h3>
-                <p className={`${base}__text`}>{activeTeacher.description}</p>
+              <button
+                type="button"
+                className={`${base}__navBtn`}
+                onClick={handleNext}
+                aria-label="Next teacher"
+              >
+                ›
+              </button>
+            </div>
 
-                <div className={`${base}__socials`}>
-                  <a
-                    href="/"
-                    onClick={(e) => e.preventDefault()}
-                    aria-label="Facebook"
-                  >
-                    <FaFacebookF />
-                  </a>
-                  <a
-                    href="/"
-                    onClick={(e) => e.preventDefault()}
-                    aria-label="Twitter"
-                  >
-                    <FaTwitter />
-                  </a>
-                  <a
-                    href="/"
-                    onClick={(e) => e.preventDefault()}
-                    aria-label="LinkedIn"
-                  >
-                    <FaLinkedinIn />
-                  </a>
-                </div>
-              </div>
-            </article>
+            <div className={`${base}__cards`}>
+              {renderTeacherCard(activeTeacher, currentTeacher, true)}
+            </div>
           </div>
         </div>
 

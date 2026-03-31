@@ -1,7 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Education.css";
 
-import fieldBg from "../../assets/field.webp";
 import heroImg from "../../assets/Section1.webp";
 import img2 from "../../assets/Section2.webp";
 import img3 from "../../assets/Section3.webp";
@@ -16,44 +15,85 @@ const Education = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeImage, setActiveImage] = useState(null);
 
+  const [isMobile, setIsMobile] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [rightPage, setRightPage] = useState(0);
+  const imagesPerPage = 4;
+
   const galleryImages = [
     {
       id: 1,
       image: heroImg,
-      alt: "Kids playing in school garden",
+      alt: "Dream Flower Pre-School & Day Care Bhubaneswar joyful learning environment",
       className: `${base}__card ${base}__card--hero`,
     },
     {
       id: 2,
       image: img2,
-      alt: "Kids classroom activity",
+      alt: "Dream Flower Pre-School & Day Care Bhubaneswar classroom activity",
       className: `${base}__card ${base}__card--small`,
     },
     {
       id: 3,
       image: img3,
-      alt: "Kids cycling outdoors",
+      alt: "Kids outdoor play at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--smallTall`,
     },
     {
       id: 4,
       image: img4,
-      alt: "Teacher with children painting",
+      alt: "Teacher guiding children at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--medium`,
     },
     {
       id: 5,
       image: img5,
-      alt: "Kids group learning together",
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--wide`,
     },
-    // {
-    //   id: 6,
-    //   image: img6,
-    //   alt: "Toddler playing with blocks",
-    //   className: `${base}__card ${base}__card--bottom`,
-    // },
   ];
+
+  const rightGalleryImages = [
+    {
+      id: 2,
+      image: img2,
+      alt: "Dream Flower Pre-School & Day Care Bhubaneswar classroom activity",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+    {
+      id: 3,
+      image: img3,
+      alt: "Kids outdoor play at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+    {
+      id: 4,
+      image: img4,
+      alt: "Teacher guiding children at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+    {
+      id: 5,
+      image: img5,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+  ];
+
+  const totalRightPages = Math.ceil(rightGalleryImages.length / imagesPerPage);
+
+  const paginatedRightImages = useMemo(() => {
+    const start = rightPage * imagesPerPage;
+    return rightGalleryImages.slice(start, start + imagesPerPage);
+  }, [rightGalleryImages, rightPage]);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth <= 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const current = sectionRef.current;
@@ -70,7 +110,6 @@ const Education = () => {
     );
 
     observer.observe(current);
-
     return () => observer.disconnect();
   }, []);
 
@@ -94,6 +133,24 @@ const Education = () => {
       document.body.style.overflow = "";
     };
   }, [activeImage]);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(
+      (prev) => (prev - 1 + galleryImages.length) % galleryImages.length
+    );
+  };
+
+  const nextRightPage = () => {
+    setRightPage((prev) => (prev + 1) % totalRightPages);
+  };
+
+  const prevRightPage = () => {
+    setRightPage((prev) => (prev - 1 + totalRightPages) % totalRightPages);
+  };
 
   return (
     <>
@@ -152,15 +209,33 @@ const Education = () => {
                   </svg>
                 </span>
 
-                <p className={`${base}__subTitle`}>International Education</p>
+                <p className={`${base}__subTitle`}>
+                  Our Enviromental Gallery
+                </p>
               </div>
 
-              <h2 className={`${base}__title`}>Bicultural Students</h2>
+              <h2 className={`${base}__title`}>
+                Best Pre-School & Day Care in Bhubaneswar for Joyful Early Learning
+              </h2>
 
               <p className={`${base}__desc`}>
-                We create a joyful learning environment where children explore,
-                play, build confidence, and grow through creative school
-                activities and interactive experiences.
+                Welcome to <strong>Dream Flower Pre-School & Day Care Bhubaneswar</strong>,
+                a warm, safe, and inspiring learning space where every child feels
+                happy, confident, and cared for. We create a joyful environment
+                filled with playful learning, creative classroom activities,
+                guided exploration, and loving teacher support so that children
+                can learn naturally while enjoying every moment of their early
+                childhood journey.
+              </p>
+
+              <p className={`${base}__extraDesc`}>
+                As a trusted <strong>pre-school and day care in Bhubaneswar</strong>,
+                we focus on building communication, creativity, social skills,
+                confidence, discipline, and strong learning foundations through
+                fun-based education. From colorful classrooms and engaging
+                activities to caring attention and meaningful child development,
+                <strong> Dream Flower Pre-School & Day Care Bhubaneswar</strong>
+                helps every child grow with happiness, curiosity, and success.
               </p>
             </div>
 
@@ -190,7 +265,6 @@ const Education = () => {
                     fill="#f7f1ff"
                     stroke="#a48cff"
                     strokeWidth="2.8"
-                    strokeLinejoin="round"
                   />
                   <path
                     d="M56 34C63 34 68 39 68 46C68 53 63 58 56 58C49 58 44 53 44 46C44 39 49 34 56 34Z"
@@ -204,85 +278,128 @@ const Education = () => {
                     stroke="#ffb648"
                     strokeWidth="1.8"
                   />
-                  <path
-                    d="M41 67L30 79"
-                    stroke="#8b7ef8"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M47 72L39 88"
-                    stroke="#ff7d64"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M53 76L49 94"
-                    stroke="#ff6a59"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M80 43L95 40L87 54L80 43Z"
-                    fill="#dae6ff"
-                    stroke="#8d83ff"
-                    strokeWidth="2.2"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M71 85L80 99"
-                    stroke="#ff7d64"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
-                  <path
-                    d="M78 80L92 93"
-                    stroke="#ff9b6a"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                  />
                 </g>
               </svg>
             </div>
           </div>
 
           <div className={`${base}__gallery`}>
-            <div className={`${base}__left`}>
-              <button
-                type="button"
-                className={`${base}__imageButton ${base}__imageButton--main`}
-                onClick={() => setActiveImage(galleryImages[0])}
-                aria-label="Open main image preview"
-              >
-                <div className={galleryImages[0].className}>
-                  <img src={galleryImages[0].image} alt={galleryImages[0].alt} />
-                </div>
-              </button>
-            </div>
-
-            <div className={`${base}__right`}>
-              {galleryImages.slice(1).map((item, index) => (
-                <button
-                  key={item.id}
-                  type="button"
-                  className={`${base}__imageButton ${base}__stagger${index + 1}`}
-                  onClick={() => setActiveImage(item)}
-                  aria-label={`Open preview ${item.id}`}
+            {isMobile ? (
+              <div className={`${base}__mobileSlider`}>
+                <div
+                  className={galleryImages[currentIndex].className}
+                  onClick={() => setActiveImage(galleryImages[currentIndex])}
                 >
-                  <div className={item.className}>
-                    <img src={item.image} alt={item.alt} />
+                  <img
+                    src={galleryImages[currentIndex].image}
+                    alt={galleryImages[currentIndex].alt}
+                  />
+                </div>
+
+                <div className={`${base}__controls`}>
+                  <button onClick={prevSlide}>‹</button>
+                  <span>
+                    {currentIndex + 1} / {galleryImages.length}
+                  </span>
+                  <button onClick={nextSlide}>›</button>
+                </div>
+
+                <div className={`${base}__dots`}>
+                  {galleryImages.map((_, i) => (
+                    <span
+                      key={i}
+                      className={i === currentIndex ? "active" : ""}
+                      onClick={() => setCurrentIndex(i)}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <>
+                <div className={`${base}__left`}>
+                  <button
+                    className={`${base}__imageButton ${base}__imageButton--main`}
+                    onClick={() => setActiveImage(galleryImages[0])}
+                  >
+                    <div className={galleryImages[0].className}>
+                      <img
+                        src={galleryImages[0].image}
+                        alt={galleryImages[0].alt}
+                      />
+                    </div>
+                  </button>
+                </div>
+
+                <div className={`${base}__rightPanel`}>
+                  <div className={`${base}__rightTopBar`}>
+                    <div className={`${base}__rightPager`}>
+                      <button
+                        type="button"
+                        className={`${base}__rightPagerBtn`}
+                        onClick={prevRightPage}
+                        aria-label="Previous right gallery page"
+                      >
+                        ‹
+                      </button>
+
+                      <span className={`${base}__rightPagerCount`}>
+                        {String(rightPage + 1).padStart(2, "0")} /{" "}
+                        {String(totalRightPages).padStart(2, "0")}
+                      </span>
+
+                      <button
+                        type="button"
+                        className={`${base}__rightPagerBtn`}
+                        onClick={nextRightPage}
+                        aria-label="Next right gallery page"
+                      >
+                        ›
+                      </button>
+                    </div>
                   </div>
-                </button>
-              ))}
-            </div>
+
+                  <div className={`${base}__right ${base}__right--grid`}>
+                    {paginatedRightImages.map((item, index) => (
+                      <button
+                        key={item.id}
+                        className={`${base}__imageButton ${base}__imageButton--grid ${base}__stagger${
+                          index + 1
+                        }`}
+                        onClick={() => setActiveImage(item)}
+                      >
+                        <div className={item.className}>
+                          <img src={item.image} alt={item.alt} />
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className={`${base}__rightDotsWrap`}>
+                    <div className={`${base}__rightDots`}>
+                      {Array.from({ length: totalRightPages }).map(
+                        (_, pageIndex) => (
+                          <button
+                            key={pageIndex}
+                            type="button"
+                            className={`${base}__rightDot ${
+                              rightPage === pageIndex
+                                ? `${base}__rightDot--active`
+                                : ""
+                            }`}
+                            onClick={() => setRightPage(pageIndex)}
+                            aria-label={`Go to right gallery page ${pageIndex + 1}`}
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
-        <div
-          className={`${base}__field`}
-          style={{ backgroundImage: `url(${fieldBg})` }}
-          aria-hidden="true"
-        >
+        <div>
           <img
             src={pencilGirl}
             alt=""
@@ -300,18 +417,14 @@ const Education = () => {
         <div
           className={`${base}__modal`}
           onClick={() => setActiveImage(null)}
-          role="dialog"
-          aria-modal="true"
         >
           <div
             className={`${base}__modalCard`}
             onClick={(e) => e.stopPropagation()}
           >
             <button
-              type="button"
               className={`${base}__close`}
               onClick={() => setActiveImage(null)}
-              aria-label="Close preview"
             >
               ×
             </button>

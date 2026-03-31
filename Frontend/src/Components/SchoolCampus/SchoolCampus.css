@@ -297,6 +297,7 @@
   width: 90%;
   height: 80%;
   display: block;
+  margin-top: -102px;
 }
 
 .schoolCampus__statsSection {
@@ -780,5 +781,167 @@
   .schoolCampus__planetWrap,
   .schoolCampus__starWrap--left {
     display: none;
+  }
+}
+
+/* ===== FIX: CARD SIZE SAME LIKE DESIGN ===== */
+
+.schoolCampus__cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  justify-items: center;
+}
+
+/* FIX CARD SIZE */
+.schoolCampus__card {
+  width: 100%;
+  max-width: 260px;   /* 🔥 fixed width */
+  height: 420px;      /* 🔥 fixed height */
+  border-radius: 120px 120px 26px 26px;
+}
+
+/* INNER FIX */
+.schoolCampus__cardInner {
+  height: 100%;
+  padding: 16px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* IMAGE FIX */
+.schoolCampus__imgWrapper {
+  width: 170px;
+  height: 135px;
+  border-radius: 100px 100px 18px 18px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+
+/* TEXT FIX */
+.schoolCampus__cardDesc {
+  max-width: 180px;
+  text-align: center;
+}
+
+/* BUTTON FIX */
+.schoolCampus__cardBtn {
+  bottom: 90px;
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 767px) {
+
+  /* 🔥 2 CARDS IN MOBILE */
+  .schoolCampus__cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .schoolCampus__card {
+    max-width: 180px;
+    height: 360px;
+  }
+
+  .schoolCampus__cardInner {
+    padding: 12px 10px 55px;
+  }
+
+  .schoolCampus__imgWrapper {
+    width: 130px;
+    height: 105px;
+  }
+
+  .schoolCampus__cardTitle {
+    font-size: 0.9rem;
+  }
+
+  .schoolCampus__cardDesc {
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+
+  .schoolCampus__cardBtn {
+    min-width: 90px;
+    height: 34px;
+    font-size: 0.75rem;
+  }
+}
+
+/* ===== SMALL MOBILE ===== */
+@media (max-width: 480px) {
+  .schoolCampus__cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .schoolCampus__card {
+    max-width: 160px;
+    height: 340px;
+  }
+
+  .schoolCampus__imgWrapper {
+    width: 120px;
+    height: 95px;
+  }
+}
+
+/* ===== DESKTOP (4 CARDS) ===== */
+.schoolCampus__cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 🔥 4 cards */
+  gap: 24px;
+  justify-items: center;
+}
+
+/* FIX CARD SIZE */
+.schoolCampus__card {
+  width: 100%;
+  max-width: 260px;
+  height: 420px;
+  border-radius: 120px 120px 26px 26px;
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 991px) {
+  .schoolCampus__cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== TABLET (<= 1024px → 2 CARDS) ===== */
+@media (max-width: 1024px) {
+  .schoolCampus__cardsGrid {
+    grid-template-columns: repeat(2, 1fr); /* ✅ 2 cards */
+  }
+}
+
+/* ===== MOBILE (<= 767px → STILL 2 CARDS) ===== */
+@media (max-width: 767px) {
+  .schoolCampus__cardsGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+/* ===== MOBILE (2 CARDS) ===== */
+@media (max-width: 767px) {
+  .schoolCampus__cardsGrid {
+    grid-template-columns: repeat(2, 1fr); /* 🔥 2 cards */
+    gap: 14px;
+  }
+
+  .schoolCampus__card {
+    max-width: 180px;
+    height: 360px;
+  }
+}
+
+/* ===== SMALL MOBILE ===== */
+@media (max-width: 480px) {
+  .schoolCampus__card {
+    max-width: 160px;
+    height: 340px;
   }
 }

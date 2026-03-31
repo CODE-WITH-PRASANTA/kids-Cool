@@ -88,11 +88,87 @@
   padding-left: 24px;
 }
 
+.blogSection__scrollPanel {
+  position: relative;
+  padding: 10px 16px 12px 0;
+}
+
+.blogSection__scrollHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.blogSection__contentScrollActions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-shrink: 0;
+  padding-top: 12px;
+}
+
+.blogSection__contentScrollBtn {
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 12px 22px rgba(6, 33, 43, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.blogSection__contentScrollBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.36);
+}
+
+.blogSection__contentScroller {
+  max-height: 350px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 12px;
+  scroll-behavior: smooth;
+  mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 18px, #000 calc(100% - 18px), transparent 100%);
+}
+
+.blogSection__contentScroller::-webkit-scrollbar {
+  width: 10px;
+}
+
+.blogSection__contentScroller::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+}
+
+.blogSection__contentScroller::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ffd182, #f79a18);
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.12);
+}
+
+.blogSection__contentScroller::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ffda95, #ff8d08);
+}
+
 .blogSection__titleWrap {
   display: flex;
   align-items: flex-start;
   gap: 22px;
-  margin-bottom: 18px;
+  margin-bottom: 0;
 }
 
 .blogSection__girl {
@@ -101,6 +177,7 @@
   object-fit: contain;
   animation: blogFloat 4.8s ease-in-out infinite;
   flex-shrink: 0;
+  margin-top: -90px;
 }
 
 .blogSection__titleContent {
@@ -134,8 +211,8 @@
   grid-template-columns: 82px 1fr;
   gap: 16px;
   align-items: start;
-  /* padding-bottom: 18px; */
   border-bottom: 2px dashed rgba(255, 255, 255, 0.88);
+  padding-bottom: 16px;
   opacity: 0;
   transform: translateY(30px);
   transition:
@@ -204,7 +281,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 14px;
-  margin-top: 8px;
+  margin-top: 18px;
   padding-left: 6px;
 }
 
@@ -217,6 +294,13 @@
   width: 100%;
   height: auto;
   display: block;
+}
+
+.blogSection__actionRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 .blogSection__button {
@@ -416,12 +500,20 @@
     padding-left: 0;
   }
 
+  .blogSection__scrollPanel {
+    padding-right: 0;
+  }
+
+  .blogSection__contentScroller {
+    max-height: 320px;
+  }
+
   .blogSection__titleContent {
     padding-top: 58px;
   }
 
   .blogSection__right {
-    min-height: 460px;
+    min-height: 480px;
   }
 
   .blogSection__title {
@@ -467,6 +559,16 @@
     width: 110px;
   }
 
+  .blogSection__scrollHeader {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .blogSection__contentScrollActions {
+    flex-direction: row;
+    padding-top: 0;
+  }
+
   .blogSection__titleWrap {
     align-items: center;
     gap: 14px;
@@ -477,7 +579,7 @@
   }
 
   .blogSection__titleContent {
-    padding-top: 20px;
+    padding-top: 25px;
   }
 
   .blogSection__eyebrow {
@@ -486,6 +588,11 @@
 
   .blogSection__title {
     font-size: 30px;
+  }
+
+  .blogSection__contentScroller {
+    max-height: 300px;
+    padding-right: 8px;
   }
 
   .blogSection__item {
@@ -549,7 +656,11 @@
   }
 
   .blogSection__title {
-    font-size: 26px;
+    font-size: 75px;
+  }
+
+  .blogSection__contentScroller {
+    max-height: 280px;
   }
 
   .blogSection__item {
@@ -585,5 +696,15 @@
   .blogSection__trainPath {
     width: 122px;
     bottom: 58px;
+  }
+
+  .blogSection__actionRow {
+    width: 100%;
+    gap: 10px;
+  }
+
+  .blogSection__button {
+    width: 100%;
+    justify-content: center;
   }
 }
