@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Education.css";
 
-import fieldBg from "../../assets/field-removebg-preview.webp";
+import fieldBg from "../../assets/field.webp";
 import heroImg from "../../assets/Section1.webp";
 import img2 from "../../assets/Section2.webp";
 import img3 from "../../assets/Section3.webp";
