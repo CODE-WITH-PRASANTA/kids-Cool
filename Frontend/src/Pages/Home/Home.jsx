@@ -13,16 +13,46 @@ import Testimonial from '../../Components/Testimonial/Testimonial'
 const Home = () => {
   return (
     <div>
+      <section id="home">
         <Homehero/>
+      </section>
+
+      <section id="why">
         <EssentialSkill/>
+      </section>
+
+      <section id="history">
         <Creative/>
+      </section>
+
+      <section id="facility">
         <SchoolCampus/>
-         <Activites/>
+      </section>
+
+      <section id="gallery">
+        <Education/>
+      </section>
+      
+      <section id="teachers">
         <Teacher/>
-          <Education/>
+      </section>
+
+      <section id="programms">
+        <Activites/>
+      </section>
+      
+      <section id="news">
         <Blog/>
+      </section>
+       
+      <section id="stage">
         <TeachingMethodology/>
-        <Testimonial/>
+      </section>
+
+        <section id="testimonial">
+          <Testimonial/>
+        </section>
+        
     </div>
   )
 }

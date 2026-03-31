@@ -70,6 +70,7 @@
   font-size: 16px;
   line-height: 1.8;
   color: var(--text-gray);
+  text-align: justify;
 }
 
 .creativeSection__actionArea {

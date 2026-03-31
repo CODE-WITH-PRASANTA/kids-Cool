@@ -1,0 +1,298 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+
+/* ROOT */
+.floatingForm {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  font-family: "Nunito", sans-serif;
+}
+
+/* OVERLAY */
+.floatingForm__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(6px);
+}
+
+/* CARD */
+.floatingForm__card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: 100%;
+  max-width: 420px;
+  background: linear-gradient(135deg, #ffffff, #f9fbff);
+  border-radius: 20px;
+  padding: 20px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  text-align: center;
+  animation: fadeInScale 0.35s ease forwards;
+}
+
+/* ANIMATION */
+@keyframes fadeInScale {
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* CLOSE */
+.floatingForm__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  transition: 0.25s;
+}
+
+.floatingForm__close:hover {
+  background: #e2e2e2;
+}
+
+/* TEXT */
+.floatingForm__title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  background: linear-gradient(90deg, #1f4fbf, #0aa4c7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.floatingForm__subtitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.floatingForm__desc {
+  font-size: 14px;
+  color: #777;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* FORM */
+.floatingForm__form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* INPUTS */
+.floatingForm__input,
+.floatingForm__textarea {
+  width: 90%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background: linear-gradient(145deg, #ffffff, #f3f5f9);
+  font-size: 14px;
+  transition: 0.25s;
+  box-shadow:
+    inset 0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* HOVER */
+.floatingForm__input:hover,
+.floatingForm__textarea:hover {
+  border-color: rgba(31, 79, 191, 0.25);
+}
+
+/* FOCUS */
+.floatingForm__input:focus,
+.floatingForm__textarea:focus {
+  background: #fff;
+  border-color: #1f4fbf;
+  box-shadow:
+    0 0 0 3px rgba(31, 79, 191, 0.12),
+    0 8px 20px rgba(31, 79, 191, 0.08);
+}
+
+/* TEXTAREA */
+.floatingForm__textarea {
+  height: 110px;
+  resize: none;
+}
+
+/* SUBMIT */
+.floatingForm__submit {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 15px;
+  color: #fff;
+  cursor: pointer;
+  background: linear-gradient(90deg, #022d53, #0aa4c7);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+/* SHINE EFFECT */
+.floatingForm__submit::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1)
+  );
+  transform: skewX(-25deg);
+}
+
+.floatingForm__submit:hover::before {
+  left: 130%;
+  transition: 0.8s;
+}
+
+/* HOVER */
+.floatingForm__submit:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 30px rgba(10, 164, 199, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* DIVIDER */
+.floatingForm__divider {
+  margin: 18px 0;
+  font-size: 12px;
+  color: #aaa;
+  position: relative;
+}
+
+.floatingForm__divider::before,
+.floatingForm__divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 35%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #ddd);
+}
+
+.floatingForm__divider::after {
+  right: 0;
+  background: linear-gradient(to left, transparent, #ddd);
+}
+
+.floatingForm__divider::before {
+  left: 0;
+}
+
+/* ACTIONS */
+.floatingForm__actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* BUTTONS */
+.floatingForm__call,
+.floatingForm__whatsapp {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  transition: 0.25s;
+  box-shadow:
+    0 6px 15px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* CALL */
+.floatingForm__call {
+  background: #1f4fbf;
+  color: #fff;
+}
+
+.floatingForm__call:hover {
+  background: #173a91;
+  transform: translateY(-2px);
+}
+
+/* WHATSAPP */
+.floatingForm__whatsapp {
+  background: #25d366;
+  color: #fff;
+}
+
+.floatingForm__whatsapp:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 768px) {
+  .floatingForm__card {
+    max-width: 92%;
+    padding: 28px 20px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .floatingForm__card {
+    border-radius: 16px;
+    padding: 24px 16px;
+  }
+
+  .floatingForm__title {
+    font-size: 20px;
+  }
+
+  .floatingForm__desc {
+    font-size: 13px;
+  }
+
+  .floatingForm__actions {
+    flex-direction: column;
+  }
+
+  .floatingForm__input,
+  .floatingForm__textarea {
+    width: 100%;
+  }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 360px) {
+  .floatingForm__card {
+    padding: 20px 14px;
+  }
+}

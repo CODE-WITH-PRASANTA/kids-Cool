@@ -178,6 +178,7 @@
   font-size: 1rem;
   line-height: 1.95;
   max-width: 430px;
+  text-align: justify;
 }
 
 .essentialSkill__btn {
@@ -311,7 +312,7 @@
 
 .essentialSkill__programHeader {
   max-width: 680px;
-  margin: 0 auto 52px;
+  margin: 50px auto 52px;
   text-align: center;
   position: relative;
 }

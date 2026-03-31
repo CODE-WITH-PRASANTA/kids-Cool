@@ -35,36 +35,72 @@ const SchoolCampus = () => {
   const campusCards = [
     {
       id: 1,
-      title: "Class Room",
+      title: "Smart Classrooms",
       image: classroomImg,
-      desc: "Purus sit amet luctus venenatis lectus magna fringilla urna. Scelerisque viverra mauris.",
+      desc: "Spacious, well-ventilated, and technology-enabled classrooms designed for interactive and activity-based learning, making us a leading play school in Bhubaneswar.",
       theme: "teal",
       iconType: "book",
     },
     {
       id: 2,
-      title: "Transport",
+      title: "Safe Transport Facility",
       image: transportImg,
-      desc: "Tristique risus nec feugiat in. Auctor augue mauris augue neque gravida in fermentum.",
+      desc: "Reliable and secure school transport with proper safety measures, making it convenient for parents looking for a pre school with transport in Bhubaneswar.",
       theme: "purple",
       iconType: "bus",
     },
     {
       id: 3,
-      title: "Play Area",
+      title: "Indoor & Outdoor Play Area",
       image: playAreaImg,
-      desc: "Diam donec adipiscing tristique risus nec feugiat in fermentum posuere ultricies eros.",
+      desc: "Dedicated play zones that promote physical activity, creativity, and social interaction—essential for early childhood growth in a top pre school in Bhubaneswar.",
       theme: "teal",
       iconType: "play",
     },
     {
       id: 4,
-      title: "Healthy Foods",
+      title: "Healthy & Nutritious Food",
       image: healthyFoodImg,
-      desc: "Integer enim neque volutpat ac tincidunt vitae semper eget duis at tellus urna.",
+      desc: "We ensure children receive healthy, hygienic, and balanced meals, supporting their physical and mental development at our day care center in Bhubaneswar.",
       theme: "teal",
       iconType: "leaf",
     },
+
+    {
+      id: 5,
+      title: "Activity & Creative Zones",
+      image: playAreaImg,
+      desc: "Special spaces for Yoga, Art, Dance, and creative activities, helping children build confidence, coordination, and imagination.",
+      theme: "teal",
+      iconType: "play",
+    },
+    {
+      id: 6,
+      title: "Safe & Hygienic Environment",
+      image: healthyFoodImg,
+      desc: "We maintain a clean, secure, and child-friendly campus with proper hygiene standards, making us a trusted day care in Bhubaneswar for working parents.",
+      theme: "teal",
+      iconType: "leaf",
+    },
+
+    {
+      id: 7,
+      title: "Experienced & Caring Staff",
+      image: transportImg,
+      desc: "Our trained teachers and caregivers ensure personalized attention, making us one of the best nursery schools in Bhubaneswar.",
+      theme: "purple",
+      iconType: "bus",
+    },
+    {
+      id: 8,
+      title: "Activity-Based Learning Infrastructure",
+      image: playAreaImg,
+      desc: "We provide a structured setup that supports play-based and experiential learning, helping children develop communication, social, and cognitive skills.",
+      theme: "teal",
+      iconType: "play",
+    },
+
+    
   ];
 
   const stats = [
@@ -377,8 +413,9 @@ const handleNext = () => {
               Engaging &amp; Spacious School Campus
             </h2>
             <p className={`${base}__subtitle`}>
-              Hise sed augue vitae felis pellentesque varius nec quis nunc.
-              Morbi mauris augue, pulvinar quis luctus eget.
+              At Dream Flower Pre School & Day Care, we provide a thoughtfully designed campus that reflects our commitment to being the best pre school in Bhubaneswar. Our environment is crafted to inspire creativity, ensure safety, and support holistic child development in a warm and engaging atmosphere.
+
+Our school stands out as a top pre school and day care center in Bhubaneswar, offering modern facilities that create the perfect balance between learning and play.
             </p>
           </header>
 

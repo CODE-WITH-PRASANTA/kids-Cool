@@ -86,6 +86,7 @@
   list-style: none; /* ✅ remove dots */
   padding: 0; /* ✅ remove left space */
   margin: 0; /* ✅ remove top space */
+  margin-top: 10px;
 }
 
 .nb-item:hover .nb-dropdown {
