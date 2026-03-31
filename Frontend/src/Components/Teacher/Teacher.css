@@ -17,6 +17,7 @@
   width: min(1240px, calc(100% - 40px));
   margin: 0 auto;
   position: relative;
+  font-family: "Nunito", sans-serif;
 }
 
 .teacherSection__header {

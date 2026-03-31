@@ -19,6 +19,7 @@
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
   align-items: center;
   gap: 34px;
+  font-family: "Nunito", sans-serif;
 }
 
 .creativeSection__left,

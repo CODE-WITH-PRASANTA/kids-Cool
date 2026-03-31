@@ -205,7 +205,7 @@ const Blog = () => {
                 </div>
 
                 <div className={`${base}__actionRow`}>
-                  <button className={`${base}__button`}>View More</button>
+                  <button className={`${base}__button`}>Contact Us</button>
                 </div>
               </div>
             </div>
