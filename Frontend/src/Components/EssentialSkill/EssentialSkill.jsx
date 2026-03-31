@@ -18,7 +18,7 @@ const EssentialSkill = () => {
           observer.unobserve(current);
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0.15 }
     );
 
     observer.observe(current);
@@ -28,68 +28,48 @@ const EssentialSkill = () => {
   /* ================= slider ================= */
 
   const [page, setPage] = useState(0);
-  const [perPage, setPerPage] = useState(2);
+  const perPage = 2;
 
-const programs = [
-  {
-    id: 1,
-    title: "Play Group",
-    desc: "Our Play Group program introduces children to a fun and engaging learning environment through play-based activities. It helps develop social skills, creativity, and confidence, making it an ideal start for early childhood education in Bhubaneswar.",
-    image:
-      "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 2,
-    title: "Nursery",
-    desc: "The Nursery program focuses on building strong foundational skills through activity-based learning. Children develop early literacy, numeracy, and communication skills in a structured yet enjoyable environment.",
-    image:
-      "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    title: "LKG / UKG",
-    desc: "Our LKG and UKG programs prepare children for primary education with a focus on academics, communication, and personality development. It ensures a smooth transition to formal schooling.",
-    image:
-      "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "Day Care",
-    desc: "We provide a safe and reliable day care environment in Bhubaneswar where children are cared for with attention and love. It includes supervised activities, healthy routines, and a secure setting for working parents.",
-    image:
-      "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
-  },
-];
-
-  /* responsive cards */
-
-  useEffect(() => {
-    const update = () => {
-      if (window.innerWidth < 600) {
-        setPerPage(1);
-      } else {
-        setPerPage(2);
-      }
-    };
-
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, []);
+  const programs = [
+    {
+      id: 1,
+      title: "Play Group",
+      desc: "Our Play Group program introduces children to a fun and engaging learning environment through play-based activities. It helps develop social skills, creativity, and confidence, making it an ideal start for early childhood education in Bhubaneswar.",
+      image:
+        "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: 2,
+      title: "Nursery",
+      desc: "The Nursery program focuses on building strong foundational skills through activity-based learning. Children develop early literacy, numeracy, and communication skills in a structured yet enjoyable environment.",
+      image:
+        "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: 3,
+      title: "LKG / UKG",
+      desc: "Our LKG and UKG programs prepare children for primary education with a focus on academics, communication, and personality development. It ensures a smooth transition to formal schooling.",
+      image:
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+    },
+    {
+      id: 4,
+      title: "Day Care",
+      desc: "We provide a safe and reliable day care environment in Bhubaneswar where children are cared for with attention and love. It includes supervised activities, healthy routines, and a secure setting for working parents.",
+      image:
+        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
+    },
+  ];
 
   const totalPages = Math.ceil(programs.length / perPage);
 
-  /* auto slide */
+  const handlePrev = () => {
+    setPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  };
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setPage((p) => (p + 1) % totalPages);
-    }, 3000);
-
-    return () => clearInterval(timer);
-  }, [totalPages]);
-
-  const current = page;
+  const handleNext = () => {
+    setPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+  };
 
   /* animation visible */
 
@@ -104,7 +84,7 @@ const programs = [
           observer.unobserve(currentEl);
         }
       },
-      { threshold: 0.2 },
+      { threshold: 0.2 }
     );
 
     observer.observe(currentEl);
@@ -389,12 +369,14 @@ const programs = [
               center in Bhubaneswar, we provide a safe, supportive, and
               stimulating environment for young minds to explore, learn, and
               grow. <br />
-
-              At Dream Flower Pre School, we believe that every child is unique and deserves the best start in life. Our curriculum is designed to balance education, creativity, and play-based learning, ensuring holistic development.
+              At Dream Flower Pre School, we believe that every child is unique
+              and deserves the best start in life. Our curriculum is designed to
+              balance education, creativity, and play-based learning, ensuring
+              holistic development.
             </p>
 
             <button className={`${base}__btn`} type="button">
-             Contact Us
+              Contact Us
             </button>
 
             <span className={`${base}__spark`}>
@@ -505,16 +487,16 @@ const programs = [
 
           <p className={`${base}__programTag`}>Educational Programs</p>
           <h3 className={`${base}__programTitle`}>
-           Systematic Early Education for Every Step of Growth
+            Systematic Early Education for Every Step of Growth
           </h3>
           <p className={`${base}__programDesc`}>
-           At Dream Flower Pre School & Day Care in Bhubaneswar, we offer carefully planned early education programs that support holistic child development. Through a mix of play-based learning, structured guidance, and creative exploration, we create a strong foundation for your child’s future learning journey.
+            At Dream Flower Pre School & Day Care in Bhubaneswar, we offer
+            carefully planned early education programs that support holistic
+            child development. Through a mix of play-based learning, structured
+            guidance, and creative exploration, we create a strong foundation
+            for your child’s future learning journey.
           </p>
         </div>
-
-        {/* ========================= */}
-        {/* ===== SLIDER START ===== */}
-        {/* ========================= */}
 
         <div className={`${base}__slider`}>
           <div
@@ -527,7 +509,7 @@ const programs = [
               <div key={pageIndex} className={`${base}__slidePage`}>
                 {programs
                   .slice(pageIndex * perPage, pageIndex * perPage + perPage)
-                  .map((item, index) => (
+                  .map((item) => (
                     <article className={`${base}__card`} key={item.id}>
                       <div className={`${base}__cardImageWrap`}>
                         <img
@@ -566,26 +548,42 @@ const programs = [
             ))}
           </div>
 
-          {/* ===== dots ===== */}
+          <div className={`${base}__paginationWrap`}>
+            <button
+              type="button"
+              className={`${base}__pageBtn`}
+              onClick={handlePrev}
+            >
+              Prev
+            </button>
 
-          <div className={`${base}__dots`}>
-            {Array.from({ length: totalPages }).map((_, i) => (
-              <span
-                key={i}
-                className={`${base}__dot ${
-                  i === page ? `${base}__dot--active` : ""
-                }`}
-                onClick={() => setPage(i)}
-              />
-            ))}
+            <div className={`${base}__dots`}>
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <span
+                  key={i}
+                  className={`${base}__dot ${
+                    i === page ? `${base}__dot--active` : ""
+                  }`}
+                  onClick={() => setPage(i)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className={`${base}__pageBtn`}
+              onClick={handleNext}
+            >
+              Next
+            </button>
           </div>
         </div>
 
-        <div className={`${base}__action`}>
+        {/* <div className={`${base}__action`}>
           <button className={`${base}__btn ${base}__btn--center`} type="button">
             View More
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
