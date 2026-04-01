@@ -10,6 +10,9 @@ const Creative = () => {
   const sectionRef = useRef(null);
   const [show, setShow] = useState(false);
 
+  const whatsappLink =
+    "https://wa.me/918280547763?text=Hello%20Dream%20Flower%20Pre%20School,%20I%20want%20to%20know%20more%20about%20admission.";
+
   useEffect(() => {
     const current = sectionRef.current;
     if (!current) return;
@@ -21,7 +24,7 @@ const Creative = () => {
           observer.unobserve(current);
         }
       },
-      { threshold: 0.1 },
+      { threshold: 0.1 }
     );
 
     observer.observe(current);
@@ -55,7 +58,7 @@ const Creative = () => {
               </svg>
             </span>
 
-            <span className={`${base}__eyebrow`}>Harmonious</span>
+            <span className={`${base}__eyebrow`}>Our History</span>
           </div>
 
           <h2 className={`${base}__title`}>
@@ -80,9 +83,14 @@ const Creative = () => {
           </p>
 
           <div className={`${base}__actionArea`}>
-            <button className={`${base}__button`} type="button">
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${base}__button`}
+            >
               Contact Us
-            </button>
+            </a>
 
             <div className={`${base}__flyWrap`}>
               <img

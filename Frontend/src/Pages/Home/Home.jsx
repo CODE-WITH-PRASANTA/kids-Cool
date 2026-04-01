@@ -9,6 +9,7 @@ import Activites from '../../Components/Activites/Activites'
 import Blog from '../../Components/Blog/Blog'
 import TeachingMethodology from '../../Components/TeachingMethodology/TeachingMethodology'
 import Testimonial from '../../Components/Testimonial/Testimonial'
+import Contactfrom from '../../Components/ContactForm/ContactForm'
 
 const Home = () => {
   return (
@@ -51,7 +52,10 @@ const Home = () => {
 
         <section id="testimonial">
           <Testimonial/>
-        </section>
+        </section> 
+
+        
+        <Contactfrom />
         
     </div>
   )

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
 
-import logo from "../../assets/kidslogo.png";
+import logo from "../../assets/Logo1.JPG";
 import pencil from "../../assets/menu-hover-icon.png";
 
 import { Menu, X, Phone } from "lucide-react";

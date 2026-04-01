@@ -6,6 +6,8 @@ import Footer from "./Components/Footer/Footer";
 import Home from "./Pages/Home/Home";
 import Topbar from "./Components/Topbar/Topbar";
 import FloatingForm from "./Components/FloatingForm/FloatingForm";
+import FloatingIcons from "./Components/FloatingIcons/FloatingIcons";
+import NewsDetails from "./Pages/NewsDetails/NewsDetails";
 
 
 function App() {
@@ -15,8 +17,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/News-Details" element={<NewsDetails />} />
       </Routes>
       <Footer />
+      <FloatingIcons />
       <FloatingForm/>
     </>
   );

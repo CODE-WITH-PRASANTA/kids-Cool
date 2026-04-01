@@ -20,9 +20,11 @@ const Homehero = () => {
         id: 1,
         type: "content",
         image: heroMain,
-        titleTop: "20%",
-        titleMiddle: "Flat Off",
-        titleBottom: "On Registration",
+        miniTag: "Dream Flower Pre School",
+        titleTop: "Learn",
+        titleMiddle: "Play & Grow",
+        titleBottom:
+          "A safe and joyful place where little learners begin their journey with care and confidence.",
         button: "Know More",
         accent: "sky",
       },
@@ -30,16 +32,24 @@ const Homehero = () => {
         id: 2,
         type: "content",
         image: sliderTwo,
-        titleTop: "20%",
-        titleMiddle: "Flat Off",
-        titleBottom: "On Registration",
-        button: "Know More",
+        miniTag: "Caring Early Education",
+        titleTop: "Bright",
+        titleMiddle: "Little Minds",
+        titleBottom:
+          "Guided by Director Pranya Ranjan Palei and Principal Swetalin Swain with focus on values and growth.",
+        button: "Explore More",
         accent: "orange",
       },
       {
         id: 3,
-        type: "image",
+        type: "content",
         image: sliderThree,
+        miniTag: "Admissions Open",
+        titleTop: "Happy",
+        titleMiddle: "School Days",
+        titleBottom:
+          "Creative activities, friendly teachers and a child-first environment for strong early learning.",
+        button: "Apply Now",
         accent: "teal",
       },
     ],
@@ -112,7 +122,7 @@ const Homehero = () => {
             >
               <img
                 src={slide.image}
-                alt={`Hero slide ${index + 1}`}
+                alt={`Dream Flower Pre School slide ${index + 1}`}
                 className={`${base}__bg`}
               />
 
@@ -153,11 +163,9 @@ const Homehero = () => {
               {slide.type === "content" && (
                 <div className={`${base}__contentWrap`}>
                   <div className={`${base}__content`}>
-                    <span className={`${base}__miniTag`}>
-                      Limited Time Offer
-                    </span>
-                    <h2 className={`${base}__percent`}>{slide.titleTop}</h2>
-                    <h3 className={`${base}__heading`}>{slide.titleMiddle}</h3>
+                    <span className={`${base}__miniTag`}>{slide.miniTag}</span>
+                    <h1 className={`${base}__percent`}>{slide.titleTop}</h1>
+                    <h2 className={`${base}__heading`}>{slide.titleMiddle}</h2>
                     <p className={`${base}__subheading`}>{slide.titleBottom}</p>
                     <button className={`${base}__btn`} type="button">
                       {slide.button}
@@ -168,7 +176,7 @@ const Homehero = () => {
 
               <img
                 src={floatingCloud}
-                alt="Floating cloud decoration"
+                alt="Cloud decoration"
                 className={`${base}__cloudImage`}
               />
             </article>
