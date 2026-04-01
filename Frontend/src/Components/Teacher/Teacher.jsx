@@ -3,12 +3,12 @@ import "./Teacher.css";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
 /* import your teacher images here */
-import teacher1 from "../../assets/teacher1.webp";
-import teacher2 from "../../assets/teacher2.webp";
-import teacher3 from "../../assets/teacher3.webp";
-import teacher4 from "../../assets/teacher4.webp";
-import teacher5 from "../../assets/teacher5.webp";
-import teacher6 from "../../assets/teacher6.webp";
+import teacher1 from "../../assets/Cool1.webp";
+import teacher2 from "../../assets/Cool2.webp";
+import teacher3 from "../../assets/Cool3.webp";
+import teacher4 from "../../assets/Cool1.webp";
+import teacher5 from "../../assets/Cool2.webp";
+import teacher6 from "../../assets/Cool3.webp";
 
 const Teacher = () => {
   const base = "teacherSection";
