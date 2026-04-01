@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Education.css";
 
 import heroImg from "../../assets/Section1.webp";
@@ -15,44 +15,79 @@ const Education = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeImage, setActiveImage] = useState(null);
 
-  // ✅ mobile pagination
   const [isMobile, setIsMobile] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const [rightPage, setRightPage] = useState(0);
+  const imagesPerPage = 4;
 
   const galleryImages = [
     {
       id: 1,
       image: heroImg,
-      alt: "Kids playing in school garden",
+      alt: "Dream Flower Pre-School & Day Care Bhubaneswar joyful learning environment",
       className: `${base}__card ${base}__card--hero`,
     },
     {
       id: 2,
       image: img2,
-      alt: "Kids classroom activity",
+      alt: "Dream Flower Pre-School & Day Care Bhubaneswar classroom activity",
       className: `${base}__card ${base}__card--small`,
     },
     {
       id: 3,
       image: img3,
-      alt: "Kids cycling outdoors",
+      alt: "Kids outdoor play at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--smallTall`,
     },
     {
       id: 4,
       image: img4,
-      alt: "Teacher with children painting",
+      alt: "Teacher guiding children at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--medium`,
     },
     {
       id: 5,
       image: img5,
-      alt: "Kids group learning together",
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--wide`,
     },
   ];
 
-  // ✅ detect mobile
+  const rightGalleryImages = [
+    {
+      id: 2,
+      image: img2,
+      alt: "Dream Flower Pre-School & Day Care Bhubaneswar classroom activity",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+    {
+      id: 3,
+      image: img3,
+      alt: "Kids outdoor play at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+    {
+      id: 4,
+      image: img4,
+      alt: "Teacher guiding children at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+    {
+      id: 5,
+      image: img5,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+  ];
+
+  const totalRightPages = Math.ceil(rightGalleryImages.length / imagesPerPage);
+
+  const paginatedRightImages = useMemo(() => {
+    const start = rightPage * imagesPerPage;
+    return rightGalleryImages.slice(start, start + imagesPerPage);
+  }, [rightGalleryImages, rightPage]);
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth <= 768);
     check();
@@ -60,7 +95,6 @@ const Education = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
-  // ✅ intersection observer (fixed duplicate)
   useEffect(() => {
     const current = sectionRef.current;
     if (!current) return;
@@ -79,7 +113,6 @@ const Education = () => {
     return () => observer.disconnect();
   }, []);
 
-  // ✅ modal ESC + scroll lock (fixed duplicate)
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === "Escape") {
@@ -101,7 +134,6 @@ const Education = () => {
     };
   }, [activeImage]);
 
-  // ✅ pagination
   const nextSlide = () => {
     setCurrentIndex((prev) => (prev + 1) % galleryImages.length);
   };
@@ -110,6 +142,14 @@ const Education = () => {
     setCurrentIndex(
       (prev) => (prev - 1 + galleryImages.length) % galleryImages.length
     );
+  };
+
+  const nextRightPage = () => {
+    setRightPage((prev) => (prev + 1) % totalRightPages);
+  };
+
+  const prevRightPage = () => {
+    setRightPage((prev) => (prev - 1 + totalRightPages) % totalRightPages);
   };
 
   return (
@@ -169,33 +209,80 @@ const Education = () => {
                   </svg>
                 </span>
 
-                <p className={`${base}__subTitle`}>International Education</p>
+                <p className={`${base}__subTitle`}>
+                  Our Enviromental Gallery
+                </p>
               </div>
 
-              <h2 className={`${base}__title`}>Bicultural Students</h2>
+              <h2 className={`${base}__title`}>
+                Best Pre-School & Day Care in Bhubaneswar for Joyful Early Learning
+              </h2>
 
               <p className={`${base}__desc`}>
-                We create a joyful learning environment where children explore,
-                play, build confidence, and grow through creative school
-                activities and interactive experiences.
+                Welcome to <strong>Dream Flower Pre-School & Day Care Bhubaneswar</strong>,
+                a warm, safe, and inspiring learning space where every child feels
+                happy, confident, and cared for. We create a joyful environment
+                filled with playful learning, creative classroom activities,
+                guided exploration, and loving teacher support so that children
+                can learn naturally while enjoying every moment of their early
+                childhood journey.
+              </p>
+
+              <p className={`${base}__extraDesc`}>
+                As a trusted <strong>pre-school and day care in Bhubaneswar</strong>,
+                we focus on building communication, creativity, social skills,
+                confidence, discipline, and strong learning foundations through
+                fun-based education. From colorful classrooms and engaging
+                activities to caring attention and meaningful child development,
+                <strong> Dream Flower Pre-School & Day Care Bhubaneswar</strong>
+                helps every child grow with happiness, curiosity, and success.
               </p>
             </div>
 
             <div className={`${base}__topIcon`} aria-hidden="true">
               <svg viewBox="0 0 120 120" fill="none">
                 <g className={`${base}__topIconDraw`}>
-                  <path d="M50 22C63 28 72 41 73 54" stroke="#9b87f5" strokeWidth="2.6" strokeLinecap="round"/>
-                  <path d="M72 54C74 68 68 82 56 92" stroke="#7f72ff" strokeWidth="2.6" strokeLinecap="round"/>
-                  <path d="M55 19C77 25 94 42 99 64" stroke="#c8b9ff" strokeWidth="2.6" strokeLinecap="round"/>
-                  <path d="M46 23L82 43L60 97L35 68L46 23Z" fill="#f7f1ff" stroke="#a48cff" strokeWidth="2.8"/>
-                  <path d="M56 34C63 34 68 39 68 46C68 53 63 58 56 58C49 58 44 53 44 46C44 39 49 34 56 34Z" fill="#fff4ea" stroke="#ff9955" strokeWidth="2.2"/>
-                  <path d="M56 39C60 39 63 42 63 46C63 50 60 53 56 53C52 53 49 50 49 46C49 42 52 39 56 39Z" fill="#ffd36f" stroke="#ffb648" strokeWidth="1.8"/>
+                  <path
+                    d="M50 22C63 28 72 41 73 54"
+                    stroke="#9b87f5"
+                    strokeWidth="2.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M72 54C74 68 68 82 56 92"
+                    stroke="#7f72ff"
+                    strokeWidth="2.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M55 19C77 25 94 42 99 64"
+                    stroke="#c8b9ff"
+                    strokeWidth="2.6"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M46 23L82 43L60 97L35 68L46 23Z"
+                    fill="#f7f1ff"
+                    stroke="#a48cff"
+                    strokeWidth="2.8"
+                  />
+                  <path
+                    d="M56 34C63 34 68 39 68 46C68 53 63 58 56 58C49 58 44 53 44 46C44 39 49 34 56 34Z"
+                    fill="#fff4ea"
+                    stroke="#ff9955"
+                    strokeWidth="2.2"
+                  />
+                  <path
+                    d="M56 39C60 39 63 42 63 46C63 50 60 53 56 53C52 53 49 50 49 46C49 42 52 39 56 39Z"
+                    fill="#ffd36f"
+                    stroke="#ffb648"
+                    strokeWidth="1.8"
+                  />
                 </g>
               </svg>
             </div>
           </div>
 
-          {/* ===== GALLERY ===== */}
           <div className={`${base}__gallery`}>
             {isMobile ? (
               <div className={`${base}__mobileSlider`}>
@@ -235,37 +322,97 @@ const Education = () => {
                     onClick={() => setActiveImage(galleryImages[0])}
                   >
                     <div className={galleryImages[0].className}>
-                      <img src={galleryImages[0].image} alt="" />
+                      <img
+                        src={galleryImages[0].image}
+                        alt={galleryImages[0].alt}
+                      />
                     </div>
                   </button>
                 </div>
 
-                <div className={`${base}__right`}>
-                  {galleryImages.slice(1).map((item, index) => (
-                    <button
-                      key={item.id}
-                      className={`${base}__imageButton ${base}__stagger${index + 1}`}
-                      onClick={() => setActiveImage(item)}
-                    >
-                      <div className={item.className}>
-                        <img src={item.image} alt="" />
-                      </div>
-                    </button>
-                  ))}
+                <div className={`${base}__rightPanel`}>
+                  <div className={`${base}__rightTopBar`}>
+                    <div className={`${base}__rightPager`}>
+                      <button
+                        type="button"
+                        className={`${base}__rightPagerBtn`}
+                        onClick={prevRightPage}
+                        aria-label="Previous right gallery page"
+                      >
+                        ‹
+                      </button>
+
+                      <span className={`${base}__rightPagerCount`}>
+                        {String(rightPage + 1).padStart(2, "0")} /{" "}
+                        {String(totalRightPages).padStart(2, "0")}
+                      </span>
+
+                      <button
+                        type="button"
+                        className={`${base}__rightPagerBtn`}
+                        onClick={nextRightPage}
+                        aria-label="Next right gallery page"
+                      >
+                        ›
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className={`${base}__right ${base}__right--grid`}>
+                    {paginatedRightImages.map((item, index) => (
+                      <button
+                        key={item.id}
+                        className={`${base}__imageButton ${base}__imageButton--grid ${base}__stagger${
+                          index + 1
+                        }`}
+                        onClick={() => setActiveImage(item)}
+                      >
+                        <div className={item.className}>
+                          <img src={item.image} alt={item.alt} />
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className={`${base}__rightDotsWrap`}>
+                    <div className={`${base}__rightDots`}>
+                      {Array.from({ length: totalRightPages }).map(
+                        (_, pageIndex) => (
+                          <button
+                            key={pageIndex}
+                            type="button"
+                            className={`${base}__rightDot ${
+                              rightPage === pageIndex
+                                ? `${base}__rightDot--active`
+                                : ""
+                            }`}
+                            onClick={() => setRightPage(pageIndex)}
+                            aria-label={`Go to right gallery page ${pageIndex + 1}`}
+                          />
+                        )
+                      )}
+                    </div>
+                  </div>
                 </div>
               </>
             )}
           </div>
         </div>
 
-        {/* kids images */}
         <div>
-          <img src={pencilGirl} className={`${base}__kid ${base}__kid--left`} />
-          <img src={pencilBoy} className={`${base}__kid ${base}__kid--right`} />
+          <img
+            src={pencilGirl}
+            alt=""
+            className={`${base}__kid ${base}__kid--left`}
+          />
+          <img
+            src={pencilBoy}
+            alt=""
+            className={`${base}__kid ${base}__kid--right`}
+          />
         </div>
       </section>
 
-      {/* ===== FULL MODAL (RESTORED) ===== */}
       {activeImage && (
         <div
           className={`${base}__modal`}

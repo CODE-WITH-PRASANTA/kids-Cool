@@ -21,7 +21,7 @@ const Creative = () => {
           observer.unobserve(current);
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     observer.observe(current);
@@ -59,20 +59,29 @@ const Creative = () => {
           </div>
 
           <h2 className={`${base}__title`}>
-            Creative Learning <br />
-            Opportunity For Kids
+            Creative Learning Opportunity <br />
+            for Kids in Bhubaneswar
           </h2>
 
           <p className={`${base}__desc`}>
-            Morbi mauris augue, pulvinar quis luctus eget, pretium sed massa.
-            Phasellus gravida lacus quis eros lobortis, nec dapibus quam
-            gravida. Duis sed augue vitae felis pellentesque varius nec quis
-            nunc.
+            What began as a small initiative has grown into a highly trusted
+            name among parents searching for the best pre school in Bhubaneswar
+            and a reliable day care center in Bhubaneswar. Over the years, Dream
+            Flower Pre School & Day Care has established itself as a top pre
+            school near Rasulgarh, Bhubaneswar, known for delivering quality
+            early education in a safe, child-friendly, and engaging environment.
+            Our focus on a structured, activity-based curriculum, combined with
+            modern teaching methods and creative learning opportunities, helps
+            children build strong academic and social foundations. With a
+            commitment to excellence and care, we have earned the trust of
+            families across Rasulgarh and surrounding areas, making us a
+            preferred choice for parents looking for the best play school,
+            nursery school, and day care in Bhubaneswar.
           </p>
 
           <div className={`${base}__actionArea`}>
             <button className={`${base}__button`} type="button">
-              Creative Works
+              Contact Us
             </button>
 
             <div className={`${base}__flyWrap`}>

@@ -12,14 +12,38 @@ const TeachingMethodology = () => {
   const methodologyImg =
     "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1200&q=80";
 
-  const demoVideo =
-    "https://www.w3schools.com/html/mov_bbb.mp4";
+  const demoVideo = "https://www.w3schools.com/html/mov_bbb.mp4";
 
   const ageGroups = [
-    { id: 1, years: "2–3", label: "Infant", color: "pink", active: true },
-    { id: 2, years: "4–6", label: "Kindergarten", color: "orange" },
-    { id: 3, years: "7–8", label: "Pre-Primary", color: "green" },
-    { id: 4, years: "9–10", label: "Primary", color: "cyan" },
+    {
+      id: 1,
+      years: "2–3",
+      label: "Infant",
+      color: "pink",
+      active: true,
+      text: "A warm and caring beginning where little learners feel safe, happy, and comfortable through playful interaction and gentle guidance.",
+    },
+    {
+      id: 2,
+      years: "4–6",
+      label: "Kindergarten",
+      color: "orange",
+      text: "An exciting stage filled with stories, creative activities, classroom fun, and joyful learning experiences that build confidence every day.",
+    },
+    {
+      id: 3,
+      years: "7–8",
+      label: "Pre-Primary",
+      color: "green",
+      text: "Children develop communication, observation, creativity, and independent learning habits through engaging visual teaching methods.",
+    },
+    {
+      id: 4,
+      years: "9–10",
+      label: "Primary",
+      color: "cyan",
+      text: "A stronger learning foundation with activity-based teaching, concept clarity, teamwork, and early academic confidence for future growth.",
+    },
   ];
 
   useEffect(() => {
@@ -59,16 +83,19 @@ const TeachingMethodology = () => {
             <div className={`${base}__content`}>
               <div className={`${base}__mini-heading`}>
                 <PiGraduationCapThin className={`${base}__mini-icon`} />
-                <span>Active</span>
+                <span>Growing Stage</span>
               </div>
 
-              <h2 className={`${base}__title`}>Visual Teaching Methodology!</h2>
+              <h3 className={`${base}__title`}>
+                Visual Teaching Methodology For Bright Young Minds!
+              </h3>
 
               <p className={`${base}__description`}>
-                Morbi mauris augue, pulvinar quis luctus eget, pretium sed
-                massa. Phasellus gravida lacus quis eros lobortis, nec dapibus
-                quam gravida. Duis sed augue vitae felis pellentesque varius nec
-                quis nunc.
+                At Dream Flower Pre-School & Day Care Bhubaneswar, children learn through colorful visuals, creative exploration, and hands-on activities. Our thoughtfully designed classrooms with interactive learning tools inspire curiosity, imagination, and joyful participation every day. 🌸🎨
+              </p>
+
+              <p className={`${base}__description ${base}__description--extra`}>
+               At Dream Flower Pre-School & Day Care Bhubaneswar, we nurture young minds through storytelling, art, music, and activity-based learning. Our playful teaching approach builds confidence, communication skills, and strong early learning foundations, helping every child grow happily and naturally. 🌸📚
               </p>
 
               <button className={`${base}__button`}>Creative Works</button>
@@ -110,6 +137,7 @@ const TeachingMethodology = () => {
                 </div>
 
                 <h3 className={`${base}__label`}>{item.label}</h3>
+                <p className={`${base}__level-text`}>{item.text}</p>
               </div>
             ))}
           </div>

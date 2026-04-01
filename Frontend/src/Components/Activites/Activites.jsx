@@ -10,6 +10,8 @@ import swimImg from "../../assets/imbox3.webp";
 const Activites = () => {
   const base = "activitiesSection";
   const sectionRef = useRef(null);
+  const autoSlideRef = useRef(null);
+
   const [visible, setVisible] = useState(false);
   const [activeSet, setActiveSet] = useState(0);
 
@@ -17,8 +19,8 @@ const Activites = () => {
     [
       {
         id: 1,
-        title: "Craft",
-        text: "Aliquam congue id velit sit amet vehicula. Donec quis pretium orci. Mauris posuere sem nec ex laoreet suscipit fusce.",
+        title: "Play Group Learning",
+        text: "At Dream Flower Pre-School & Day Care Bhubaneswar, our play group learning program creates a joyful start for little learners. Through guided play, storytelling, rhymes, fun interaction, and engaging classroom activities, children develop confidence, social bonding, listening habits, and a love for school in a safe and caring environment.",
         image: craftImg,
         shape: "hexagon",
         color: "violet",
@@ -26,8 +28,8 @@ const Activites = () => {
       },
       {
         id: 2,
-        title: "Painting",
-        text: "Aliquam congue id velit sit amet vehicula. Donec quis pretium orci. Mauris posuere sem nec ex laoreet suscipit fusce.",
+        title: "Art & Creative Time",
+        text: "Our art and creative sessions help children explore drawing, coloring, painting, craft work, and imagination in exciting ways. At Dream Flower Pre-School & Day Care Bhubaneswar, these activities strengthen fine motor skills, creativity, hand-eye coordination, and self-expression while making every day brighter, happier, and more meaningful.",
         image: paintingImg,
         shape: "triangle",
         color: "mint",
@@ -35,8 +37,8 @@ const Activites = () => {
       },
       {
         id: 3,
-        title: "Physical Activities",
-        text: "Sed pulvinar proin gravida hendrerit lectus a. Sed nisi lacus sed viverra. Vitae auctor eu augue ut. Ac felis donec et odio.",
+        title: "Yoga, Dance & Movement",
+        text: "We include yoga, dance, music, and movement-based fun to keep children active, cheerful, and confident. These sessions improve flexibility, balance, coordination, rhythm, and healthy physical growth. Our early childhood program in Bhubaneswar supports both body and mind development through joyful movement and playful participation every day.",
         image: swimImg,
         shape: "square",
         color: "cyan",
@@ -46,17 +48,17 @@ const Activites = () => {
     [
       {
         id: 4,
-        title: "Physical Activities",
-        text: "Sed pulvinar proin gravida hendrerit lectus a. Sed nisi lacus sed viverra. Vitae auctor eu augue ut. Ac felis donec et odio.",
-        image: swimImg,
+        title: "Smart Classroom Sessions",
+        text: "Dream Flower Pre-School & Day Care Bhubaneswar offers smart classroom sessions that make learning visual, interesting, and easy to understand. Using child-friendly methods, interactive teaching, and joyful concept learning, we help children improve focus, understanding, classroom participation, and curiosity in a modern preschool environment.",
+        image: classImg,
         shape: "square",
         color: "cyan",
-        icon: "butterfly",
+        icon: "school",
       },
       {
         id: 5,
-        title: "Team Activities",
-        text: "Blandit volutpat maecenas volutpat blandit aliquam etiam. Placerat duis ultricies lacus sed consectetur adipiscing elit.",
+        title: "Activity-Based Learning",
+        text: "We believe the best preschool learning happens through doing, exploring, and participating. Our activity-based learning includes speaking games, practical tasks, teamwork, creative play, and fun educational exercises. This approach builds communication, problem-solving ability, independent thinking, confidence, and stronger learning habits for young children.",
         image: blocksImg,
         shape: "circle",
         color: "yellow",
@@ -64,12 +66,41 @@ const Activites = () => {
       },
       {
         id: 6,
-        title: "Individual Activity",
-        text: "Vivamus at augue eget arcu dictum varius. Tristique et egestas quis ipsum suspendisse ultrices gravida dictum fusce.",
-        image: classImg,
+        title: "Indoor & Outdoor Fun",
+        text: "At Dream Flower Pre-School & Day Care Bhubaneswar, children enjoy safe indoor and outdoor activities that support physical growth, teamwork, joyful exploration, and active play. These fun-filled experiences create a healthy balance between study, creativity, exercise, and happiness, making every child’s preschool journey more energetic and memorable.",
+        image: craftImg,
         shape: "triangle",
         color: "orange",
         icon: "ball",
+      },
+    ],
+    [
+      {
+        id: 7,
+        title: "Nursery Foundation Program",
+        text: "Our Nursery Foundation Program is designed to build a strong base for early learning. Through phonics readiness, language development, number concepts, classroom habits, and guided routines, Dream Flower Pre-School & Day Care Bhubaneswar prepares children for future academic success with confidence, joy, and personalized care.",
+        image: paintingImg,
+        shape: "hexagon",
+        color: "violet",
+        icon: "butterfly",
+      },
+      {
+        id: 8,
+        title: "LKG / UKG Preparation",
+        text: "We provide structured LKG and UKG preparation through writing readiness, counting practice, phonics, speaking activities, and concept-based learning. Our preschool in Bhubaneswar helps children become expressive, confident, disciplined, and well-prepared for the next stage of school education in a warm and encouraging learning atmosphere.",
+        image: classImg,
+        shape: "circle",
+        color: "yellow",
+        icon: "school",
+      },
+      {
+        id: 9,
+        title: "Safe Day Care Support",
+        text: "Our day care program gives children a loving, secure, and comfortable second home. With supervised routines, guided play, rest time, learning support, and nurturing care, Dream Flower Pre-School & Day Care Bhubaneswar ensures every child feels safe, valued, happy, and supported throughout the day.",
+        image: swimImg,
+        shape: "square",
+        color: "orange",
+        icon: "kids",
       },
     ],
   ];
@@ -85,7 +116,7 @@ const Activites = () => {
           observer.unobserve(current);
         }
       },
-      { threshold: 0.16 }
+      { threshold: 0.18 }
     );
 
     observer.observe(current);
@@ -98,6 +129,31 @@ const Activites = () => {
 
   const prevSet = () => {
     setActiveSet((prev) => (prev - 1 + activitySets.length) % activitySets.length);
+  };
+
+  useEffect(() => {
+    autoSlideRef.current = setInterval(() => {
+      setActiveSet((prev) => (prev + 1) % activitySets.length);
+    }, 3500);
+
+    return () => clearInterval(autoSlideRef.current);
+  }, [activitySets.length]);
+
+  const resetAutoSlide = () => {
+    clearInterval(autoSlideRef.current);
+    autoSlideRef.current = setInterval(() => {
+      setActiveSet((prev) => (prev + 1) % activitySets.length);
+    }, 3500);
+  };
+
+  const handleNext = () => {
+    nextSet();
+    resetAutoSlide();
+  };
+
+  const handlePrev = () => {
+    prevSet();
+    resetAutoSlide();
   };
 
   const currentCards = activitySets[activeSet];
@@ -177,12 +233,24 @@ const Activites = () => {
               </svg>
             </div>
 
-            <p className={`${base}__subTitle`}>Activity Programs</p>
-            <h2 className={`${base}__title`}>Smart Activities</h2>
+            <p className={`${base}__subTitle`}>
+              Dream Flower Pre-School & Day Care Bhubaneswar
+            </p>
+
+            <h2 className={`${base}__title`}>
+              Best Pre-School Activities, Programs & Day Care Learning
+            </h2>
+
             <p className={`${base}__desc`}>
-              Forbi mauris augue, pulvinar quis luctus eget. Phasellus gravida
-              lacus quis eros lobortis, nec dapibus quam gravida. Duis sed augue
-              vitae felis pellentesque varius nec quis nunc.
+              Dream Flower Pre-School & Day Care Bhubaneswar offers a joyful,
+              safe, and nurturing environment where children learn through play,
+              creativity, movement, interaction, and guided classroom
+              experiences. Our preschool programs are carefully designed to
+              build confidence, communication, social skills, creativity, and
+              strong early learning foundations. With caring teachers,
+              child-friendly classrooms, smart learning methods, and engaging
+              day care support, we help every child grow happily, learn
+              naturally, and shine with confidence.
             </p>
           </div>
 
@@ -207,7 +275,7 @@ const Activites = () => {
           <button
             type="button"
             className={`${base}__nav ${base}__nav--left`}
-            onClick={prevSet}
+            onClick={handlePrev}
             aria-label="Previous activities"
           >
             <span className={`${base}__spider`}>
@@ -222,12 +290,22 @@ const Activites = () => {
                 </g>
               </svg>
             </span>
+
+            <span className={`${base}__spiderUnder`} aria-hidden="true">
+              <svg viewBox="0 0 70 28" fill="none">
+                <path d="M35 2v8" stroke="#6b5b95" strokeWidth="2.2" strokeLinecap="round" />
+                <ellipse cx="35" cy="17" rx="10" ry="7" fill="#6b5b95" />
+                <circle cx="32" cy="15" r="1.5" fill="#fff" />
+                <circle cx="38" cy="15" r="1.5" fill="#fff" />
+                <path d="M25 14l-6-4M25 18l-7 1M25 21l-5 5M45 14l6-4M45 18l7 1M45 21l5 5" stroke="#6b5b95" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </span>
           </button>
 
           <button
             type="button"
             className={`${base}__nav ${base}__nav--right`}
-            onClick={nextSet}
+            onClick={handleNext}
             aria-label="Next activities"
           >
             <span className={`${base}__spider`}>
@@ -240,6 +318,16 @@ const Activites = () => {
                   <path d="M22 15h8l5 4-5 4h-8" fill="#ff5f87" />
                   <path d="M10 5V0M5 7 1 4M19 7l4-3M3 15H0M24 15h4M5 23l-4 3M19 23l4 3M10 25v5" stroke="#43587d" strokeWidth="2" strokeLinecap="round" />
                 </g>
+              </svg>
+            </span>
+
+            <span className={`${base}__spiderUnder`} aria-hidden="true">
+              <svg viewBox="0 0 70 28" fill="none">
+                <path d="M35 2v8" stroke="#6b5b95" strokeWidth="2.2" strokeLinecap="round" />
+                <ellipse cx="35" cy="17" rx="10" ry="7" fill="#6b5b95" />
+                <circle cx="32" cy="15" r="1.5" fill="#fff" />
+                <circle cx="38" cy="15" r="1.5" fill="#fff" />
+                <path d="M25 14l-6-4M25 18l-7 1M25 21l-5 5M45 14l6-4M45 18l7 1M45 21l5 5" stroke="#6b5b95" strokeWidth="2" strokeLinecap="round" />
               </svg>
             </span>
           </button>
@@ -265,6 +353,21 @@ const Activites = () => {
                   <p className={`${base}__cardText`}>{item.text}</p>
                 </div>
               </article>
+            ))}
+          </div>
+
+          <div className={`${base}__dots`}>
+            {activitySets.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`${base}__dot ${activeSet === index ? `${base}__dot--active` : ""}`}
+                onClick={() => {
+                  setActiveSet(index);
+                  resetAutoSlide();
+                }}
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
           </div>
         </div>

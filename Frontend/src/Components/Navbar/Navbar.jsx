@@ -11,23 +11,33 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [mobileDrop, setMobileDrop] = useState(null);
 
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+      setOpen(false); // close mobile menu
+    }
+  };
+
   const menu = [
-    { name: "Home", path: "/" },
+    { name: "Home", id: "home" },
 
     {
       name: "About",
       children: [
-        { name: "Why Choose Us", path: "/why" },
-        { name: "Our History", path: "/history" },
-        { name: "Growing Stage", path: "/stage" },
+        { name: "Why Choose Us", id: "why" },
+        { name: "Our History", id: "history" },
+        { name: "Our Facility", id: "facility" },
+        { name: "Growing Stage", id: "stage" },
       ],
     },
 
-    { name: "Teachers", path: "/teachers" },
-    { name: "Programms", path: "/programms" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "News", path: "/news" },
-    { name: "Contact", path: "/contact" },
+    { name: "Teachers", id: "teachers" },
+    { name: "Programms", id: "programms" },
+    { name: "Gallery", id: "gallery" },
+    { name: "News", id: "news" },
+    { name: "Testimonial", id: "testimonial" },
+    { name: "Contact", id: "contact" },
   ];
 
   return (
@@ -48,13 +58,12 @@ export default function Navbar() {
                 <span className="nb-inner">
                   <img src={pencil} className="nb-hoverIcon" />
 
-                  {item.path ? (
-                    <Link to={item.path} className="nb-text">
-                      {item.name}
-                    </Link>
-                  ) : (
-                    <span className="nb-text">{item.name}</span>
-                  )}
+                  <span
+                    className="nb-text"
+                    onClick={() => item.id && scrollToSection(item.id)}
+                  >
+                    {item.name}
+                  </span>
                 </span>
 
                 {/* DROPDOWN */}
@@ -63,7 +72,9 @@ export default function Navbar() {
                   <ul className="nb-dropdown">
                     {item.children.map((sub, j) => (
                       <li key={j}>
-                        <Link to={sub.path}>{sub.name}</Link>
+                        <span onClick={() => scrollToSection(sub.id)}>
+                          {sub.name}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -81,7 +92,7 @@ export default function Navbar() {
                 <div className="nb-number">
                   <Phone size={14} />
 
-                  <span>+91 12345 67890</span>
+                  <span>+91 8280547763</span>
                 </div>
               </a>
 
@@ -115,7 +126,13 @@ export default function Navbar() {
 
               <div
                 className="nb-mobileItem"
-                onClick={() => setMobileDrop(mobileDrop === i ? null : i)}
+                onClick={() => {
+                  if (item.children) {
+                    setMobileDrop(mobileDrop === i ? null : i);
+                  } else {
+                    scrollToSection(item.id);
+                  }
+                }}
               >
                 {item.name}
               </div>
@@ -126,7 +143,9 @@ export default function Navbar() {
                 <ul className="nb-mobileSub">
                   {item.children.map((sub, j) => (
                     <li key={j}>
-                      <Link to={sub.path}>{sub.name}</Link>
+                      <span onClick={() => scrollToSection(sub.id)}>
+                        {sub.name}
+                      </span>
                     </li>
                   ))}
                 </ul>

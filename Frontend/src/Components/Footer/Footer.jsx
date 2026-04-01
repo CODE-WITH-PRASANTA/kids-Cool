@@ -128,7 +128,7 @@ export default function Footer() {
       {/* bottom */}
 
       <div className="ft-bottom">
-        <p>Copyright © 2023 Kids. All Rights Reserved.</p>
+        <p>© 2026 Dream Flower Pre School & Crafted with ❤️ by PR Webstock.</p>
 
         <div>Privacy Policy | Terms | Conditions</div>
       </div>

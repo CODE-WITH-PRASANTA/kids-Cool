@@ -10,25 +10,26 @@
   position: relative;
   overflow: hidden;
   background: var(--teacher-bg);
-  padding: 72px 0 94px;
+  padding: 86px 0 104px;
 }
 
 .teacherSection__container {
-  width: min(1220px, calc(100% - 40px));
+  width: min(1240px, calc(100% - 40px));
   margin: 0 auto;
   position: relative;
+  font-family: "Nunito", sans-serif;
 }
 
 .teacherSection__header {
-  max-width: 620px;
-  margin: 0 auto 52px;
+  max-width: 760px;
+  margin: 0 auto 64px;
   position: relative;
 }
 
 .teacherSection__topIcon {
   position: absolute;
-  width: 72px;
-  height: 72px;
+  width: 86px;
+  height: 86px;
   color: #d9d9d9;
   top: -8px;
 }
@@ -40,7 +41,7 @@
 }
 
 .teacherSection__topIcon--left {
-  left: -110px;
+  left: -120px;
   animation: teacherFloatSoft 5s ease-in-out infinite;
 }
 
@@ -52,20 +53,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-bottom: 8px;
+  gap: 10px;
+  margin-bottom: 12px;
 }
 
 .teacherSection__stars {
   color: #f2c6cf;
-  font-size: 18px;
+  font-size: 22px;
   letter-spacing: 5px;
   line-height: 1;
 }
 
 .teacherSection__capIcon {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   color: #d6d1cd;
   display: inline-flex;
   align-items: center;
@@ -75,29 +76,98 @@
 .teacherSection__subTitle {
   margin: 0;
   color: var(--teacher-accent);
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .teacherSection__title {
-  margin: 0 0 12px;
-  font-size: clamp(30px, 4vw, 50px);
-  line-height: 1.12;
+  margin: 0 0 18px;
+  font-size: clamp(40px, 5vw, 62px);
+  line-height: 1.08;
   color: var(--teacher-text);
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .teacherSection__desc {
-  max-width: 520px;
+  max-width: 680px;
   margin: 0 auto;
   color: var(--teacher-muted);
-  font-size: 15px;
-  line-height: 1.9;
+  font-size: 18px;
+  line-height: 2;
+  text-align: justify;
+  text-align-last: center;
 }
 
 .teacherSection__sliderWrap {
   position: relative;
   z-index: 2;
+}
+
+.teacherSection__desktopSlider {
+  display: block;
+}
+
+.teacherSection__desktopTopControls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 34px;
+}
+
+.teacherSection__desktopNavBtn {
+  width: 54px;
+  height: 54px;
+  border: none;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--teacher-dark);
+  font-size: 34px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(28, 39, 75, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.teacherSection__desktopNavBtn:hover {
+  transform: translateY(-3px);
+  background: #fff2f6;
+  box-shadow: 0 14px 30px rgba(255, 79, 125, 0.2);
+}
+
+.teacherSection__desktopDots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.teacherSection__desktopDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(36, 50, 74, 0.22);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.teacherSection__desktopDot--active {
+  width: 32px;
+  border-radius: 999px;
+  background: var(--teacher-accent);
+}
+
+.teacherSection__desktopGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 30px;
+  align-items: start;
+}
+
+.teacherSection__mobileSlider {
+  display: none;
 }
 
 .teacherSection__controls {
@@ -109,13 +179,13 @@
 }
 
 .teacherSection__navBtn {
-  width: 48px;
-  height: 48px;
+  width: 52px;
+  height: 52px;
   border: none;
   border-radius: 999px;
   background: #ffffff;
   color: var(--teacher-dark);
-  font-size: 30px;
+  font-size: 32px;
   line-height: 1;
   cursor: pointer;
   box-shadow: 0 12px 28px rgba(28, 39, 75, 0.08);
@@ -155,36 +225,36 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 560px;
+  min-height: auto;
 }
 
 .teacherSection__card {
   width: 100%;
-  max-width: 430px;
   text-align: center;
   opacity: 0;
   transform: translateY(42px);
   transition:
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.9s ease;
+    opacity 0.9s ease,
+    box-shadow 0.35s ease;
 }
 
-.teacherSection--visible .teacherSection__card,
-.teacherSection__card--active {
+.teacherSection__card--visible,
+.teacherSection--visible .teacherSection__card {
   opacity: 1;
   transform: translateY(0);
 }
 
 .teacherSection__imageWrap {
   position: relative;
-  margin-bottom: 28px;
-  padding-top: 14px;
+  margin-bottom: 32px;
+  padding-top: 16px;
 }
 
 .teacherSection__dotDecor {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   background: #c8c8c8;
   top: 50%;
@@ -198,7 +268,7 @@
 
 .teacherSection__imageBlob {
   position: relative;
-  width: min(100%, 360px);
+  width: min(100%, 380px);
   aspect-ratio: 1.16 / 0.88;
   margin: 0 auto;
   overflow: hidden;
@@ -231,8 +301,8 @@
 
 .teacherSection__arrow {
   position: absolute;
-  width: 104px;
-  height: 34px;
+  width: 110px;
+  height: 36px;
   color: #1d1d1d;
   opacity: 0.95;
 }
@@ -256,45 +326,57 @@
 }
 
 .teacherSection__contentBox {
-  max-width: 360px;
+  max-width: 390px;
   margin: 0 auto;
 }
 
 .teacherSection__role {
-  margin: 0 0 8px;
+  margin: 0 0 10px;
   color: var(--teacher-accent);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .teacherSection__name {
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   color: var(--teacher-teal);
-  font-size: 24px;
+  font-size: 30px;
   line-height: 1.2;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .teacherSection__text {
-  margin: 0 auto 18px;
+  margin: 0 auto 16px;
   color: var(--teacher-muted);
-  font-size: 15px;
+  font-size: 17px;
+  line-height: 1.95;
+  max-width: 360px;
+  text-align: justify;
+  text-align-last: center;
+}
+
+.teacherSection__extraInfo {
+  margin: 0 auto 22px;
+  color: #5e6479;
+  font-size: 16px;
   line-height: 1.9;
-  max-width: 320px;
+  max-width: 360px;
+  text-align: justify;
+  text-align-last: center;
 }
 
 .teacherSection__socials {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .teacherSection__socials a {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   background: var(--teacher-accent);
   color: #ffffff;
@@ -317,7 +399,7 @@
 
 .teacherSection__sideDecor {
   position: absolute;
-  top: 380px;
+  top: 410px;
   z-index: 1;
 }
 
@@ -344,7 +426,7 @@
 
 .teacherSection__bottomPattern {
   width: min(760px, 78%);
-  margin: 72px auto 0;
+  margin: 78px auto 0;
   opacity: 0.98;
 }
 
@@ -389,6 +471,10 @@
     width: min(1120px, calc(100% - 32px));
   }
 
+  .teacherSection__desktopGrid {
+    gap: 24px;
+  }
+
   .teacherSection__sideDecor--left {
     left: 10px;
   }
@@ -396,42 +482,81 @@
   .teacherSection__sideDecor--right {
     right: 10px;
   }
+
+  .teacherSection__imageBlob {
+    width: min(100%, 340px);
+  }
+
+  .teacherSection__name {
+    font-size: 27px;
+  }
+
+  .teacherSection__text {
+    font-size: 16px;
+  }
 }
 
 @media (max-width: 991px) {
   .teacherSection {
-    padding: 60px 0 80px;
+    padding: 68px 0 88px;
   }
 
   .teacherSection__header {
-    margin-bottom: 42px;
+    margin-bottom: 46px;
   }
 
   .teacherSection__topIcon--left {
     position: relative;
     left: auto;
     top: auto;
-    margin: 0 auto 14px;
+    margin: 0 auto 16px;
     display: block;
+  }
+
+  .teacherSection__desktopGrid {
+    gap: 18px;
+  }
+
+  .teacherSection__imageBlob {
+    width: min(100%, 295px);
+  }
+
+  .teacherSection__title {
+    font-size: 46px;
+  }
+
+  .teacherSection__desc {
+    font-size: 17px;
+    line-height: 1.9;
+  }
+
+  .teacherSection__name {
+    font-size: 24px;
+  }
+
+  .teacherSection__text {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .teacherSection__extraInfo {
+    font-size: 14.5px;
+    line-height: 1.8;
   }
 
   .teacherSection__sideDecor {
     display: none;
   }
 
-  .teacherSection__cards {
-    min-height: 520px;
-  }
-
   .teacherSection__bottomPattern {
     width: min(620px, 90%);
-    margin-top: 60px;
+    margin-top: 62px;
   }
 }
 
 @media (max-width: 767px) {
   .teacherSection {
-    padding: 50px 0 70px;
+    padding: 56px 0 74px;
   }
 
   .teacherSection__container {
@@ -439,12 +564,26 @@
   }
 
   .teacherSection__title {
-    font-size: 30px;
+    font-size: 34px;
+  }
+
+  .teacherSection__subTitle {
+    font-size: 15px;
   }
 
   .teacherSection__desc {
-    font-size: 14px;
-    line-height: 1.75;
+    font-size: 15px;
+    line-height: 1.8;
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  .teacherSection__desktopSlider {
+    display: none;
+  }
+
+  .teacherSection__mobileSlider {
+    display: block;
   }
 
   .teacherSection__controls {
@@ -453,9 +592,9 @@
   }
 
   .teacherSection__navBtn {
-    width: 42px;
-    height: 42px;
-    font-size: 26px;
+    width: 44px;
+    height: 44px;
+    font-size: 27px;
   }
 
   .teacherSection__cards {
@@ -475,12 +614,21 @@
   }
 
   .teacherSection__name {
-    font-size: 21px;
+    font-size: 24px;
   }
 
   .teacherSection__text {
+    font-size: 15px;
+    line-height: 1.82;
+    text-align: justify;
+    text-align-last: left;
+  }
+
+  .teacherSection__extraInfo {
     font-size: 14px;
     line-height: 1.8;
+    text-align: justify;
+    text-align-last: left;
   }
 
   .teacherSection__bottomPattern {
@@ -491,7 +639,7 @@
 
 @media (max-width: 480px) {
   .teacherSection {
-    padding: 44px 0 62px;
+    padding: 46px 0 64px;
   }
 
   .teacherSection__tagRow {
@@ -499,7 +647,7 @@
   }
 
   .teacherSection__stars {
-    font-size: 15px;
+    font-size: 16px;
     letter-spacing: 4px;
   }
 
@@ -508,7 +656,11 @@
   }
 
   .teacherSection__title {
-    font-size: 26px;
+    font-size: 28px;
+  }
+
+  .teacherSection__desc {
+    font-size: 14px;
   }
 
   .teacherSection__controls {
@@ -538,7 +690,15 @@
   }
 
   .teacherSection__name {
-    font-size: 20px;
+    font-size: 22px;
+  }
+
+  .teacherSection__text {
+    font-size: 14px;
+  }
+
+  .teacherSection__extraInfo {
+    font-size: 13.5px;
   }
 
   .teacherSection__socials a {
@@ -557,7 +717,7 @@
   }
 
   .teacherSection__title {
-    font-size: 23px;
+    font-size: 24px;
   }
 
   .teacherSection__imageBlob {
@@ -571,5 +731,8 @@
   .teacherSection__text {
     font-size: 13.5px;
   }
-}
 
+  .teacherSection__extraInfo {
+    font-size: 13px;
+  }
+}

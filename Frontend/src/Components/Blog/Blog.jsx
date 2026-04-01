@@ -8,6 +8,7 @@ import painterGirl from "../../assets/Girl.webp";
 const Blog = () => {
   const base = "blogSection";
   const sectionRef = useRef(null);
+  const contentScrollRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
   const blogItems = [
@@ -29,6 +30,24 @@ const Blog = () => {
       date: "Dec 29, 2022",
       text: "An overview nisl rhoncus mattis rhoncus urna. Pellentesque massa placerat duis ultricies lacus sed...",
     },
+    {
+      id: 4,
+      title: "Creative Storytelling Sessions For Kids",
+      date: "Dec 29, 2022",
+      text: "An overview pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas...",
+    },
+    {
+      id: 5,
+      title: "Joyful Learning Through Art & Craft",
+      date: "Dec 29, 2022",
+      text: "An overview facilisis volutpat est velit egestas dui id ornare arcu odio ut sem nulla...",
+    },
+    {
+      id: 6,
+      title: "Safe And Friendly Day Care Programs",
+      date: "Dec 29, 2022",
+      text: "An overview viverra nibh cras pulvinar mattis nunc sed blandit libero volutpat sed cras ornare...",
+    },
   ];
 
   useEffect(() => {
@@ -48,6 +67,17 @@ const Blog = () => {
     observer.observe(current);
     return () => observer.disconnect();
   }, []);
+
+  const handleContentScroll = (direction) => {
+    if (!contentScrollRef.current) return;
+
+    const amount = direction === "down" ? 220 : -220;
+
+    contentScrollRef.current.scrollBy({
+      top: amount,
+      behavior: "smooth",
+    });
+  };
 
   return (
     <section
@@ -82,74 +112,102 @@ const Blog = () => {
 
         <div className={`${base}__grid`}>
           <div className={`${base}__left`}>
-            <div className={`${base}__titleWrap`}>
-              <img src={painterGirl} alt="" className={`${base}__girl`} />
+            <div className={`${base}__scrollPanel`}>
+              <div className={`${base}__scrollHeader`}>
+                <div className={`${base}__titleWrap`}>
+                  <img src={painterGirl} alt="" className={`${base}__girl`} />
 
-              <div className={`${base}__titleContent`}>
-                <p className={`${base}__eyebrow`}>Blog</p>
-                <h2 className={`${base}__title`}>News about our Education</h2>
-              </div>
-            </div>
-
-            <div className={`${base}__list`}>
-              {blogItems.map((item, index) => (
-                <div
-                  key={item.id}
-                  className={`${base}__item ${base}__item--${index + 1}`}
-                >
-                  <div className={`${base}__dateBox`}>
-                    <span className={`${base}__calendar`} aria-hidden="true">
-                      <svg viewBox="0 0 24 24" fill="none">
-                        <rect
-                          x="4"
-                          y="6"
-                          width="16"
-                          height="14"
-                          rx="2"
-                          stroke="currentColor"
-                          strokeWidth="1.9"
-                        />
-                        <path
-                          d="M8 4v4M16 4v4M4 10h16"
-                          stroke="currentColor"
-                          strokeWidth="1.9"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </span>
-                    <span>Dec 29,</span>
-                    <span>2022</span>
-                  </div>
-
-                  <div className={`${base}__itemContent`}>
-                    <h3 className={`${base}__itemTitle`}>{item.title}</h3>
-                    <p className={`${base}__itemText`}>{item.text}</p>
+                  <div className={`${base}__titleContent`}>
+                    <p className={`${base}__eyebrow`}>Blog</p>
+                    <h2 className={`${base}__title`}>News about our Education</h2>
                   </div>
                 </div>
-              ))}
-            </div>
 
-            <div className={`${base}__leftBottomRow`}>
-              <div className={`${base}__duck`} aria-hidden="true">
-                <svg viewBox="0 0 90 90" fill="none">
-                  <path
-                    d="M23 50c0-12 10-21 22-21 14 0 25 11 25 25 0 12-10 22-23 22H31c-10 0-18-8-18-18 0-8 5-14 10-17"
-                    stroke="currentColor"
-                    strokeWidth="2.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <circle cx="38" cy="36" r="2.5" fill="currentColor" />
-                  <path
-                    d="M18 38h10l8 5-8 5H18"
-                    stroke="currentColor"
-                    strokeWidth="2.6"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                <div className={`${base}__contentScrollActions`}>
+                  <button
+                    type="button"
+                    className={`${base}__contentScrollBtn`}
+                    onClick={() => handleContentScroll("up")}
+                    aria-label="Scroll content up"
+                  >
+                    ↑
+                  </button>
+
+                  <button
+                    type="button"
+                    className={`${base}__contentScrollBtn`}
+                    onClick={() => handleContentScroll("down")}
+                    aria-label="Scroll content down"
+                  >
+                    ↓
+                  </button>
+                </div>
               </div>
 
-              <button className={`${base}__button`}>View More</button>
+              <div ref={contentScrollRef} className={`${base}__contentScroller`}>
+                <div className={`${base}__list`}>
+                  {blogItems.map((item, index) => (
+                    <div
+                      key={item.id}
+                      className={`${base}__item ${base}__item--${(index % 3) + 1}`}
+                    >
+                      <div className={`${base}__dateBox`}>
+                        <span className={`${base}__calendar`} aria-hidden="true">
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <rect
+                              x="4"
+                              y="6"
+                              width="16"
+                              height="14"
+                              rx="2"
+                              stroke="currentColor"
+                              strokeWidth="1.9"
+                            />
+                            <path
+                              d="M8 4v4M16 4v4M4 10h16"
+                              stroke="currentColor"
+                              strokeWidth="1.9"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </span>
+                        <span>Dec 29,</span>
+                        <span>2022</span>
+                      </div>
+
+                      <div className={`${base}__itemContent`}>
+                        <h3 className={`${base}__itemTitle`}>{item.title}</h3>
+                        <p className={`${base}__itemText`}>{item.text}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className={`${base}__leftBottomRow`}>
+                <div className={`${base}__duck`} aria-hidden="true">
+                  <svg viewBox="0 0 90 90" fill="none">
+                    <path
+                      d="M23 50c0-12 10-21 22-21 14 0 25 11 25 25 0 12-10 22-23 22H31c-10 0-18-8-18-18 0-8 5-14 10-17"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <circle cx="38" cy="36" r="2.5" fill="currentColor" />
+                    <path
+                      d="M18 38h10l8 5-8 5H18"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+
+                <div className={`${base}__actionRow`}>
+                  <button className={`${base}__button`}>Contact Us</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -197,8 +255,20 @@ const Blog = () => {
                       strokeWidth="2.6"
                       strokeLinecap="round"
                     />
-                    <circle cx="12" cy="46" r="4.5" stroke="currentColor" strokeWidth="2.6" />
-                    <circle cx="38" cy="46" r="4.5" stroke="currentColor" strokeWidth="2.6" />
+                    <circle
+                      cx="12"
+                      cy="46"
+                      r="4.5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                    />
+                    <circle
+                      cx="38"
+                      cy="46"
+                      r="4.5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                    />
                   </g>
                   <path d="M156 34l10 5-10 5" fill="currentColor" />
                 </svg>
