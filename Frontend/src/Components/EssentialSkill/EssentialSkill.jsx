@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./EssentialSkill.css";
 import playKid from "../../assets/playboy.webp";
 
@@ -6,6 +6,46 @@ const EssentialSkill = () => {
   const base = "essentialSkill";
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
+
+  const whatsappLink =
+    "https://wa.me/918280547763?text=Hello%20Dream%20Flower%20Pre%20School,%20I%20want%20to%20know%20more%20about%20admission.";
+
+  const programs = useMemo(
+    () => [
+      {
+        id: 1,
+        title: "Play Group",
+        desc: "Our Play Group program introduces children to a fun and engaging learning environment through play-based activities. It helps develop social skills, creativity, and confidence, making it an ideal start for early childhood education in Bhubaneswar.",
+        image:
+          "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: 2,
+        title: "Nursery",
+        desc: "The Nursery program focuses on building strong foundational skills through activity-based learning. Children develop early literacy, numeracy, and communication skills in a structured yet enjoyable environment.",
+        image:
+          "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: 3,
+        title: "LKG / UKG",
+        desc: "Our LKG and UKG programs prepare children for primary education with a focus on academics, communication, and personality development. It ensures a smooth transition to formal schooling.",
+        image:
+          "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+      },
+      {
+        id: 4,
+        title: "Day Care",
+        desc: "We provide a safe and reliable day care environment in Bhubaneswar where children are cared for with attention and love. It includes supervised activities, healthy routines, and a secure setting for working parents.",
+        image:
+          "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
+      },
+    ],
+    []
+  );
+
+  const [itemsPerPage, setItemsPerPage] = useState(4);
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
     const current = sectionRef.current;
@@ -25,54 +65,6 @@ const EssentialSkill = () => {
     return () => observer.disconnect();
   }, []);
 
-  /* ================= slider ================= */
-
-  const [page, setPage] = useState(0);
-  const perPage = 2;
-
-  const programs = [
-    {
-      id: 1,
-      title: "Play Group",
-      desc: "Our Play Group program introduces children to a fun and engaging learning environment through play-based activities. It helps develop social skills, creativity, and confidence, making it an ideal start for early childhood education in Bhubaneswar.",
-      image:
-        "https://images.unsplash.com/photo-1588072432836-e10032774350?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 2,
-      title: "Nursery",
-      desc: "The Nursery program focuses on building strong foundational skills through activity-based learning. Children develop early literacy, numeracy, and communication skills in a structured yet enjoyable environment.",
-      image:
-        "https://images.unsplash.com/photo-1516627145497-ae6968895b74?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 3,
-      title: "LKG / UKG",
-      desc: "Our LKG and UKG programs prepare children for primary education with a focus on academics, communication, and personality development. It ensures a smooth transition to formal schooling.",
-      image:
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
-    },
-    {
-      id: 4,
-      title: "Day Care",
-      desc: "We provide a safe and reliable day care environment in Bhubaneswar where children are cared for with attention and love. It includes supervised activities, healthy routines, and a secure setting for working parents.",
-      image:
-        "https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?auto=format&fit=crop&w=800&q=80",
-    },
-  ];
-
-  const totalPages = Math.ceil(programs.length / perPage);
-
-  const handlePrev = () => {
-    setPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
-  };
-
-  /* animation visible */
-
   useEffect(() => {
     const currentEl = sectionRef.current;
     if (!currentEl) return;
@@ -90,6 +82,42 @@ const EssentialSkill = () => {
     observer.observe(currentEl);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (window.innerWidth <= 767) {
+        setItemsPerPage(1);
+      } else if (window.innerWidth <= 991) {
+        setItemsPerPage(2);
+      } else {
+        setItemsPerPage(4);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener("resize", updateItemsPerPage);
+
+    return () => window.removeEventListener("resize", updateItemsPerPage);
+  }, []);
+
+  const totalPages = Math.ceil(programs.length / itemsPerPage);
+
+  useEffect(() => {
+    setPage(0);
+  }, [itemsPerPage]);
+
+  const paginatedPrograms = [];
+  for (let i = 0; i < programs.length; i += itemsPerPage) {
+    paginatedPrograms.push(programs.slice(i, i + itemsPerPage));
+  }
+
+  const handlePrev = () => {
+    setPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
+  };
+
+  const handleNext = () => {
+    setPage((prev) => (prev === totalPages - 1 ? 0 : prev + 1));
+  };
 
   return (
     <section
@@ -375,9 +403,14 @@ const EssentialSkill = () => {
               holistic development.
             </p>
 
-            <button className={`${base}__btn`} type="button">
+            <a
+              href={whatsappLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`${base}__btn`}
+            >
               Contact Us
-            </button>
+            </a>
 
             <span className={`${base}__spark`}>
               <svg viewBox="0 0 80 80" aria-hidden="true">
@@ -505,45 +538,44 @@ const EssentialSkill = () => {
               transform: `translateX(-${page * 100}%)`,
             }}
           >
-            {Array.from({ length: totalPages }).map((_, pageIndex) => (
+            {paginatedPrograms.map((group, pageIndex) => (
               <div key={pageIndex} className={`${base}__slidePage`}>
-                {programs
-                  .slice(pageIndex * perPage, pageIndex * perPage + perPage)
-                  .map((item) => (
-                    <article className={`${base}__card`} key={item.id}>
-                      <div className={`${base}__cardImageWrap`}>
-                        <img
-                          src={item.image}
-                          alt={item.title}
-                          className={`${base}__cardImage`}
-                        />
+                {group.map((item) => (
+                  <article className={`${base}__card`} key={item.id}>
+                    <div className={`${base}__cardImageWrap`}>
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className={`${base}__cardImage`}
+                      />
 
-                        <span
-                          className={`${base}__bubble ${base}__bubble--one`}
-                        />
-                        <span
-                          className={`${base}__bubble ${base}__bubble--two`}
-                        />
-                        <span
-                          className={`${base}__bubble ${base}__bubble--three`}
-                        />
-                      </div>
+                      <span
+                        className={`${base}__bubble ${base}__bubble--one`}
+                      />
+                      <span
+                        className={`${base}__bubble ${base}__bubble--two`}
+                      />
+                      <span
+                        className={`${base}__bubble ${base}__bubble--three`}
+                      />
+                    </div>
 
-                      <div className={`${base}__cardContent`}>
-                        <h4 className={`${base}__cardTitle`}>{item.title}</h4>
+                    <div className={`${base}__cardContent`}>
+                      <h4 className={`${base}__cardTitle`}>{item.title}</h4>
 
-                        <p className={`${base}__cardDesc`}>{item.desc}</p>
+                      <p className={`${base}__cardDesc`}>{item.desc}</p>
 
-                        <a
-                          href="/"
-                          className={`${base}__cardLink`}
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Contact Us
-                        </a>
-                      </div>
-                    </article>
-                  ))}
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`${base}__cardLink`}
+                      >
+                        Contact Us
+                      </a>
+                    </div>
+                  </article>
+                ))}
               </div>
             ))}
           </div>
@@ -553,14 +585,17 @@ const EssentialSkill = () => {
               type="button"
               className={`${base}__pageBtn`}
               onClick={handlePrev}
+              aria-label="Previous page"
             >
               Prev
             </button>
 
             <div className={`${base}__dots`}>
               {Array.from({ length: totalPages }).map((_, i) => (
-                <span
+                <button
                   key={i}
+                  type="button"
+                  aria-label={`Go to page ${i + 1}`}
                   className={`${base}__dot ${
                     i === page ? `${base}__dot--active` : ""
                   }`}
@@ -573,17 +608,12 @@ const EssentialSkill = () => {
               type="button"
               className={`${base}__pageBtn`}
               onClick={handleNext}
+              aria-label="Next page"
             >
               Next
             </button>
           </div>
         </div>
-
-        {/* <div className={`${base}__action`}>
-          <button className={`${base}__btn ${base}__btn--center`} type="button">
-            View More
-          </button>
-        </div> */}
       </div>
     </section>
   );

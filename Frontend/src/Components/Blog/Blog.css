@@ -12,6 +12,7 @@
   overflow: hidden;
   background: var(--blog-bg);
   padding: 34px 0 42px;
+  font-family: "Nunito", sans-serif;
 }
 
 .blogSection__topWave,

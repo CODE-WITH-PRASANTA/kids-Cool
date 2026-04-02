@@ -13,7 +13,11 @@
 
   position: relative;
   overflow: hidden;
-  background: linear-gradient(to bottom, var(--bg-top) 0 29%, var(--bg-main) 29% 100%);
+  background: linear-gradient(
+    to bottom,
+    var(--bg-top) 0 29%,
+    var(--bg-main) 29% 100%
+  );
   padding: 0 0 110px;
 }
 
@@ -187,19 +191,23 @@
   height: 54px;
   border: none;
   border-radius: 999px;
-  padding: 0 28px;
+  padding: 15px 28px;
   background: linear-gradient(135deg, var(--pink), #ff276f);
   color: #fff;
-  font-size: 0.98rem;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 900;
   cursor: pointer;
   box-shadow: 0 14px 30px rgba(247, 24, 103, 0.24);
   transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .essentialSkill__btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 38px rgba(247, 24, 103, 0.32);
+  box-shadow: 0 18px 38px rgba(119, 9, 48, 0.32);
   filter: brightness(1.05);
 }
 
@@ -358,18 +366,10 @@
   line-height: 1.95;
 }
 
-.essentialSkill__cardGrid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(320px, 1fr));
-  gap: 34px;
-  max-width: 960px;
-  margin: 0 auto;
-}
-
 .essentialSkill__card {
   background: rgba(248, 248, 248, 0.94);
   border-radius: 38px;
-  padding: 34px 34px 30px;
+  padding: 34px 26px 30px;
   box-shadow: var(--shadow);
   transition: transform 0.35s ease, box-shadow 0.35s ease, background 0.35s ease;
 }
@@ -440,9 +440,9 @@
 .essentialSkill__cardDesc {
   margin: 0 0 16px;
   color: var(--text-soft);
-  line-height: 1.9;
+  line-height: 1.85;
   font-size: 0.98rem;
-  max-width: 310px;
+  max-width: 100%;
 }
 
 .essentialSkill__cardLink {
@@ -566,6 +566,76 @@
   }
 }
 
+.essentialSkill__slider {
+  max-width: 1300px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.essentialSkill__sliderTrack {
+  display: flex;
+  transition: transform 0.55s ease;
+}
+
+.essentialSkill__slidePage {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 26px;
+  align-items: stretch;
+}
+
+.essentialSkill__paginationWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.essentialSkill__pageBtn {
+  min-width: 110px;
+  height: 46px;
+  border: none;
+  outline: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f71867, #ff276f);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 24px rgba(247, 24, 103, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.essentialSkill__pageBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 28px rgba(247, 24, 103, 0.3);
+}
+
+.essentialSkill__dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.essentialSkill__dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #bbb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+}
+
+.essentialSkill__dot--active {
+  background: #f71867;
+  transform: scale(1.15);
+}
+
 @media (max-width: 1399px) {
   .essentialSkill__aboutRow {
     grid-template-columns: 1fr 1fr 0.85fr;
@@ -642,11 +712,6 @@
     left: calc(50% + 22px);
   }
 
-  .essentialSkill__cardGrid {
-    max-width: 900px;
-    gap: 26px;
-  }
-
   .essentialSkill__decor--star,
   .essentialSkill__decor--planet,
   .essentialSkill__decor--abc,
@@ -660,7 +725,11 @@
 
 @media (max-width: 991px) {
   .essentialSkill {
-    background: linear-gradient(to bottom, var(--bg-top) 0 23%, var(--bg-main) 23% 100%);
+    background: linear-gradient(
+      to bottom,
+      var(--bg-top) 0 23%,
+      var(--bg-main) 23% 100%
+    );
   }
 
   .essentialSkill__container {
@@ -679,9 +748,9 @@
     font-size: clamp(1.8rem, 4.8vw, 2.6rem);
   }
 
-  .essentialSkill__cardGrid {
-    grid-template-columns: 1fr;
-    max-width: 640px;
+  .essentialSkill__slidePage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
   }
 
   .essentialSkill__card {
@@ -713,7 +782,11 @@
 @media (max-width: 767px) {
   .essentialSkill {
     padding-bottom: 74px;
-    background: linear-gradient(to bottom, #f4f4f4 0 18%, var(--bg-main) 18% 100%);
+    background: linear-gradient(
+      to bottom,
+      #f4f4f4 0 18%,
+      var(--bg-main) 18% 100%
+    );
   }
 
   .essentialSkill__container {
@@ -770,6 +843,11 @@
 
   .essentialSkill__programHeader {
     margin-bottom: 34px;
+  }
+
+  .essentialSkill__slidePage {
+    grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .essentialSkill__card {
@@ -873,6 +951,16 @@
     right: 5%;
     bottom: 160px;
   }
+
+  .essentialSkill__paginationWrap {
+    gap: 12px;
+  }
+
+  .essentialSkill__pageBtn {
+    min-width: 95px;
+    height: 42px;
+    font-size: 0.88rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -882,10 +970,6 @@
 
   .essentialSkill__programTitle {
     font-size: 1.65rem;
-  }
-
-  .essentialSkill__cardGrid {
-    gap: 18px;
   }
 
   .essentialSkill__card {
@@ -904,102 +988,5 @@
   .essentialSkill__decor--star,
   .essentialSkill__decor--rocketBottom {
     opacity: 0.45;
-  }
-}
-
-/* ========= SLIDER ========= */
-
-.essentialSkill__slider {
-  max-width: 1000px;
-  margin: auto;
-  overflow: hidden;
-}
-
-.essentialSkill__sliderTrack {
-  display: flex;
-  transition: transform 0.5s ease;
-}
-
-.essentialSkill__slidePage {
-  min-width: 100%;
-  display: flex;
-  gap: 30px;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.essentialSkill__card {
-  flex: 1 1 calc(50% - 15px);
-  max-width: 450px;
-}
-
-.essentialSkill__paginationWrap {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-  margin-top: 24px;
-  flex-wrap: wrap;
-}
-
-.essentialSkill__pageBtn {
-  min-width: 110px;
-  height: 46px;
-  border: none;
-  outline: none;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #f71867, #ff276f);
-  color: #fff;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 12px 24px rgba(247, 24, 103, 0.22);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.essentialSkill__pageBtn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 16px 28px rgba(247, 24, 103, 0.3);
-}
-
-.essentialSkill__dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-}
-
-.essentialSkill__dot {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  background: #bbb;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.essentialSkill__dot--active {
-  background: #f71867;
-  transform: scale(1.15);
-}
-
-@media (max-width: 600px) {
-  .essentialSkill__slidePage {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .essentialSkill__card {
-    width: 100%;
-    max-width: 420px;
-  }
-
-  .essentialSkill__paginationWrap {
-    gap: 12px;
-  }
-
-  .essentialSkill__pageBtn {
-    min-width: 95px;
-    height: 42px;
-    font-size: 0.88rem;
   }
 }

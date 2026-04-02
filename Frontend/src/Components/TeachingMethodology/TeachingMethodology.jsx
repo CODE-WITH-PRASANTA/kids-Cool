@@ -17,32 +17,32 @@ const TeachingMethodology = () => {
   const ageGroups = [
     {
       id: 1,
-      years: "2–3",
-      label: "Infant",
+      years: "2+",
+      label: "Play",
       color: "pink",
       active: true,
-      text: "A warm and caring beginning where little learners feel safe, happy, and comfortable through playful interaction and gentle guidance.",
+      text: "A gentle beginning where children learn through play, music, movement, and simple classroom activities in a happy and caring environment.",
     },
     {
       id: 2,
-      years: "4–6",
-      label: "Kindergarten",
+      years: "3+",
+      label: "Nursery",
       color: "orange",
-      text: "An exciting stage filled with stories, creative activities, classroom fun, and joyful learning experiences that build confidence every day.",
+      text: "Children build early speaking, listening, and social skills through stories, creative tasks, guided play, and everyday learning routines.",
     },
     {
       id: 3,
-      years: "7–8",
-      label: "Pre-Primary",
+      years: "4+",
+      label: "LKG",
       color: "green",
-      text: "Children develop communication, observation, creativity, and independent learning habits through engaging visual teaching methods.",
+      text: "Our LKG program strengthens early reading, writing, number learning, and confidence through activity-based teaching and child-friendly methods.",
     },
     {
       id: 4,
-      years: "9–10",
-      label: "Primary",
+      years: "5+",
+      label: "UKG",
       color: "cyan",
-      text: "A stronger learning foundation with activity-based teaching, concept clarity, teamwork, and early academic confidence for future growth.",
+      text: "UKG prepares children for primary school with strong basics in language, numbers, communication, classroom habits, and independent learning.",
     },
   ];
 
@@ -83,29 +83,37 @@ const TeachingMethodology = () => {
             <div className={`${base}__content`}>
               <div className={`${base}__mini-heading`}>
                 <PiGraduationCapThin className={`${base}__mini-icon`} />
-                <span>Growing Stage</span>
+                <span>Teaching Approach</span>
               </div>
 
               <h3 className={`${base}__title`}>
-                Visual Teaching Methodology For Bright Young Minds!
+                Smart Early Learning For Play, Nursery, LKG & UKG
               </h3>
 
               <p className={`${base}__description`}>
-                At Dream Flower Pre-School & Day Care Bhubaneswar, children learn through colorful visuals, creative exploration, and hands-on activities. Our thoughtfully designed classrooms with interactive learning tools inspire curiosity, imagination, and joyful participation every day. 🌸🎨
+                Dream Flower Pre-School & Day Care, Bhubaneswar offers a joyful
+                and child-friendly learning environment where every child grows
+                through play, creativity, classroom activities, and guided
+                learning. Our teaching method is simple, caring, and focused on
+                strong early development.
               </p>
 
               <p className={`${base}__description ${base}__description--extra`}>
-               At Dream Flower Pre-School & Day Care Bhubaneswar, we nurture young minds through storytelling, art, music, and activity-based learning. Our playful teaching approach builds confidence, communication skills, and strong early learning foundations, helping every child grow happily and naturally. 🌸📚
+                We help children build good habits, communication skills,
+                confidence, creativity, and basic academic readiness through
+                stories, rhymes, art, movement, and activity-based learning.
+                From Play Group to UKG, each stage is planned to support steady
+                and happy progress.
               </p>
 
-              <button className={`${base}__button`}>Creative Works</button>
+              <button className={`${base}__button`}>View Programs</button>
             </div>
 
             <div className={`${base}__media-wrap`}>
               <div className={`${base}__media-shape`}>
                 <img
                   src={methodologyImg}
-                  alt="Visual teaching methodology"
+                  alt="Teaching methodology at Dream Flower Pre-School and Day Care"
                   className={`${base}__image`}
                 />
 
