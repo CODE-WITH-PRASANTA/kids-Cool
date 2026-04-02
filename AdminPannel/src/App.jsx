@@ -8,6 +8,7 @@ import Teacher from "./Pages/Teacher/Teacher";
 import Testimonial from "./Pages/Testimonial/Testimonial";
 import Galleryposting from "./Pages/Galleryposting/Galleryposting";
 import AdmissionTable from "./Pages/AdmissionTable/AdmissionTable";
+import ColdLead from "./Pages/ColdLead/ColdLead";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           <Route path="/admin/testimonial" element={<Testimonial/>}/>
           <Route path="/admin/gallery" element={<Galleryposting/>}/>
           <Route path="admin/admission-table" element={<AdmissionTable/>}/>
+          <Route path="/admin/cold-lead" element={<ColdLead />} />
         </Route>
       </Routes>
     </BrowserRouter>
