@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Education.css";
 
-import heroImg from "../../assets/Section1.webp";
-import img2 from "../../assets/Section2.webp";
-import img3 from "../../assets/Section3.webp";
-import img4 from "../../assets/Section4.webp";
-import img5 from "../../assets/Section5.webp";
+import heroImg from "../../assets/img-2.jpeg";
+import img2 from "../../assets/img-1.jpeg";
+import img3 from "../../assets/img-3.jpeg";
+import img4 from "../../assets/img-4.jpeg";
+import img5 from "../../assets/img-5.jpeg";
 import pencilGirl from "../../assets/pencile.webp";
 import pencilBoy from "../../assets/pencileboy.webp";
 

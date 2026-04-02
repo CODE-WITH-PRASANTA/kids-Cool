@@ -2,6 +2,14 @@ import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./Teacher.css";
 import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
 
+/* import your teacher images here */
+import teacher1 from "../../assets/Cool1.webp";
+import teacher2 from "../../assets/Cool2.webp";
+import teacher3 from "../../assets/Cool3.webp";
+import teacher4 from "../../assets/Cool1.webp";
+import teacher5 from "../../assets/Cool2.webp";
+import teacher6 from "../../assets/Cool3.webp";
+
 const Teacher = () => {
   const base = "teacherSection";
   const sectionRef = useRef(null);
@@ -32,8 +40,7 @@ const Teacher = () => {
       id: 1,
       name: "Ananya Sharma",
       role: "Early Learning Mentor",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+      image: teacher1,
       description:
         "At Dream Flower Pre-School & Day Care, Ananya ma’am creates a warm and joyful classroom where children learn through stories, playful activities, communication practice, and gentle guidance. She helps little learners build confidence, language skills, classroom discipline, and a strong emotional connection with learning from the very beginning.",
     },
@@ -41,8 +48,7 @@ const Teacher = () => {
       id: 2,
       name: "Meera Das",
       role: "Creative Activity Trainer",
-      image:
-        "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+      image: teacher2,
       description:
         "Meera ma’am makes every day colorful and exciting with art, craft, music, movement, and interactive classroom fun. Her teaching style encourages creativity, imagination, teamwork, and self-expression, helping children enjoy a playful learning journey while developing important early childhood skills in a happy environment.",
     },
@@ -50,8 +56,7 @@ const Teacher = () => {
       id: 3,
       name: "Riya Sen",
       role: "Academic Growth Guide",
-      image:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=900&q=80",
+      image: teacher3,
       description:
         "Riya ma’am focuses on building strong learning foundations through phonics, numbers, speaking activities, and concept-based teaching. With personal care and patient support, she helps children improve attention, understanding, social interaction, and readiness for the next stage of school life with confidence and comfort.",
     },
@@ -59,8 +64,7 @@ const Teacher = () => {
       id: 4,
       name: "Pooja Verma",
       role: "Storytelling & Language Coach",
-      image:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+      image: teacher4,
       description:
         "Pooja ma’am brings stories, conversations, and expressive speaking activities into the classroom to help children develop vocabulary, listening skills, imagination, and confidence. Her engaging teaching style makes every learning session lively, interactive, and enjoyable for young learners.",
     },
@@ -68,8 +72,7 @@ const Teacher = () => {
       id: 5,
       name: "Neha Kapoor",
       role: "Art & Activity Teacher",
-      image:
-        "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+      image: teacher5,
       description:
         "Neha ma’am encourages children to explore colors, shapes, crafts, and hands-on creative work through joyful activity sessions. She helps students improve fine motor skills, concentration, self-expression, and imagination while making every classroom moment bright and exciting.",
     },
@@ -77,8 +80,7 @@ const Teacher = () => {
       id: 6,
       name: "Rahul Nanda",
       role: "Play & Development Guide",
-      image:
-        "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+      image: teacher6,
       description:
         "Rahul sir supports children through play-based learning, movement activities, and confidence-building routines that strengthen teamwork, discipline, and social interaction. His caring approach helps every child feel comfortable, active, valued, and motivated to participate with joy.",
     },
@@ -91,30 +93,22 @@ const Teacher = () => {
   const desktopTeachers = useMemo(() => {
     const start = desktopPage * cardsPerPage;
     return teachers.slice(start, start + cardsPerPage);
-  }, [desktopPage, teachers]);
+  }, [desktopPage]);
 
   const handlePrev = () => {
-    setCurrentTeacher((prev) =>
-      prev === 0 ? teachers.length - 1 : prev - 1
-    );
+    setCurrentTeacher((prev) => (prev === 0 ? teachers.length - 1 : prev - 1));
   };
 
   const handleNext = () => {
-    setCurrentTeacher((prev) =>
-      prev === teachers.length - 1 ? 0 : prev + 1
-    );
+    setCurrentTeacher((prev) => (prev === teachers.length - 1 ? 0 : prev + 1));
   };
 
   const handleDesktopPrev = () => {
-    setDesktopPage((prev) =>
-      prev === 0 ? totalDesktopPages - 1 : prev - 1
-    );
+    setDesktopPage((prev) => (prev === 0 ? totalDesktopPages - 1 : prev - 1));
   };
 
   const handleDesktopNext = () => {
-    setDesktopPage((prev) =>
-      prev === totalDesktopPages - 1 ? 0 : prev + 1
-    );
+    setDesktopPage((prev) => (prev === totalDesktopPages - 1 ? 0 : prev + 1));
   };
 
   const renderTeacherCard = (teacher, index, isMobile = false) => (
@@ -177,25 +171,13 @@ const Teacher = () => {
         </p>
 
         <div className={`${base}__socials`}>
-          <a
-            href="/"
-            onClick={(e) => e.preventDefault()}
-            aria-label="Facebook"
-          >
+          <a href="/" onClick={(e) => e.preventDefault()} aria-label="Facebook">
             <FaFacebookF />
           </a>
-          <a
-            href="/"
-            onClick={(e) => e.preventDefault()}
-            aria-label="Twitter"
-          >
+          <a href="/" onClick={(e) => e.preventDefault()} aria-label="Twitter">
             <FaTwitter />
           </a>
-          <a
-            href="/"
-            onClick={(e) => e.preventDefault()}
-            aria-label="LinkedIn"
-          >
+          <a href="/" onClick={(e) => e.preventDefault()} aria-label="LinkedIn">
             <FaLinkedinIn />
           </a>
         </div>
@@ -266,13 +248,9 @@ const Teacher = () => {
 
             <p className={`${base}__desc`}>
               At Dream Flower Pre-School & Day Care, our experienced and caring
-              teachers create a joyful, safe, and inspiring learning
-              environment where every child feels valued, supported, and
-              encouraged to explore. With activity-based teaching, personal
-              attention, and playful classroom experiences, our educators help
-              children develop confidence, communication skills, creativity,
-              discipline, and strong early learning foundations for a bright
-              future.
+              teachers create a joyful, safe, and inspiring learning environment
+              where every child feels valued, supported, and encouraged to
+              explore.
             </p>
           </div>
         </div>
