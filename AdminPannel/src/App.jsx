@@ -9,6 +9,8 @@ import Testimonial from "./Pages/Testimonial/Testimonial";
 import Galleryposting from "./Pages/Galleryposting/Galleryposting";
 import AdmissionTable from "./Pages/AdmissionTable/AdmissionTable";
 import ColdLead from "./Pages/ColdLead/ColdLead";
+import StudentAdmission from "./Pages/StudentAdmission/StudentAdmission";
+import StudentAdmsnDetails from "./Pages/StudentAdmsnDetails/StudentAdmsnDetails";
 
 const App = () => {
   return (
@@ -22,6 +24,8 @@ const App = () => {
           <Route path="/admin/gallery" element={<Galleryposting/>}/>
           <Route path="admin/admission-table" element={<AdmissionTable/>}/>
           <Route path="/admin/cold-lead" element={<ColdLead />} />
+          <Route path="/student/admission" element={<StudentAdmission/>}/>
+          <Route path="/student/admission/details" element={<StudentAdmsnDetails/>}/>
         </Route>
       </Routes>
     </BrowserRouter>
