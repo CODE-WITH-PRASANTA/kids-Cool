@@ -827,10 +827,6 @@
   text-align: center;
 }
 
-/* BUTTON FIX */
-.schoolCampus__cardBtn {
-  bottom: 90px;
-}
 
 /* ===== MOBILE FIX ===== */
 @media (max-width: 767px) {
