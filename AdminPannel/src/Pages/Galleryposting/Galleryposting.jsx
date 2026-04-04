@@ -1,32 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Galleryposting.css";
 
+import API, { IMAGE_URL } from "../../Api/axois";
 
 const Galleryposting = () => {
-  const [gallerypostingForm, setGallerypostingForm] = useState({
+  const [form, setForm] = useState({
     image: null,
     preview: "",
   });
 
-  const [gallerypostingList, setGallerypostingList] = useState([]);
-  const [gallerypostingEditId, setGallerypostingEditId] = useState(null);
-  const [gallerypostingCurrentPage, setGallerypostingCurrentPage] = useState(1);
+  const [list, setList] = useState([]);
+  const [editId, setEditId] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const gallerypostingFileRef = useRef(null);
-  const gallerypostingItemsPerPage = 5;
+  const fileRef = useRef(null);
+  const itemsPerPage = 5;
 
   /* ================= FETCH ================= */
   const fetchGallery = async () => {
     try {
       const res = await API.get("/gallery");
 
-      const data = (res.data.data || []).map((item) => ({
+      const data = res.data.data.map((item) => ({
         id: item._id,
         image: item.image,
-        preview: IMAGE_URL + item.image, // ✅ show image
+        preview: IMAGE_URL + item.image,
       }));
 
-      setGallerypostingList(data);
+      setList(data);
     } catch (err) {
       console.error("FETCH ERROR:", err);
     }
@@ -37,76 +38,50 @@ const Galleryposting = () => {
   }, []);
 
   /* ================= IMAGE CHANGE ================= */
-  const handleGallerypostingImageChange = (e) => {
+  const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
 
-    const imageUrl = URL.createObjectURL(file);
-
-    setGallerypostingForm({
-      image: file, // ✅ send file
-      preview: imageUrl,
+    setForm({
+      image: file,
+      preview: URL.createObjectURL(file),
     });
   };
 
   /* ================= SUBMIT ================= */
-  const handleGallerypostingSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!gallerypostingForm.image && !gallerypostingEditId) {
-      alert("Please upload a gallery image.");
+    if (!form.image && !editId) {
+      alert("Upload image");
       return;
     }
 
+    const formData = new FormData();
+    if (form.image) formData.append("image", form.image);
+
     try {
-      const formData = new FormData();
-
-      if (gallerypostingForm.image) {
-        formData.append("image", gallerypostingForm.image);
-      }
-
-      if (gallerypostingEditId !== null) {
-        await API.put(`/gallery/${gallerypostingEditId}`, formData);
-        setGallerypostingEditId(null);
+      if (editId) {
+        await API.put(`/gallery/${editId}`, formData);
       } else {
         await API.post("/gallery", formData);
       }
 
-      fetchGallery(); // ✅ refresh list
+      fetchGallery();
 
-      setGallerypostingForm({
-        image: null,
-        preview: "",
-      });
+      setForm({ image: null, preview: "" });
+      setEditId(null);
 
-      if (gallerypostingFileRef.current) {
-        gallerypostingFileRef.current.value = "";
-      }
-
-      setGallerypostingCurrentPage(1);
+      if (fileRef.current) fileRef.current.value = "";
+      setCurrentPage(1);
     } catch (err) {
       console.error("SUBMIT ERROR:", err);
     }
   };
 
-  /* ================= EDIT ================= */
-  const handleGallerypostingEdit = (item) => {
-    setGallerypostingForm({
-      image: null,
-      preview: item.preview, // ✅ show existing
-    });
-
-    setGallerypostingEditId(item.id);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
   /* ================= DELETE ================= */
-  const handleGallerypostingDelete = async (id) => {
-    const confirmDelete = window.confirm(
-      "Are you sure you want to delete this image?"
-    );
-
-    if (!confirmDelete) return;
+  const handleDelete = async (id) => {
+    if (!window.confirm("Delete this image?")) return;
 
     try {
       await API.delete(`/gallery/${id}`);
@@ -116,29 +91,38 @@ const Galleryposting = () => {
     }
   };
 
-  /* ================= PAGINATION ================= */
-  const gallerypostingTotalPages =
-    Math.ceil(gallerypostingList.length / gallerypostingItemsPerPage) || 1;
-
-  const gallerypostingStartIndex =
-    (gallerypostingCurrentPage - 1) * gallerypostingItemsPerPage;
-
-  const gallerypostingPaginatedList = gallerypostingList.slice(
-    gallerypostingStartIndex,
-    gallerypostingStartIndex + gallerypostingItemsPerPage
-  );
-
-  const handleGallerypostingPageChange = (page) => {
-    setGallerypostingCurrentPage(page);
+  /* ================= EDIT ================= */
+  const handleEdit = (item) => {
+    setForm({
+      image: null,
+      preview: item.preview,
+    });
+    setEditId(item.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  /* ================= PAGINATION ================= */
+  const totalPages =
+    Math.ceil(list.length / itemsPerPage) || 1;
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+
+  const paginatedList = list.slice(
+    startIndex,
+    startIndex + itemsPerPage
+  );
 
   return (
     <div className="galleryposting">
       <div className="galleryposting__wrapper">
+        
+        {/* LEFT FORM */}
         <div className="galleryposting__left">
           <div className="galleryposting__card">
             <div className="galleryposting__header">
-              <h2 className="galleryposting__title">Gallery Posting Form</h2>
+              <h2 className="galleryposting__title">
+                Gallery Posting Form
+              </h2>
               <p className="galleryposting__subtitle">
                 Upload gallery images for your admin panel.
               </p>
@@ -146,45 +130,47 @@ const Galleryposting = () => {
 
             <form
               className="galleryposting__form"
-              onSubmit={handleGallerypostingSubmit}
+              onSubmit={handleSubmit}
             >
               <div className="galleryposting__formGroup">
                 <label className="galleryposting__label">
-                  Upload Gallery Image
+                  Upload Image
                 </label>
 
                 <input
                   type="file"
-                  accept="image/*"
-                  ref={gallerypostingFileRef}
+                  ref={fileRef}
                   className="galleryposting__fileInput"
-                  onChange={handleGallerypostingImageChange}
+                  onChange={handleImageChange}
                 />
               </div>
 
-              {gallerypostingForm.preview && (
+              {form.preview && (
                 <div className="galleryposting__previewBox">
                   <img
-                    src={gallerypostingForm.preview}
-                    alt="Preview"
+                    src={form.preview}
+                    alt="preview"
                     className="galleryposting__previewImage"
                   />
                 </div>
               )}
 
-              <button type="submit" className="galleryposting__submitBtn">
-                {gallerypostingEditId !== null ? "Update Image" : "Submit"}
+              <button className="galleryposting__submitBtn">
+                {editId ? "Update Image" : "Upload Image"}
               </button>
             </form>
           </div>
         </div>
 
+        {/* RIGHT TABLE */}
         <div className="galleryposting__right">
           <div className="galleryposting__card">
             <div className="galleryposting__header">
-              <h2 className="galleryposting__title">Gallery Posting Table</h2>
+              <h2 className="galleryposting__title">
+                Gallery Table
+              </h2>
               <p className="galleryposting__subtitle">
-                All uploaded gallery images will appear here.
+                All uploaded images appear here.
               </p>
             </div>
 
@@ -193,39 +179,41 @@ const Galleryposting = () => {
                 <thead>
                   <tr>
                     <th>Sl No</th>
-                    <th>Picture</th>
+                    <th>Image</th>
                     <th>Action</th>
                   </tr>
                 </thead>
 
                 <tbody>
-                  {gallerypostingPaginatedList.length > 0 ? (
-                    gallerypostingPaginatedList.map((item, index) => (
+                  {paginatedList.length > 0 ? (
+                    paginatedList.map((item, index) => (
                       <tr key={item.id}>
-                        <td>{gallerypostingStartIndex + index + 1}</td>
+                        <td>{startIndex + index + 1}</td>
+
                         <td>
                           <div className="galleryposting__imageCell">
                             <img
                               src={item.preview}
-                              alt={`Gallery ${gallerypostingStartIndex + index + 1}`}
+                              alt=""
                               className="galleryposting__tableImage"
                             />
                           </div>
                         </td>
+
                         <td>
                           <div className="galleryposting__actionButtons">
                             <button
-                              type="button"
                               className="galleryposting__actionBtn galleryposting__actionBtn--edit"
-                              onClick={() => handleGallerypostingEdit(item)}
+                              onClick={() => handleEdit(item)}
                             >
                               Edit
                             </button>
 
                             <button
-                              type="button"
                               className="galleryposting__actionBtn galleryposting__actionBtn--delete"
-                              onClick={() => handleGallerypostingDelete(item.id)}
+                              onClick={() =>
+                                handleDelete(item.id)
+                              }
                             >
                               Delete
                             </button>
@@ -236,7 +224,7 @@ const Galleryposting = () => {
                   ) : (
                     <tr>
                       <td colSpan="3" className="galleryposting__empty">
-                        No gallery images uploaded yet.
+                        No images uploaded
                       </td>
                     </tr>
                   )}
@@ -244,47 +232,38 @@ const Galleryposting = () => {
               </table>
             </div>
 
-            {gallerypostingList.length > 0 && (
+            {/* PAGINATION */}
+            {list.length > 0 && (
               <div className="galleryposting__pagination">
                 <button
                   className="galleryposting__pageBtn"
+                  disabled={currentPage === 1}
                   onClick={() =>
-                    handleGallerypostingPageChange(
-                      gallerypostingCurrentPage > 1
-                        ? gallerypostingCurrentPage - 1
-                        : 1
-                    )
+                    setCurrentPage((prev) => prev - 1)
                   }
-                  disabled={gallerypostingCurrentPage === 1}
                 >
                   Prev
                 </button>
 
-                {Array.from({ length: gallerypostingTotalPages }, (_, index) => (
+                {Array.from({ length: totalPages }).map((_, i) => (
                   <button
-                    key={index + 1}
+                    key={i}
                     className={`galleryposting__pageBtn ${
-                      gallerypostingCurrentPage === index + 1
+                      currentPage === i + 1
                         ? "galleryposting__pageBtn--active"
                         : ""
                     }`}
-                    onClick={() => handleGallerypostingPageChange(index + 1)}
+                    onClick={() => setCurrentPage(i + 1)}
                   >
-                    {index + 1}
+                    {i + 1}
                   </button>
                 ))}
 
                 <button
                   className="galleryposting__pageBtn"
+                  disabled={currentPage === totalPages}
                   onClick={() =>
-                    handleGallerypostingPageChange(
-                      gallerypostingCurrentPage < gallerypostingTotalPages
-                        ? gallerypostingCurrentPage + 1
-                        : gallerypostingTotalPages
-                    )
-                  }
-                  disabled={
-                    gallerypostingCurrentPage === gallerypostingTotalPages
+                    setCurrentPage((prev) => prev + 1)
                   }
                 >
                   Next
@@ -293,6 +272,7 @@ const Galleryposting = () => {
             )}
           </div>
         </div>
+
       </div>
     </div>
   );
