@@ -13,6 +13,8 @@ import ColdLeadTable from "./Pages/ColdLeadTable/ColdLeadTable";
 import FeeCollection from "./Pages/FeeCollection/FeeCollection";
 import FeeType from "./Pages/FeeType/FeeType";
 
+import StudentAdmission from "./Pages/StudentAdmission/StudentAdmission";
+import StudentAdmsnDetails from "./Pages/StudentAdmsnDetails/StudentAdmsnDetails";
 
 const App = () => {
   return (
@@ -29,6 +31,8 @@ const App = () => {
           <Route path="/admin/cold-lead-table" element={<ColdLeadTable/>}/>
           <Route path="/fee-collect" element={<FeeCollection/>}/>
           <Route path="/fee-type" element={<FeeType/>}/>
+          <Route path="/student/admission" element={<StudentAdmission/>}/>
+          <Route path="/student/admission/details" element={<StudentAdmsnDetails/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

@@ -127,17 +127,23 @@ export default function Footer() {
       <img src={Hands} alt="Kids hands decoration" className="ft-hands" />
 
       {/* bottom */}
-      <div className="ft-bottom">
-        <p>
-          © 2026 Dream Flower Pre School & Day Care, Bhubaneswar. Best pre
-          school for Play, Nursery, LKG and UKG near Rasulgarh.
-        </p>
+     <div className="ft-bottom">
+            <p>
+              © {new Date().getFullYear()} Dream Flower Pre School  All Rights Reserved.
+            </p>
 
-        <div>
-          Contact: 8280547763 | 8926006166 <br />
-          GGP Bank Colony, Canal Road, Rasulgarh, Bhubaneswar
-        </div>
-      </div>
+            <p>
+              Developed with ❤️ by{" "}
+              <a 
+                href="https://prwebstock.com" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="ft-dev-link"
+              >
+                PR WEBSTOCK
+              </a>
+            </p>
+          </div>
     </footer>
   );
 }
