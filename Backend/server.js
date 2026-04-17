@@ -6,6 +6,11 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const galleryRoutes = require("./routes/gallery.routes");
 const coldLeadRoutes = require("./routes/coldLeadRoutes");
+const newsRoutes = require("./routes/news.routes");
+const teacherRoutes = require("./routes/teacher.routes");
+const testimonialRoutes = require("./routes/testimonial.routes");
+
+
 
 // ================= CONFIG =================
 dotenv.config();
@@ -35,6 +40,13 @@ app.get("/", (req, res) => {
 // ================= API ROUTES =================
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/cold-leads", coldLeadRoutes);
+app.use("/api/news", newsRoutes);
+app.use("/api/teachers", teacherRoutes);
+app.use("/api/testimonials", testimonialRoutes);
+
+
+
+
 
 // ================= 404 HANDLER =================
 app.use((req, res) => {
@@ -60,3 +72,30 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

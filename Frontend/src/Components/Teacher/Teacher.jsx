@@ -10,6 +10,27 @@ const Teacher = () => {
   const sectionRef = useRef(null);
   const [visible, setVisible] = useState(false);
 
+  const [teachers, setTeachers] = useState([]);
+
+  useEffect(() => {
+    const fetchTeachers = async () => {
+      try {
+        const res = await API.get("/teachers");
+
+        // show only active teachers
+        const filtered = (res.data.data || []).filter(
+          (t) => t.status === "Active",
+        );
+
+        setTeachers(filtered);
+      } catch (err) {
+        console.log("FETCH ERROR:", err);
+      }
+    };
+
+    fetchTeachers();
+  }, []);
+
   useEffect(() => {
     const current = sectionRef.current;
     if (!current) return;
@@ -21,7 +42,7 @@ const Teacher = () => {
           observer.unobserve(current);
         }
       },
-      { threshold: 0.14 }
+      { threshold: 0.14 },
     );
 
     observer.observe(current);
@@ -49,7 +70,7 @@ const Teacher = () => {
 
   const renderTeacherCard = (teacher, index) => (
     <article
-      key={teacher.id}
+      key={teacher._id}
       className={`${base}__card ${
         visible ? `${base}__card--visible` : ""
       }`}
@@ -61,7 +82,14 @@ const Teacher = () => {
         ></span>
 
         <div className={`${base}__imageBlob`}>
-          <img src={teacher.image} alt={teacher.name} />
+          <img
+            src={
+              teacher.image
+                ? IMAGE_URL + teacher.image
+                : "https://via.placeholder.com/300"
+            }
+            alt={teacher.name}
+          />
         </div>
       </div>
 

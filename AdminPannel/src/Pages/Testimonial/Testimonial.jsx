@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Testimonial.css";
+import API, { IMAGE_URL } from "../../Api/axois";
 
 import {
   FaQuoteLeft,
@@ -30,6 +31,7 @@ const Testimonial = () => {
   const [testimonials, setTestimonials] = useState([]);
   const [editId, setEditId] = useState(null);
   const [openMenu, setOpenMenu] = useState(null);
+  const [imageFile, setImageFile] = useState(null);
 
   /* ================= FETCH ================= */
   const fetchTestimonials = async () => {
@@ -50,12 +52,18 @@ const Testimonial = () => {
     return {
       parentName: form.parentName || "Parent Name",
       reviewText:
-        form.reviewText ||
-        "Your testimonial preview will appear here.",
+        form.reviewText || "Your testimonial preview will appear here.",
       rating: Number(form.rating) || 5,
       status: form.status || "Active",
     };
   }, [form]);
+
+  const handleImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setImageFile(file);
+  };
 
   /* ================= FORM ================= */
   const handleChange = (e) => {
@@ -71,14 +79,26 @@ const Testimonial = () => {
     e.preventDefault();
 
     try {
-      if (editId) {
-        await API.put(`/testimonials/${editId}`, form);
-      } else {
-        await API.post("/testimonials", form);
+      const formData = new FormData();
+
+      formData.append("parentName", form.parentName);
+      formData.append("reviewText", form.reviewText);
+      formData.append("rating", form.rating);
+      formData.append("status", form.status);
+
+      if (imageFile) {
+        formData.append("image", imageFile);
       }
 
-      fetchTestimonials(); // ✅ refresh
+      if (editId) {
+        await API.put(`/testimonials/${editId}`, formData);
+      } else {
+        await API.post("/testimonials", formData);
+      }
+
+      fetchTestimonials();
       setForm(initialForm);
+      setImageFile(null);
       setEditId(null);
     } catch (err) {
       console.error("SUBMIT ERROR:", err);
@@ -138,6 +158,10 @@ const Testimonial = () => {
           </div>
 
           <form className={`${base}__form`} onSubmit={handleSubmit}>
+            <div className={`${base}__formGroup`}>
+              <label>Upload Image</label>
+              <input type="file" accept="image/*" onChange={handleImage} />
+            </div>
             <div className={`${base}__formGroup`}>
               <label>Parent Name</label>
               <input
@@ -208,9 +232,7 @@ const Testimonial = () => {
         {/* PREVIEW SAME */}
         <div className={`${base}__card`}>
           <div className={`${base}__previewCard`}>
-            <p className={`${base}__previewText`}>
-              {previewData.reviewText}
-            </p>
+            <p className={`${base}__previewText`}>{previewData.reviewText}</p>
 
             <div className={`${base}__previewBottom`}>
               <div className={`${base}__quoteIcon`}>
@@ -234,6 +256,7 @@ const Testimonial = () => {
           <table className={`${base}__table`}>
             <thead>
               <tr>
+                <th>Image</th>
                 <th>Parent Name</th>
                 <th>Review Text</th>
                 <th>Rating</th>
@@ -246,6 +269,20 @@ const Testimonial = () => {
               {testimonials.length > 0 ? (
                 testimonials.map((item) => (
                   <tr key={item._id}>
+                    <td>
+                      <img
+                        src={
+                          item.image
+                            ? IMAGE_URL + item.image
+                            : "https://via.placeholder.com/80"
+                        }
+                        style={{
+                          width: "50px",
+                          height: "50px",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </td>
                     <td>{item.parentName}</td>
                     <td>{item.reviewText}</td>
                     <td>{item.rating} Star</td>

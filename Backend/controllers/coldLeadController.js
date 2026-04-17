@@ -36,6 +36,7 @@ const createColdLead = async (req, res) => {
       childName: childName?.trim() || "",
       classInterested: classInterested?.trim() || "",
       message: message.trim(),
+      feedback: "", // ✅ default
     });
 
     return res.status(201).json({
@@ -100,7 +101,7 @@ const getSingleColdLead = async (req, res) => {
   }
 };
 
-// @desc    Update cold lead
+// @desc    Update cold lead (FULL UPDATE + FEEDBACK SUPPORT)
 // @route   PUT /api/cold-leads/:id
 // @access  Public
 const updateColdLead = async (req, res) => {
@@ -113,31 +114,26 @@ const updateColdLead = async (req, res) => {
       childName,
       classInterested,
       message,
+      feedback, // ✅ added
     } = req.body;
-
-    if (
-      !parentStudentName?.trim() ||
-      !addressCity?.trim() ||
-      !phoneNumber?.trim() ||
-      !message?.trim()
-    ) {
-      return res.status(400).json({
-        success: false,
-        message:
-          "Parent / Student Name, Address / City, Phone Number and Message are required.",
-      });
-    }
 
     const updatedColdLead = await ColdLead.findByIdAndUpdate(
       req.params.id,
       {
-        parentStudentName: parentStudentName.trim(),
-        addressCity: addressCity.trim(),
-        phoneNumber: phoneNumber.trim(),
-        email: email?.trim() || "",
-        childName: childName?.trim() || "",
-        classInterested: classInterested?.trim() || "",
-        message: message.trim(),
+        ...(parentStudentName && {
+          parentStudentName: parentStudentName.trim(),
+        }),
+        ...(addressCity && { addressCity: addressCity.trim() }),
+        ...(phoneNumber && { phoneNumber: phoneNumber.trim() }),
+        ...(email !== undefined && { email: email.trim() }),
+        ...(childName !== undefined && { childName: childName.trim() }),
+        ...(classInterested !== undefined && {
+          classInterested: classInterested.trim(),
+        }),
+        ...(message && { message: message.trim() }),
+        ...(feedback !== undefined && {
+          feedback: feedback.trim(),
+        }), // ✅ important
       },
       {
         new: true,
@@ -161,6 +157,47 @@ const updateColdLead = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to update cold lead.",
+      error: error.message,
+    });
+  }
+};
+
+// @desc    Update ONLY feedback (BEST PRACTICE)
+// @route   PUT /api/cold-leads/:id/feedback
+// @access  Public
+const updateFeedback = async (req, res) => {
+  try {
+    const { feedback } = req.body;
+
+    if (!feedback?.trim()) {
+      return res.status(400).json({
+        success: false,
+        message: "Feedback is required",
+      });
+    }
+
+    const updated = await ColdLead.findByIdAndUpdate(
+      req.params.id,
+      { feedback: feedback.trim() },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({
+        success: false,
+        message: "Cold lead not found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Feedback updated successfully",
+      data: updated,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to update feedback",
       error: error.message,
     });
   }
@@ -198,5 +235,6 @@ module.exports = {
   getAllColdLeads,
   getSingleColdLead,
   updateColdLead,
+  updateFeedback, // ✅ NEW EXPORT
   deleteColdLead,
 };
