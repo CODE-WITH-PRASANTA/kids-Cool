@@ -6,6 +6,17 @@ import img2 from "../../assets/img-1.jpeg";
 import img3 from "../../assets/img-3.jpeg";
 import img4 from "../../assets/img-4.jpeg";
 import img5 from "../../assets/img-5.jpeg";
+import DreamG1 from "../../assets/DreamG1.webp";
+import DreamG2 from "../../assets/DreamG2.webp";
+import DreamG3 from "../../assets/DreamG3.webp";
+import DreamG4 from "../../assets/DreamG4.webp";
+import DreamG5 from "../../assets/DreamG5.webp";
+import DreamG6 from "../../assets/DreamG6.webp";
+import DreamG7 from "../../assets/DreamG7.webp";
+import DreamG8 from "../../assets/DreamG8.webp";
+import DreamG9 from "../../assets/DreamG9.webp";
+import DreamG10 from "../../assets/DreamG10.webp";
+
 import pencilGirl from "../../assets/pencile.webp";
 import pencilBoy from "../../assets/pencileboy.webp";
 
@@ -56,29 +67,66 @@ const Education = () => {
 
   const rightGalleryImages = [
     {
-      id: 2,
-      image: img2,
+      id: 1,
+      image: DreamG1,
       alt: "Dream Flower Pre-School & Day Care Bhubaneswar classroom activity",
       className: `${base}__card ${base}__card--rightGrid`,
     },
     {
-      id: 3,
-      image: img3,
+      id: 2,
+      image: DreamG2,
       alt: "Kids outdoor play at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--rightGrid`,
     },
     {
-      id: 4,
-      image: img4,
+      id: 3,
+      image: DreamG3,
       alt: "Teacher guiding children at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--rightGrid`,
     },
     {
-      id: 5,
-      image: img5,
+      id: 4,
+      image: DreamG4,
       alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
       className: `${base}__card ${base}__card--rightGrid`,
     },
+     {
+      id: 5,
+      image: DreamG5,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+     {
+      id: 6,
+      image: DreamG6,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+     {
+      id: 7,
+      image: DreamG7,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+     {
+      id: 8,
+      image: DreamG8,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+     {
+      id: 9,
+      image: DreamG9,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+     {
+      id: 10,
+      image: DreamG10,
+      alt: "Group learning at Dream Flower Pre-School & Day Care Bhubaneswar",
+      className: `${base}__card ${base}__card--rightGrid`,
+    },
+
   ];
 
   const totalRightPages = Math.ceil(rightGalleryImages.length / imagesPerPage);
