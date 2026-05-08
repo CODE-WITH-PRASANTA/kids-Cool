@@ -736,3 +736,108 @@
     font-size: 13px;
   }
 }
+
+.teacherSection {
+  background: #f6f6f6;
+  padding: 80px 0;
+}
+
+.teacherSection__container {
+  width: min(1100px, 95%);
+  margin: auto;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+}
+
+/* HEADER */
+.teacherSection__title {
+  font-size: 42px;
+  font-weight: 900;
+}
+
+.teacherSection__subTitle {
+  color: #ff4f7d;
+  font-weight: 700;
+}
+
+.teacherSection__desc {
+  max-width: 600px;
+  margin: auto;
+  color: #666;
+}
+
+/* GRID CENTERED */
+.teacherSection__grid {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 50px;
+}
+
+/* CARD */
+.teacherSection__card {
+  max-width: 380px;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: 0.6s ease;
+}
+
+.teacherSection__card--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* IMAGE */
+.teacherSection__imageWrap {
+  position: relative;
+}
+
+.teacherSection__imageBlob {
+  width: 300px;
+  height: 230px;
+  margin: auto;
+  overflow: hidden;
+  border-radius: 30px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.teacherSection__imageBlob img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* TEXT */
+.teacherSection__role {
+  color: #ff4f7d;
+  font-weight: 700;
+  margin-top: 20px;
+}
+
+.teacherSection__name {
+  font-size: 24px;
+  color: #16b8b7;
+}
+
+.teacherSection__text {
+  color: #666;
+  font-size: 15px;
+  margin-top: 10px;
+}
+
+/* SOCIAL */
+.teacherSection__socials {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.teacherSection__socials a {
+  background: #ff4f7d;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}

@@ -1,13 +1,14 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./ColdLeadTable.css";
-
+import API from "../../Api/axois";
 
 const ColdLeadTable = () => {
   const [coldLeadTableList, setColdLeadTableList] = useState([]);
   const [coldLeadTableCurrentPage, setColdLeadTableCurrentPage] = useState(1);
   const [coldLeadTablePopupOpen, setColdLeadTablePopupOpen] = useState(false);
   const [coldLeadTableSelectedId, setColdLeadTableSelectedId] = useState(null);
-  const [coldLeadTableFeedbackText, setColdLeadTableFeedbackText] = useState("");
+  const [coldLeadTableFeedbackText, setColdLeadTableFeedbackText] =
+    useState("");
 
   const coldLeadTableItemsPerPage = 8;
 
@@ -15,7 +16,7 @@ const ColdLeadTable = () => {
   useEffect(() => {
     const fetchLeads = async () => {
       try {
-        const res = await API.get("/enquiries");
+        const res = await API.get("/cold-leads");
         setColdLeadTableList(res.data.data || []);
       } catch (error) {
         console.error("FETCH ERROR:", error);
@@ -25,7 +26,7 @@ const ColdLeadTable = () => {
   }, []);
 
   const handleColdLeadTableEdit = (item) => {
-    alert(`Edit clicked for ${item.name}`);
+    alert(`Edit clicked for ${item.parentStudentName}`);
   };
 
   /* ================= DELETE ================= */
@@ -37,7 +38,7 @@ const ColdLeadTable = () => {
     if (!confirmDelete) return;
 
     try {
-      await API.delete(`/enquiries/${id}`);
+      await API.delete(`/cold-leads/${id}`);
 
       const updatedList = coldLeadTableList.filter(
         (item) => item._id !== id
@@ -57,7 +58,7 @@ const ColdLeadTable = () => {
 
   /* ================= OPEN FEEDBACK ================= */
   const handleColdLeadTableOpenFeedback = (item) => {
-    setColdLeadTableSelectedId(item._id); // ✅ FIXED
+    setColdLeadTableSelectedId(item._id);
     setColdLeadTableFeedbackText(item.feedback || "");
     setColdLeadTablePopupOpen(true);
   };
@@ -81,7 +82,7 @@ const ColdLeadTable = () => {
 
     try {
       const res = await API.put(
-        `/enquiries/${coldLeadTableSelectedId}/feedback`,
+        `/cold-leads/${coldLeadTableSelectedId}`,
         { feedback: coldLeadTableFeedbackText }
       );
 
@@ -145,22 +146,14 @@ const ColdLeadTable = () => {
                 coldLeadTablePaginatedList.map((item, index) => (
                   <tr key={item._id}>
                     <td>{coldLeadTableStartIndex + index + 1}</td>
-                    <td>{item.name}</td>
-                    <td>{item.address}</td>
+                    <td>{item.parentStudentName}</td>
+                    <td>{item.addressCity}</td>
                     <td className="coldLeadTable__feedbackCell">
                       {item.feedback || "No feedback added"}
                     </td>
-                    <td>{item.phone}</td>
+                    <td>{item.phoneNumber}</td>
                     <td>
                       <div className="coldLeadTable__actionButtons">
-                        {/* <button
-                          type="button"
-                          className="coldLeadTable__actionBtn coldLeadTable__actionBtn--edit"
-                          onClick={() => handleColdLeadTableEdit(item)}
-                        >
-                          Edit
-                        </button> */}
-
                         <button
                           type="button"
                           className="coldLeadTable__actionBtn coldLeadTable__actionBtn--delete"
@@ -174,7 +167,9 @@ const ColdLeadTable = () => {
                         <button
                           type="button"
                           className="coldLeadTable__actionBtn coldLeadTable__actionBtn--feedback"
-                          onClick={() => handleColdLeadTableOpenFeedback(item)}
+                          onClick={() =>
+                            handleColdLeadTableOpenFeedback(item)
+                          }
                         >
                           Feedback
                         </button>
@@ -217,7 +212,9 @@ const ColdLeadTable = () => {
                     ? "coldLeadTable__pageBtn--active"
                     : ""
                 }`}
-                onClick={() => handleColdLeadTablePageChange(index + 1)}
+                onClick={() =>
+                  handleColdLeadTablePageChange(index + 1)
+                }
               >
                 {index + 1}
               </button>
@@ -232,7 +229,9 @@ const ColdLeadTable = () => {
                     : coldLeadTableTotalPages
                 )
               }
-              disabled={coldLeadTableCurrentPage === coldLeadTableTotalPages}
+              disabled={
+                coldLeadTableCurrentPage === coldLeadTableTotalPages
+              }
             >
               Next
             </button>
@@ -240,19 +239,25 @@ const ColdLeadTable = () => {
         )}
       </div>
 
-      {/* POPUP (UNCHANGED UI) */}
+      {/* POPUP */}
       <div
         className={`coldLeadTable__popupOverlay ${
-          coldLeadTablePopupOpen ? "coldLeadTable__popupOverlay--show" : ""
+          coldLeadTablePopupOpen
+            ? "coldLeadTable__popupOverlay--show"
+            : ""
         }`}
       >
         <div
           className={`coldLeadTable__popup ${
-            coldLeadTablePopupOpen ? "coldLeadTable__popup--show" : ""
+            coldLeadTablePopupOpen
+              ? "coldLeadTable__popup--show"
+              : ""
           }`}
         >
           <div className="coldLeadTable__popupHeader">
-            <h3 className="coldLeadTable__popupTitle">Feedback Form</h3>
+            <h3 className="coldLeadTable__popupTitle">
+              Feedback Form
+            </h3>
             <button
               type="button"
               className="coldLeadTable__popupClose"
@@ -264,11 +269,15 @@ const ColdLeadTable = () => {
 
           <form onSubmit={handleColdLeadTableFeedbackSubmit}>
             <div className="coldLeadTable__popupGroup">
-              <label className="coldLeadTable__popupLabel">Feedback</label>
+              <label className="coldLeadTable__popupLabel">
+                Feedback
+              </label>
               <textarea
                 className="coldLeadTable__popupTextarea"
                 value={coldLeadTableFeedbackText}
-                onChange={(e) => setColdLeadTableFeedbackText(e.target.value)}
+                onChange={(e) =>
+                  setColdLeadTableFeedbackText(e.target.value)
+                }
                 rows="5"
               />
             </div>

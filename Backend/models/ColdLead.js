@@ -37,6 +37,13 @@ const coldLeadSchema = new mongoose.Schema(
       required: [true, "Message is required"],
       trim: true,
     },
+
+    // ✅ NEW FIELD
+    feedback: {
+      type: String,
+      trim: true,
+      default: "",
+    },
   },
   {
     timestamps: true,

@@ -1,67 +1,44 @@
 import React, { useEffect, useMemo, useState } from "react";
 import "./Testimonial.css";
 import { FaStar } from "react-icons/fa";
+import API, { IMAGE_URL } from "../../api/axios";
 
 const Testimonial = () => {
   const base = "testimonialSection";
 
-  const testimonials = useMemo(
-    () => [
-      {
-        id: 1,
-        name: "Mrs. Priya Sharma",
-        role: "Happy Mother",
-        image:
-          "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=500&q=80",
-        text: "Dream Flower Pre School has given my child a joyful, safe, and inspiring place to learn, play, and grow every day. The teachers are caring, patient, and full of positive energy. Through creative activities, playful classroom learning, and personal attention, I have seen a beautiful improvement in my child’s confidence, communication, creativity, and social development.",
-      },
-      {
-        id: 2,
-        name: "Mr. Ankit Verma",
-        role: "Parent",
-        image:
-          "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=500&q=80",
-        text: "We wanted a school that combines fun, care, values, and strong early learning, and Dream Flower Pre School truly exceeded our expectations. The environment is warm, colorful, and welcoming, and the teaching approach is engaging and child-friendly. My child feels excited to go to school every single day and comes home with new stories, smiles, and learning experiences.",
-      },
-      {
-        id: 3,
-        name: "Mrs. Sneha Das",
-        role: "Working Mother",
-        image:
-          "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=500&q=80",
-        text: "The best part about Dream Flower Pre School is the individual care and attention each child receives. The teachers are supportive, affectionate, and truly dedicated to early childhood development. The school creates a second home for children where they feel safe, happy, expressive, and motivated to learn through activities, stories, and joyful classroom interaction.",
-      },
-      {
-        id: 4,
-        name: "Mr. Rahul Nanda",
-        role: "Guardian",
-        image:
-          "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
-        text: "From creative classroom activities to interactive teaching methods, everything at Dream Flower Pre School is designed with great care and thoughtfulness. My child has become more expressive, active, independent, and eager to explore new things. It is wonderful to see such a positive environment where learning feels joyful, natural, and exciting for young children.",
-      },
-      {
-        id: 5,
-        name: "Mrs. Pooja Mishra",
-        role: "Parent",
-        image:
-          "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=500&q=80",
-        text: "Dream Flower Pre School offers the perfect balance of education, care, values, and fun. The teachers build strong learning habits along with confidence, discipline, and kindness. The school atmosphere is full of positivity, warmth, and encouragement, and we are truly happy and proud to be a part of this beautiful learning journey for our child.",
-      },
-    ],
-    []
-  );
-
   const [activeIndex, setActiveIndex] = useState(0);
-  const activeTestimonial = testimonials[activeIndex];
+  const [testimonials, setTestimonials] = useState([]);
+  const activeTestimonial = testimonials[activeIndex] || {};
 
   useEffect(() => {
+    const fetchTestimonials = async () => {
+      try {
+        const res = await API.get("/testimonials");
+
+        const filtered = (res.data.data || []).filter(
+          (item) => item.status === "Active",
+        );
+
+        setTestimonials(filtered);
+      } catch (err) {
+        console.error("FETCH ERROR:", err);
+      }
+    };
+
+    fetchTestimonials();
+  }, []);
+
+  useEffect(() => {
+    if (testimonials.length === 0) return;
+
     const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      setActiveIndex((prev) =>
+        prev === testimonials.length - 1 ? 0 : prev + 1,
+      );
     }, 3500);
 
     return () => clearInterval(interval);
-  }, [testimonials.length]);
-
+  }, [testimonials]);
   return (
     <section className={base}>
       <div className={`${base}__container`}>
@@ -76,11 +53,19 @@ const Testimonial = () => {
           </h2>
 
           <p className={`${base}__description`}>
-           At Dream Flower Pre-School & Day Care Bhubaneswar, we provide a nurturing and joyful environment where children feel safe, valued, and excited to learn. Through storytelling, art, music, and playful activities, we build confidence, creativity, and strong early learning foundations for every child. 🌸📚✨
+            At Dream Flower Pre-School & Day Care Bhubaneswar, we provide a
+            nurturing and joyful environment where children feel safe, valued,
+            and excited to learn. Through storytelling, art, music, and playful
+            activities, we build confidence, creativity, and strong early
+            learning foundations for every child. 🌸📚✨
           </p>
 
           <p className={`${base}__description ${base}__description--extra`}>
-            At Dream Flower Pre-School & Day Care Bhubaneswar, we make early education fun through storytelling, art, music, movement, and interactive learning. Every activity is designed to build confidence, creativity, and a strong foundation for a bright future. ✨
+            At Dream Flower Pre-School & Day Care Bhubaneswar, we make early
+            education fun through storytelling, art, music, movement, and
+            interactive learning. Every activity is designed to build
+            confidence, creativity, and a strong foundation for a bright future.
+            ✨
           </p>
 
           <div className={`${base}__dashed-arrow`}></div>
@@ -104,7 +89,7 @@ const Testimonial = () => {
           <span className={`${base}__bug ${base}__bug--left`}>🕷️</span>
           <span className={`${base}__bug ${base}__bug--right`}>🕷️</span>
 
-          <div className={`${base}__card`} key={activeTestimonial.id}>
+          <div className={`${base}__card`} key={activeTestimonial._id}>
             <div className={`${base}__grass`}></div>
             <div className={`${base}__flowers`}></div>
 
@@ -114,23 +99,25 @@ const Testimonial = () => {
               ))}
             </div>
 
-            <p className={`${base}__text`}>{activeTestimonial.text}</p>
+            <p className={`${base}__text`}>{activeTestimonial.reviewText}</p>
 
             <div className={`${base}__dots`}>.....</div>
 
             <div className={`${base}__author-block`}>
               <h3 className={`${base}__author-name`}>
-                - {activeTestimonial.name}
+                - {activeTestimonial.parentName}
               </h3>
-              <p className={`${base}__author-role`}>
-                {activeTestimonial.role}
-              </p>
+              <p className={`${base}__author-role`}>Parent</p>
             </div>
 
             <div className={`${base}__avatar-ring`}>
               <img
-                src={activeTestimonial.image}
-                alt={activeTestimonial.name}
+                src={
+                  activeTestimonial.image
+                    ? IMAGE_URL + activeTestimonial.image
+                    : "https://images.unsplash.com/photo-1494790108377-be9c29b29330"
+                }
+               alt={activeTestimonial.parentName}
                 className={`${base}__avatar`}
               />
             </div>
@@ -170,7 +157,9 @@ const Testimonial = () => {
               special.
             </p>
 
-            <p className={`${base}__newsletter-text ${base}__newsletter-text--extra`}>
+            <p
+              className={`${base}__newsletter-text ${base}__newsletter-text--extra`}
+            >
               From creative events and fun learning sessions to important school
               announcements and child development highlights, our updates help
               parents stay close to every beautiful step of their child’s early

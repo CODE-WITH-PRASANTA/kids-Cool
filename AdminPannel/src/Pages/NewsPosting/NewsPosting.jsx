@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./NewsPosting.css";
+import API, { IMAGE_URL } from "../../Api/axois"; // ✅ FIXED
 
 import {
   FaCalendarAlt,
@@ -9,7 +9,6 @@ import {
   FaTrash,
   FaPlus,
   FaTimes,
-  FaImage,
   FaStar,
   FaToggleOn,
   FaToggleOff,
@@ -36,6 +35,7 @@ const NewsPosting = () => {
   const [viewPost, setViewPost] = useState(null);
   const [posts, setPosts] = useState([]);
 
+  /* ================= FETCH ================= */
   useEffect(() => {
     const fetchNews = async () => {
       try {
@@ -49,6 +49,7 @@ const NewsPosting = () => {
     fetchNews();
   }, []);
 
+  /* ================= FORMAT ================= */
   const formatDate = (dateStr) => {
     if (!dateStr) return "12 January 2026";
     const date = new Date(dateStr);
@@ -64,32 +65,26 @@ const NewsPosting = () => {
     return text.length > max ? `${text.slice(0, max)}...` : text;
   };
 
+  /* ================= PREVIEW ================= */
   const displayPreview = useMemo(
     () => ({
       image:
         previewImage ||
-        (typeof form.image === "string" && form.image
-          ? IMAGE_URL + form.image
-          : "") ||
-        "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=80",
+        (form.image ? IMAGE_URL + form.image : "") ||
+        "https://images.unsplash.com/photo-1509062522246-3755977927d7",
 
       date: formatDate(form.date),
-
       title: form.title || "New Academic Session Admissions Open",
-
       description: truncateText(form.description),
-
-      buttonText: form.buttonText || "Read More",
-
+      buttonText: form.buttonText,
       featured: form.featured,
-
       status: form.status,
-
       link: form.link,
     }),
     [form, previewImage],
   );
 
+  /* ================= HANDLE ================= */
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setForm((prev) => ({
@@ -98,30 +93,13 @@ const NewsPosting = () => {
     }));
   };
 
-  const handleImage = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    const imageUrl = URL.createObjectURL(file);
-    setPreviewImage(imageUrl);
-    setForm((prev) => ({
-      ...prev,
-      image: file, // ✅ IMPORTANT
-    }));
-  };
-
+  /* ================= SUBMIT ================= */
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const formData = new FormData();
-
-    Object.keys(form).forEach((key) => {
-      formData.append(key, form[key]);
-    });
-
     try {
       if (editId) {
-        const res = await API.put(`/news/${editId}`, formData);
+        const res = await API.put(`/news/${editId}`, form);
 
         setPosts((prev) =>
           prev.map((item) => (item._id === editId ? res.data.data : item)),
@@ -129,7 +107,7 @@ const NewsPosting = () => {
 
         setEditId(null);
       } else {
-        const res = await API.post("/news", formData);
+        const res = await API.post("/news", form);
         setPosts((prev) => [...prev, res.data.data]);
       }
 
@@ -139,6 +117,7 @@ const NewsPosting = () => {
       console.error("SUBMIT ERROR:", err);
     }
   };
+
   const handleClear = () => {
     setForm(initialForm);
     setPreviewImage("");
@@ -147,7 +126,7 @@ const NewsPosting = () => {
 
   const handleEdit = (post) => {
     setForm(post);
-    setPreviewImage(IMAGE_URL + post.image);
+    setPreviewImage(post.image ? IMAGE_URL + post.image : "");
     setEditId(post._id);
   };
 
@@ -159,6 +138,7 @@ const NewsPosting = () => {
       console.error("DELETE ERROR:", err);
     }
   };
+
   const handleToggleStatus = async (id) => {
     try {
       const res = await API.put(`/news/${id}/status`);
@@ -194,7 +174,7 @@ const NewsPosting = () => {
             </div>
 
             <form className={`${base}__form`} onSubmit={handleSubmit}>
-              <div className={`${base}__formGroup`}>
+              {/* <div className={`${base}__formGroup`}>
                 <label>Upload Image</label>
                 <label className={`${base}__uploadBox`}>
                   <input type="file" accept="image/*" onChange={handleImage} />
@@ -207,7 +187,7 @@ const NewsPosting = () => {
                     </span>
                   </div>
                 </label>
-              </div>
+              </div> */}
 
               <div className={`${base}__formRow`}>
                 <div className={`${base}__formGroup`}>
@@ -255,7 +235,7 @@ const NewsPosting = () => {
               </div>
 
               <div className={`${base}__formRow`}>
-                <div className={`${base}__formGroup`}>
+                {/* <div className={`${base}__formGroup`}>
                   <label>Button Text</label>
                   <input
                     type="text"
@@ -264,7 +244,7 @@ const NewsPosting = () => {
                     onChange={handleChange}
                     placeholder="Read More"
                   />
-                </div>
+                </div> */}
 
                 <div className={`${base}__formGroup`}>
                   <label>Status</label>
@@ -279,7 +259,7 @@ const NewsPosting = () => {
                 </div>
               </div>
 
-              <div className={`${base}__formGroup`}>
+              {/* <div className={`${base}__formGroup`}>
                 <label>Read More Link</label>
                 <input
                   type="url"
@@ -288,7 +268,7 @@ const NewsPosting = () => {
                   onChange={handleChange}
                   placeholder="Enter redirect link"
                 />
-              </div>
+              </div> */}
 
               <div className={`${base}__toggleRow`}>
                 <label className={`${base}__checkboxWrap`}>

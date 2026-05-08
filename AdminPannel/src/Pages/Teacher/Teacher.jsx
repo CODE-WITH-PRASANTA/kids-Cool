@@ -1,6 +1,8 @@
 import React, { useMemo, useState, useEffect } from "react";
 import "./Teacher.css";
 
+import API, { IMAGE_URL } from "../../Api/axois"; // ✅ FIXED
+
 import {
   FaFacebookF,
   FaInstagram,
@@ -64,7 +66,7 @@ const Teacher = () => {
       phone: form.phone || "+91 7016201096",
       status: form.status,
     }),
-    [form, previewImage]
+    [form, previewImage],
   );
 
   /* ================= CHANGE ================= */
@@ -153,18 +155,20 @@ const Teacher = () => {
   };
 
   const sortedTeachers = [...teachers].sort(
-    (a, b) => Number(a.order) - Number(b.order)
+    (a, b) => Number(a.order) - Number(b.order),
   );
 
   return (
     <section className={base}>
+      {/* ✅ UI COMPLETELY SAME */}
+      {/* NO CHANGE BELOW */}
       <div className={`${base}__header`}>
         <div>
           <p className={`${base}__eyebrow`}>Admin Panel</p>
           <h2>Teacher Post Management</h2>
           <p className={`${base}__subtext`}>
-            Add teacher profiles, preview the frontend design, and manage teacher
-            cards from one place.
+            Add teacher profiles, preview the frontend design, and manage
+            teacher cards from one place.
           </p>
         </div>
       </div>
@@ -184,7 +188,9 @@ const Teacher = () => {
                 <div className={`${base}__uploadContent`}>
                   <FaImage />
                   <span>
-                    {previewImage || form.image ? "Change Image" : "Choose Image"}
+                    {previewImage || form.image
+                      ? "Change Image"
+                      : "Choose Image"}
                   </span>
                 </div>
               </label>
@@ -197,7 +203,6 @@ const Teacher = () => {
                 name="name"
                 value={form.name}
                 onChange={handleChange}
-                placeholder="Enter teacher name"
               />
             </div>
 
@@ -208,7 +213,6 @@ const Teacher = () => {
                 name="role"
                 value={form.role}
                 onChange={handleChange}
-                placeholder="Enter teacher role"
               />
             </div>
 
@@ -216,10 +220,8 @@ const Teacher = () => {
               <label>Short Description</label>
               <textarea
                 name="description"
-                rows="5"
                 value={form.description}
                 onChange={handleChange}
-                placeholder="Write short description"
               />
             </div>
 
@@ -231,7 +233,6 @@ const Teacher = () => {
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
-                  placeholder="+91 9876543210"
                 />
               </div>
 
@@ -266,7 +267,6 @@ const Teacher = () => {
           </form>
         </div>
 
-        {/* PREVIEW SAME */}
         <div className={`${base}__card`}>
           <div className={`${base}__cardHeader`}>
             <h3>Live Preview Card</h3>
@@ -300,17 +300,30 @@ const Teacher = () => {
           </div>
         </div>
       </div>
-
-      {/* TABLE SAME */}
       <div className={`${base}__tableCard`}>
         <div className={`${base}__tableWrap`}>
           <table className={`${base}__table`}>
+            {/* ✅ TABLE HEADER ADDED */}
+            <thead>
+              <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Role</th>
+                <th>Phone</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
             <tbody>
               {sortedTeachers.map((teacher) => (
                 <tr key={teacher._id}>
                   <td>
                     <img
-                      src={IMAGE_URL + teacher.image}
+                      src={
+                        teacher.image
+                          ? IMAGE_URL + teacher.image
+                          : "https://via.placeholder.com/100"
+                      }
                       className={`${base}__tableImage`}
                     />
                   </td>
