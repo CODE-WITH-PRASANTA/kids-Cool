@@ -14,7 +14,87 @@
   padding: 34px 0 42px;
   font-family: "Nunito", sans-serif;
 }
+/* ================= ACTIVE BLOG ================= */
 
+.blogSection__item--active{
+  transform:scale(1.02);
+  border:2px solid rgba(255,255,255,0.25);
+}
+
+/* ================= READ MORE BUTTON ================= */
+
+.blogSection__readMoreBtn{
+  padding:14px 28px;
+  border:none;
+  border-radius:999px;
+  background:#ffffff;
+  color:#0f4c5c;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s ease;
+}
+
+.blogSection__readMoreBtn:hover{
+  transform:translateY(-2px);
+  background:#f1f5f9;
+}
+
+/* ================= SINGLE NEWS ================= */
+
+.blogSection__singleNewsWrap{
+  width:100%;
+  position:relative;
+  animation:fadeSlide .4s ease;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes fadeSlide{
+
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* ================= PAGINATION ================= */
+
+.blogSection__paginationDots{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:22px;
+}
+
+.blogSection__dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.35);
+  transition:.3s ease;
+}
+
+.blogSection__dot--active{
+  width:28px;
+  border-radius:999px;
+  background:#ffffff;
+}
+/* ================= BUTTON ROW ================= */
+
+.blogSection__actionRow{
+  display:flex;
+  gap:14px;
+  align-items:center;
+  flex-wrap:wrap;
+}
 .blogSection__topWave,
 .blogSection__bottomWave,
 .blogSection__centerBand {

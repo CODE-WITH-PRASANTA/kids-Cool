@@ -312,7 +312,62 @@
   color:#111;
   cursor:pointer;
 }
+/* ================= CATEGORY ================= */
 
+.newsPostingAdmin__categoryBadge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:6px 12px;
+  border-radius:999px;
+  background:#eef4ff;
+  color:#2563eb;
+  font-size:12px;
+  font-weight:700;
+}
+
+/* ================= SELECT ================= */
+
+.newsPostingAdmin__modernSelect{
+  appearance:none;
+  cursor:pointer;
+}
+
+/* ================= TINYMCE ================= */
+
+.newsPostingAdmin__editorWrap{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid #dbe3ee;
+}
+
+.tox{
+  border:none !important;
+}
+/* ================= TEXTAREA ================= */
+
+.newsPostingAdmin__textarea{
+  width:100%;
+  min-height:220px;
+  resize:vertical;
+  border:1px solid #dbe3ee;
+  border-radius:16px;
+  padding:16px;
+  font-size:14px;
+  font-family:Poppins,sans-serif;
+  outline:none;
+  transition:.25s ease;
+  background:#fff;
+  line-height:1.7;
+}
+
+.newsPostingAdmin__textarea:focus{
+  border-color:#2563eb;
+  box-shadow:0 0 0 4px rgba(37,99,235,.10);
+}
+.tox-tinymce{
+  border-radius:14px !important;
+}
 .newsPostingAdmin__previewStatusWrap{
   display:flex;
   justify-content:center;

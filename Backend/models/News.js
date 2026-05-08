@@ -6,43 +6,60 @@ const newsSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+
     date: {
-      type: Date,
+      type: String,
       required: true,
     },
+
     title: {
       type: String,
       required: true,
       trim: true,
     },
+
+    category: {
+      type: String,
+      default: "General",
+    },
+
     description: {
       type: String,
       required: true,
-      trim: true,
     },
+
     buttonText: {
       type: String,
       default: "Read More",
     },
+
     link: {
       type: String,
       default: "",
     },
+
     status: {
       type: String,
       enum: ["Active", "Inactive"],
       default: "Active",
     },
+
     featured: {
       type: Boolean,
       default: false,
     },
+
     order: {
       type: Number,
       default: 1,
     },
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model("News", newsSchema);
+module.exports = mongoose.model(
+  "News",
+  newsSchema
+);

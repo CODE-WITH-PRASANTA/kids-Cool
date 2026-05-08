@@ -1,4 +1,5 @@
 const express = require("express");
+
 const router = express.Router();
 
 const {
@@ -9,13 +10,21 @@ const {
   toggleStatus,
 } = require("../controllers/news.controller");
 
-router.route("/")
+/* ================= CREATE + GET ================= */
+
+router
+  .route("/")
   .post(createNews)
   .get(getNews);
 
-router.route("/:id")
+/* ================= UPDATE + DELETE ================= */
+
+router
+  .route("/:id")
   .put(updateNews)
   .delete(deleteNews);
+
+/* ================= STATUS ================= */
 
 router.put("/:id/status", toggleStatus);
 
