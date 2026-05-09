@@ -768,16 +768,31 @@
 
 /* GRID CENTERED */
 .teacherSection__grid {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
   margin-top: 50px;
+  align-items: stretch;
+}
+@media (max-width: 991px) {
+  .teacherSection__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 767px) {
+  .teacherSection__grid {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 20px;
+  }
 }
 
 /* CARD */
 .teacherSection__card {
-  max-width: 380px;
+   width: 100%;
+  max-width: 100%;
   text-align: center;
   opacity: 0;
   transform: translateY(40px);

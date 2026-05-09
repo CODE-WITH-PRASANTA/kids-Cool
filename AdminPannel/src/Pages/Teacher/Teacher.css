@@ -143,19 +143,21 @@
 
 .teacherAdmin__topGrid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 22px;
+  grid-template-columns: 55% 45%;
+  gap: 24px;
   align-items: start;
 }
 
 .teacherAdmin__card,
 .teacherAdmin__tableCard {
+  width: 100%;
   background: var(--card-bg);
   border: 1px solid rgba(226, 232, 240, 0.85);
   border-radius: var(--radius-xl);
   padding: 24px;
   box-shadow: var(--shadow-lg);
   backdrop-filter: blur(12px);
+  overflow: hidden;
 }
 
 .teacherAdmin__cardHeader {
@@ -232,8 +234,9 @@
 }
 
 .teacherAdmin__formGroup textarea {
-  resize: none;
-  min-height: 128px;
+  resize: vertical;
+  min-height: 170px;
+  max-height: 420px;
 }
 
 .teacherAdmin__uploadBox {
@@ -340,15 +343,21 @@
 }
 
 .teacherAdmin__previewCard {
+  width: 100%;
   display: grid;
-  grid-template-columns: 230px 1fr;
-  gap: 20px;
-  align-items: center;
-  background: linear-gradient(145deg, #ffffff 0%, #f8fbff 100%);
+  grid-template-columns: 220px 1fr;
+  gap: 24px;
+  align-items: flex-start;
+  background: linear-gradient(
+    145deg,
+    #ffffff 0%,
+    #f8fbff 100%
+  );
   border: 1px solid #e9eff6;
   border-radius: 26px;
-  padding: 20px;
+  padding: 22px;
   box-shadow: var(--shadow-md);
+  min-height: auto;
 }
 
 .teacherAdmin__previewImageWrap {
@@ -401,9 +410,12 @@
 }
 
 .teacherAdmin__previewContent {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .teacherAdmin__previewTag {
@@ -797,5 +809,58 @@
     top: 50px;
     right: 0;
     min-width: 140px;
+  }
+}
+/* ================= LAPTOP ================= */
+
+@media (max-width: 1180px) {
+  .teacherAdmin__topGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .teacherAdmin__previewCard {
+    grid-template-columns: 1fr;
+  }
+
+  .teacherAdmin__previewImage {
+    height: 340px;
+  }
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 768px) {
+  .teacherAdmin__previewCard {
+    padding: 18px;
+    grid-template-columns: 1fr;
+  }
+
+  .teacherAdmin__previewImage {
+    height: 280px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 520px) {
+  .teacherAdmin__previewCard {
+    padding: 14px;
+  }
+
+  .teacherAdmin__previewImage {
+    height: 230px;
+  }
+
+  .teacherAdmin__previewContent h4 {
+    font-size: 20px;
+  }
+
+  .teacherAdmin__previewContent h5 {
+    font-size: 14px;
+  }
+
+  .teacherAdmin__previewContent p {
+    font-size: 13px;
+    line-height: 1.8;
   }
 }

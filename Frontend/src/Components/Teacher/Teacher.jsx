@@ -1,59 +1,152 @@
-import React, { useEffect, useRef, useState } from "react";
-import "./Teacher.css";
-import { FaFacebookF, FaTwitter, FaLinkedinIn } from "react-icons/fa";
+import React, {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
-import teacher1 from "../../assets/Cool1.webp";
-import teacher2 from "../../assets/Cool2.webp";
+import "./Teacher.css";
+
+import API, { IMAGE_URL } from "../../Api/axios";
+
+import {
+  FaFacebookF,
+  FaTwitter,
+  FaLinkedinIn,
+} from "react-icons/fa";
 
 const Teacher = () => {
   const base = "teacherSection";
+
   const sectionRef = useRef(null);
+
   const [visible, setVisible] = useState(false);
+
+  const [teachers, setTeachers] = useState([]);
+
+  /* ================= RESPONSIVE ================= */
+
+  const [cardsPerPage, setCardsPerPage] =
+    useState(3);
+
+  const [currentPage, setCurrentPage] =
+    useState(0);
+
+  /* ================= FETCH ================= */
+
+  const fetchTeachers = async () => {
+    try {
+      const res = await API.get("/teachers");
+
+      setTeachers(res.data.data || []);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchTeachers();
+  }, []);
+
+  /* ================= RESPONSIVE CARDS ================= */
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 767) {
+        setCardsPerPage(1);
+      } else if (window.innerWidth <= 991) {
+        setCardsPerPage(2);
+      } else {
+        setCardsPerPage(3);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener(
+      "resize",
+      handleResize
+    );
+
+    return () =>
+      window.removeEventListener(
+        "resize",
+        handleResize
+      );
+  }, []);
+
+  /* ================= PAGINATION ================= */
+
+  const totalPages = Math.ceil(
+    teachers.length / cardsPerPage
+  );
+
+  const paginatedTeachers = useMemo(() => {
+    const start =
+      currentPage * cardsPerPage;
+
+    return teachers.slice(
+      start,
+      start + cardsPerPage
+    );
+  }, [teachers, currentPage, cardsPerPage]);
+
+  const nextPage = () => {
+    setCurrentPage((prev) =>
+      prev + 1 >= totalPages
+        ? 0
+        : prev + 1
+    );
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) =>
+      prev - 1 < 0
+        ? totalPages - 1
+        : prev - 1
+    );
+  };
+
+  /* ================= ANIMATION ================= */
 
   useEffect(() => {
     const current = sectionRef.current;
+
     if (!current) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.unobserve(current);
-        }
-      },
-      { threshold: 0.14 }
-    );
+    const observer =
+      new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+
+            observer.unobserve(current);
+          }
+        },
+        { threshold: 0.14 }
+      );
 
     observer.observe(current);
+
     return () => observer.disconnect();
   }, []);
 
-  const teachers = [
-    {
-      id: 1,
-      name: "Miss Swetalin swain",
-      role: "Early Learning Mentor",
-      image: teacher1,
-      description:
-        "Miss Swetalin Swain is a passionate early childhood educator at Dream Flower Pre-School & Day Care, dedicated to creating a warm, caring, and joyful learning environment for young children.She believes that the early years are the foundation of a child’s future, and her teaching approach focuses on nurturing confidence, communication, and emotional well-being.",
-    },
-    {
-      id: 2,
-      name: "Miss Swagatika",
-      role: "Creative Activity Trainer",
-      image: teacher2,
-      description:
-        "Miss Swagatika is a creative and energetic activity trainer at Dream Flower Pre-School & Day Care, known for making every day exciting and colorful for children.She believes that creativity plays a vital role in early childhood development and ensures that every child enjoys a playful and enriching learning experience.",
-    },
-  ];
+  /* ================= CARD ================= */
 
-  const renderTeacherCard = (teacher, index) => (
+  const renderTeacherCard = (
+    teacher,
+    index
+  ) => (
     <article
-      key={teacher.id}
+      key={teacher._id}
       className={`${base}__card ${
-        visible ? `${base}__card--visible` : ""
+        visible
+          ? `${base}__card--visible`
+          : ""
       }`}
-      style={{ transitionDelay: `${index * 120}ms` }}
+      style={{
+        transitionDelay: `${index * 120}ms`,
+      }}
     >
       <div className={`${base}__imageWrap`}>
         <span
@@ -61,19 +154,38 @@ const Teacher = () => {
         ></span>
 
         <div className={`${base}__imageBlob`}>
-          <img src={teacher.image} alt={teacher.name} />
+          <img
+            src={IMAGE_URL + teacher.image}
+            alt={teacher.name}
+          />
         </div>
       </div>
 
       <div className={`${base}__contentBox`}>
-        <p className={`${base}__role`}>{teacher.role}</p>
-        <h3 className={`${base}__name`}>{teacher.name}</h3>
-        <p className={`${base}__text`}>{teacher.description}</p>
+        <p className={`${base}__role`}>
+          {teacher.role}
+        </p>
+
+        <h3 className={`${base}__name`}>
+          {teacher.name}
+        </h3>
+
+        <p className={`${base}__text`}>
+          {teacher.description}
+        </p>
 
         <div className={`${base}__socials`}>
-          <a href="#"><FaFacebookF /></a>
-          <a href="#"><FaTwitter /></a>
-          <a href="#"><FaLinkedinIn /></a>
+          <a href="#">
+            <FaFacebookF />
+          </a>
+
+          <a href="#">
+            <FaTwitter />
+          </a>
+
+          <a href="#">
+            <FaLinkedinIn />
+          </a>
         </div>
       </div>
     </article>
@@ -82,15 +194,19 @@ const Teacher = () => {
   return (
     <section
       ref={sectionRef}
-      className={`${base} ${visible ? `${base}--visible` : ""}`}
+      className={`${base} ${
+        visible ? `${base}--visible` : ""
+      }`}
     >
       <div className={`${base}__container`}>
 
         {/* HEADER */}
+
         <div className={`${base}__header`}>
           <div className={`${base}__heading`}>
             <p className={`${base}__subTitle`}>
-              Meet Our Professional Educators
+              Meet Our Professional
+              Educators
             </p>
 
             <h2 className={`${base}__title`}>
@@ -98,15 +214,71 @@ const Teacher = () => {
             </h2>
 
             <p className={`${base}__desc`}>
-              At Dream Flower Pre-School & Day Care, our teachers create a joyful learning environment.
+              At Dream Flower
+              Pre-School & Day Care,
+              our teachers create a
+              joyful learning
+              environment.
             </p>
           </div>
         </div>
 
-        {/* CENTERED GRID */}
+        {/* PAGINATION CONTROLS */}
+
+        {teachers.length > cardsPerPage && (
+          <div
+            className={`${base}__desktopTopControls`}
+          >
+            <button
+              className={`${base}__desktopNavBtn`}
+              onClick={prevPage}
+            >
+              ‹
+            </button>
+
+            <div
+              className={`${base}__desktopDots`}
+            >
+              {Array.from({
+                length: totalPages,
+              }).map((_, index) => (
+                <button
+                  key={index}
+                  className={`${base}__desktopDot ${
+                    currentPage === index
+                      ? `${base}__desktopDot--active`
+                      : ""
+                  }`}
+                  onClick={() =>
+                    setCurrentPage(index)
+                  }
+                />
+              ))}
+            </div>
+
+            <button
+              className={`${base}__desktopNavBtn`}
+              onClick={nextPage}
+            >
+              ›
+            </button>
+          </div>
+        )}
+
+        {/* GRID */}
+
         <div className={`${base}__grid`}>
-          {teachers.map((teacher, index) =>
-            renderTeacherCard(teacher, index)
+          {paginatedTeachers.length >
+          0 ? (
+            paginatedTeachers.map(
+              (teacher, index) =>
+                renderTeacherCard(
+                  teacher,
+                  index
+                )
+            )
+          ) : (
+            <p>No Teachers Found</p>
           )}
         </div>
 
