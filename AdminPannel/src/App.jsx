@@ -15,6 +15,16 @@ import FeeType from "./Pages/FeeType/FeeType";
 
 import StudentAdmission from "./Pages/StudentAdmission/StudentAdmission";
 import StudentAdmsnDetails from "./Pages/StudentAdmsnDetails/StudentAdmsnDetails";
+import Wallet from "./Pages/Wallet/Wallet";
+import CollectMoney from "./Pages/CollectMoney/CollectMoney";
+import AddExpense from "./Pages/AddExpense/AddExpense";
+import ExpenseHead from "./Pages/ExpenseHead/ExpenseHead";
+import ExpenseList from "./Pages/ExpenseList/ExpenseList";
+import ExpenseSearch from "./Pages/ExpenseSearch/ExpenseSearch";
+
+
+
+
 
 const App = () => {
   return (
@@ -33,6 +43,14 @@ const App = () => {
           <Route path="/fee-type" element={<FeeType/>}/>
           <Route path="/student/admission" element={<StudentAdmission/>}/>
           <Route path="/student/admission/details" element={<StudentAdmsnDetails/>}/>
+          <Route path="/wallet" element={<Wallet/>}/>
+          <Route path="/CollectMoney" element={<CollectMoney/>}/>
+          <Route path="/Addexpense" element={<AddExpense/>}/>
+          <Route path="/Expensehead" element={< ExpenseHead/>}/>
+          <Route path="/ExpenseList" element={<ExpenseList/>}/>
+          <Route path="/ExpenseSearch" element={<ExpenseSearch/>}/>
+          
+          
         </Route>
       </Routes>
     </BrowserRouter>
