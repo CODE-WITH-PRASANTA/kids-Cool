@@ -8,7 +8,7 @@ const {
   deleteTeacher,
 } = require("../controllers/teacher.controller");
 
-const { upload, convertToWebp } = require("../middleware/upload.middleware");
+const { upload, convertToWebp } = require("../middleware/upload");
 
 // CREATE
 router.post(
