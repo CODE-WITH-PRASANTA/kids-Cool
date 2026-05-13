@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import "./Creative.css";
 
-import creativePaint from "../../assets/a2.webp";
-import creativeClay from "../../assets/a1.webp";
+import schoolPoster from "../../assets/04 (1).webp";
 import flyBoy from "../../assets/flyboy.webp";
 
 const Creative = () => {
@@ -15,6 +14,7 @@ const Creative = () => {
 
   useEffect(() => {
     const current = sectionRef.current;
+
     if (!current) return;
 
     const observer = new IntersectionObserver(
@@ -28,6 +28,7 @@ const Creative = () => {
     );
 
     observer.observe(current);
+
     return () => observer.disconnect();
   }, []);
 
@@ -36,7 +37,13 @@ const Creative = () => {
       ref={sectionRef}
       className={`${base} ${show ? `${base}--show` : ""}`}
     >
+      {/* DECORATION */}
+      <div className={`${base}__blurOne`} />
+      <div className={`${base}__blurTwo`} />
+
       <div className={`${base}__container`}>
+        {/* ================= LEFT ================= */}
+
         <div className={`${base}__left`}>
           <div className={`${base}__labelWrap`}>
             <span className={`${base}__capIcon`}>
@@ -50,6 +57,7 @@ const Creative = () => {
                   d="M8 24L32 14L56 24L32 34L8 24Z"
                   strokeLinejoin="round"
                 />
+
                 <path
                   d="M18 30V40C18 40 24 46 32 46C40 46 46 40 46 40V30"
                   strokeLinecap="round"
@@ -58,28 +66,35 @@ const Creative = () => {
               </svg>
             </span>
 
-            <span className={`${base}__eyebrow`}>Our History</span>
+            <span className={`${base}__eyebrow`}>
+              Dream Flower Pre School
+            </span>
           </div>
 
           <h2 className={`${base}__title`}>
-            Creative Learning Opportunity <br />
+            Creative Learning Opportunity
+            <br />
             for Kids in Bhubaneswar
           </h2>
 
           <p className={`${base}__desc`}>
             What began as a small initiative has grown into a highly trusted
-            name among parents searching for the best pre school in Bhubaneswar
-            and a reliable day care center in Bhubaneswar. Over the years, Dream
-            Flower Pre School & Day Care has established itself as a top pre
-            school near Rasulgarh, Bhubaneswar, known for delivering quality
-            early education in a safe, child-friendly, and engaging environment.
-            Our focus on a structured, activity-based curriculum, combined with
-            modern teaching methods and creative learning opportunities, helps
-            children build strong academic and social foundations. With a
-            commitment to excellence and care, we have earned the trust of
-            families across Rasulgarh and surrounding areas, making us a
-            preferred choice for parents looking for the best play school,
-            nursery school, and day care in Bhubaneswar.
+            name among parents searching for the best pre school in
+            Bhubaneswar and a reliable day care center in Bhubaneswar. Over
+            the years, Dream Flower Pre School & Day Care has established
+            itself as a top pre school near Rasulgarh, Bhubaneswar, known
+            for delivering quality early education in a safe,
+            child-friendly, and engaging environment.
+          </p>
+
+          <p className={`${base}__desc`}>
+            Our focus on a structured, activity-based curriculum, combined
+            with modern teaching methods and creative learning
+            opportunities, helps children build strong academic and social
+            foundations. With a commitment to excellence and care, we have
+            earned the trust of families across Rasulgarh and surrounding
+            areas, making us a preferred choice for parents looking for the
+            best play school, nursery school, and day care in Bhubaneswar.
           </p>
 
           <div className={`${base}__actionArea`}>
@@ -107,12 +122,14 @@ const Creative = () => {
                     stroke="#ff6ea8"
                     strokeWidth="4"
                   />
+
                   <path
                     d="M45 95C60 55 95 30 130 30C165 30 200 55 215 95"
                     fill="none"
                     stroke="#ffb84d"
                     strokeWidth="4"
                   />
+
                   <path
                     d="M60 95C75 65 100 45 130 45C160 45 185 65 200 95"
                     fill="none"
@@ -121,29 +138,24 @@ const Creative = () => {
                   />
                 </svg>
               </span>
-
-              <span className={`${base}__dashArrow`}>
-                <svg
-                  viewBox="0 0 100 50"
-                  fill="none"
-                  stroke="#c7c7c7"
-                  strokeWidth="1.5"
-                >
-                  <path d="M5 40 Q20 10 50 25 T95 10" strokeDasharray="4 4" />
-                  <path d="M90 5 L96 11 L88 15" />
-                </svg>
-              </span>
             </div>
           </div>
         </div>
 
-        <div className={`${base}__right`}>
-          <div className={`${base}__imgFrame ${base}__imgFrame--top`}>
-            <img src={creativeClay} alt="Clay art activity" />
-          </div>
+        {/* ================= RIGHT ================= */}
 
-          <div className={`${base}__imgFrame ${base}__imgFrame--bottom`}>
-            <img src={creativePaint} alt="Painting activity" />
+        <div className={`${base}__right`}>
+          <div className={`${base}__posterWrapper`}>
+            <img
+              src={schoolPoster}
+              alt="Dream Flower Pre School"
+              className={`${base}__poster`}
+            />
+
+            <div className={`${base}__floatingCard`}>
+              <h4>Safe & Caring</h4>
+              <p>Creative activities for joyful learning.</p>
+            </div>
           </div>
         </div>
       </div>

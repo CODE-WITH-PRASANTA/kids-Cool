@@ -10,8 +10,8 @@ import API from "../../api/axios";
 
 import { useNavigate } from "react-router-dom";
 
-import mainImg from "../../assets/Written.webp";
-import circleImg from "../../assets/paint.webp";
+import mainImg from "../../assets/Asserts of the Dream Flower School.webp";
+import circleImg from "../../assets/04 (1).webp";
 import painterGirl from "../../assets/Girl.webp";
 
 const Blog = () => {

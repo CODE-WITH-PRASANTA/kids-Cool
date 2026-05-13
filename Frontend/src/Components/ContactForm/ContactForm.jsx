@@ -4,8 +4,8 @@ import { FiCalendar } from "react-icons/fi";
 import React, { useEffect, useState } from "react";
 import API from "../../api/axios";
 
-import child1 from "../../assets/a1.webp";
-import child2 from "../../assets/a2.webp";
+import child1 from "../../assets/Dream Flower Scholl Asserts.webp";
+import child2 from "../../assets/About asserts.webp";
 
 const Contactfrom = () => {
   const [formData, setFormData] = useState({

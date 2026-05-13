@@ -1,0 +1,122 @@
+const Expense = require("../models/Expense");
+
+
+// ================= CREATE =================
+const createExpense = async (req, res) => {
+  try {
+    const expense = await Expense.create(req.body);
+
+    res.status(201).json({
+      success: true,
+      message: "Expense Added Successfully",
+      data: expense,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// ================= GET ALL =================
+const getExpenses = async (req, res) => {
+  try {
+    const expenses = await Expense.find().sort({ createdAt: -1 });
+
+    res.status(200).json(expenses);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// ================= GET SINGLE =================
+const getExpenseById = async (req, res) => {
+  try {
+    const expense = await Expense.findById(req.params.id);
+
+    if (!expense) {
+      return res.status(404).json({
+        success: false,
+        message: "Expense Not Found",
+      });
+    }
+
+    res.status(200).json(expense);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// ================= UPDATE =================
+const updateExpense = async (req, res) => {
+  try {
+    const updatedExpense = await Expense.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    if (!updatedExpense) {
+      return res.status(404).json({
+        success: false,
+        message: "Expense Not Found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Expense Updated Successfully",
+      data: updatedExpense,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+
+// ================= DELETE =================
+const deleteExpense = async (req, res) => {
+  try {
+    const deletedExpense = await Expense.findByIdAndDelete(req.params.id);
+
+    if (!deletedExpense) {
+      return res.status(404).json({
+        success: false,
+        message: "Expense Not Found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Expense Deleted Successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+module.exports = {
+  createExpense,
+  getExpenses,
+  getExpenseById,
+  updateExpense,
+  deleteExpense,
+};

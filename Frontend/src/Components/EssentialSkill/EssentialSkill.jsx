@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import "./EssentialSkill.css";
-import playKid from "../../assets/playboy.webp";
+import playKid from "../../assets/About asserts.webp";
 
 const EssentialSkill = () => {
   const base = "essentialSkill";
@@ -396,11 +396,8 @@ const EssentialSkill = () => {
               structured programs. Recognized as a top pre school and day care
               center in Bhubaneswar, we provide a safe, supportive, and
               stimulating environment for young minds to explore, learn, and
-              grow. <br />
-              At Dream Flower Pre School, we believe that every child is unique
-              and deserves the best start in life. Our curriculum is designed to
-              balance education, creativity, and play-based learning, ensuring
-              holistic development.
+              grow. 
+
             </p>
 
             <a

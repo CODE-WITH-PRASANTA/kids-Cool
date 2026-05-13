@@ -9,11 +9,7 @@ import "./Teacher.css";
 
 import API, { IMAGE_URL } from "../../Api/axios";
 
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaLinkedinIn,
-} from "react-icons/fa";
+
 
 const Teacher = () => {
   const base = "teacherSection";
@@ -173,20 +169,6 @@ const Teacher = () => {
         <p className={`${base}__text`}>
           {teacher.description}
         </p>
-
-        <div className={`${base}__socials`}>
-          <a href="#">
-            <FaFacebookF />
-          </a>
-
-          <a href="#">
-            <FaTwitter />
-          </a>
-
-          <a href="#">
-            <FaLinkedinIn />
-          </a>
-        </div>
       </div>
     </article>
   );

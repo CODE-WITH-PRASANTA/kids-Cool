@@ -8,7 +8,7 @@ const {
   deleteTestimonial,
 } = require("../controllers/testimonial.controller");
 
-const { upload, convertToWebp } = require("../middleware/upload.middleware");
+const { upload, convertToWebp } = require("../middleware/upload");
 
 router.post(
   "/",

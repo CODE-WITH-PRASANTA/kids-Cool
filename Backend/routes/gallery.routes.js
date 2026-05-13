@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const galleryController = require("../controllers//gallery.controller");
-const { upload, convertToWebp } = require("../middleware/upload.middleware");
+const { upload, convertToWebp } = require("../middleware/upload");
 
 // CREATE
 router.post(

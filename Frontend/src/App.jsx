@@ -10,6 +10,7 @@ import FloatingIcons from "./Components/FloatingIcons/FloatingIcons";
 import NewsDetails from "./Pages/NewsDetails/NewsDetails";
 
 
+
 function App() {
   return (
     <>
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/News-Details" element={<NewsDetails />} />
+         
       </Routes>
       <Footer />
       <FloatingIcons />
